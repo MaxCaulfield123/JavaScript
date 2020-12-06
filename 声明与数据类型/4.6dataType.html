@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 字符串中有字符字面量,表示有其他用途的字符,或\'类似这种把引号转义的转义符
+    console.log('aaa\naa');//\n换行
+    let text="王八蛋"
+    console.log(text.length);
+    // 在执行这种字符串拼接时,程序先分配一个刚刚够长度的空间,然后填充字符串,最后"销毁"原字符串
+    console.log(text+'聂艳');
+    // undefined与null不能用toString()转字符串,其他都能
+    console.log(text.toString());
+    // 数值转字符串时toString()函数可以接受参数表示有进制数
+    let num=10
+    console.log(num.toString(2));//1010转为了2进制
+    // String()函数可以转换null与undefined为字符串,它检测数据是否有toString()方法,如果有则调用,
+    // 没有就是'null',或'undefined'
+    console.log(String(null));
+  </script>
+</body>
+</html>

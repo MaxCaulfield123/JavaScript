@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 数值转换
+    // 转数字与转bool值是两码事!转数字时不能在心里先转bool值
+    // 用Number() parseInt() parseFloat()将非数值转为数值
+    console.log(Number(null));//返回0
+    console.log(Number(undefined));//返回NaN
+    console.log(Number('011'));//返回11,转纯数值字符串时,会忽视前面的0
+    console.log(Number('0x1f'));//返回31,如果包含16进制的字符串,会转成相应的十进制数值
+    console.log(Number(''));//空字符串为0
+    let obj={a:1,b:'2'}
+    // 数据.valueOf()可以直接打印值,数组直接打印值,对象打印整个对象
+    console.log(obj.valueOf(),Number(obj));
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 原始数据类型undefined null number string boolean symbol
+    console.log(typeof a);//undefined未定义
+    console.log(typeof true);//boolean
+    console.log(typeof 1);//number
+    console.log(typeof 'wabiwabi');//string
+    console.log(typeof {});//object
+    console.log(typeof null);//object,注意null其实在底层相当于对空对象的引用
+    console.log(typeof function(){});//function,typeof区分函数与对象,但严格来说函数也是对象
+    
+    // undefined是未初始化变量(声明但为赋值),它的出现是为了区分空对象指针null与未初始化变量的区别
+    let b;
+    // 对未声明的变量只能执行typeof,执行delete没意义
+    console.log(typeof c);
+  </script>
+</body>
+</html>

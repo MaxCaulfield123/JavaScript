@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 模板字符串支持换行,其内支持${}来插入值
+    // ${}中的数据会先被调用toString()然后再拼接到字符串中,此处把对象的toString写成属性
+    // 进而不调用原型中的toString(),调用此处的,返回world字符串
+    let obj={toString:()=>'world'}
+    console.log(`${obj}hello`);
+
+    // 模板字符串还可以当做函数参数,此处收集剩余参数到a中
+    function fun(arr,...a){
+      console.log(arr);//注意这里有个raw
+      for(const key in a){
+        console.log(a[key]);
+      }
+      return a.map((e,i)=>{ 
+        // 这里返回了3+  2= 这样的字符串放入数组
+        return`${e}${arr[i+1]}`
+      }).join('')
+    }
+    let a=3,b=2;
+    // 注意!此处调用的函数将模板字符串作为参数传入!
+    // 函数中第一个参数为字符串数组!
+    console.log(fun`${a}+${b}=${a+b}`);
+    // String.raw()使转义符与特殊符号变为普通字符串
+    console.log(String.raw`aaaaa\naaaa`);//给String.raw函数模板字面量为参数,这里不会换行
+    console.log('\u9fa5');//如果这里换成上面的String.raw,则不会出中文
+    console.log(String.raw`aaa
+              aa`);
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // es6加了一些常用内置符号(原型中,api(预先设置的函数或链接的协定)内部的函数),用于修改语言内部行为
+    // 比如Symbol.iterator,Symbol的iterator这个属性用来表示在Symbol对象在循环中的行为,它被称为迭代器,其实在循环中调用迭代器,然后迭代数据
+    // Symbol.iterator就是@@iterator,后者是ECMAScript规范名称
+
+    // Array.prototype[@@iterator]()其他的迭代器
+    // TypedArray.prototype[@@iterator]()
+    // String.prototype[@@iterator]()
+    // Map.prototype[@@iterator]()
+    // Set.prototype[@@iterator]()
+
+    console.log(Symbol.iterator, Symbol.asyncIterator);
+    // Symbol.asyncIterator表示异步for await of的时候的迭代行为
+    class Foo {
+      async *[Symbol.asyncIterator]() { }
+    }
+    let f = new Foo();
+    console.log(f[Symbol.asyncIterator]());
+  </script>
+</body>
+
+</html>

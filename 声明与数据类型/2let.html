@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // let 声明的变量不允许重复声明,且类似块作用域(匿名函数自调?)
+    // let不会被提升,let声明变量之前的代码区域被称为代码的暂时性死区
+    // let声明的变量不会储存在window全局对象中
+    let a=1;
+    // let a=2;报错!a has been declared
+    // var a=2;报错,syntaxError不允许与let混合声明
+  </script>
+  <script>
+    // 多个script标签内的代码共享作用域!所以此处重复声明会报错
+    // let a=2;
+    for(var i=0;i<10;i++){
+      // 此处在主线程执行完后执行
+      setTimeout(()=>{
+        console.log(i);
+      },0)
+    }
+    // 此处不会像上面打印出10个10,因为let在底层循环中,为每次迭代都新声明一个变量保存数据
+    for( let i=0;i<10;i++){
+      // 此处在主线程执行完后执行
+      setTimeout(()=>{
+        console.log(i);
+      },0)
+    }
+  </script>
+</body>
+</html>

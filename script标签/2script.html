@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <!-- 把script放在head中则浏览器会把js代码块都下载,解析完成后,才开始渲染页面 
+  渲染期间页面是空白的-->
+  <!-- 浏览器页面在浏览器解析到body元素时开始被渲染 -->
+  <!-- 使用async,让浏览器一边渲染页面,一边下载Js代码块 -->
+  <script async defer src="./1.s"></script>
+  <script>
+    // 浏览器在把元素添加到dom前不会加载请求
+    // 这里的动态添加的script标签是异步加载的,相当于加了async
+    let script=document.createElement('script')
+    script.src="./1.s"
+    document.head.appendChild(script)
+  </script>
+
+</head>
+<body>
+  <noscript>
+    <!-- 这里的内容会在浏览器关闭Js功能时显示 -->
+  </noscript>
+  <!-- 所以有人会把script标签写在这里,等页面渲染后再下载,放在这里更好 -->
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 文档与js代码块从上到下执行! -->
+  <!-- async表示应该立即下载脚本,但下载时不能阻止其他页面动作,异步下载js文件 -->
+  <!-- crossorigin设置发送出站请求的时候,是否包含本网站的凭据,anonymous不必设置凭据,use-credentials包含凭据 -->
+  <!-- defer表示脚本可以延迟到HTML文档被完全解析后执行,H5要求必须写在引入的外部js文件才有效 -->
+  <!-- integrity的属性值是一串秘钥,当请求不是本域名的js文件的时候,会比对它 .详情,获取秘钥方法看下方url,
+  大多数情况下是防止CDN被劫持,用这串秘钥就能比对是否是原域名的文件,而不是CDN(为了使请求变快,分发网络请求到附近区域的网络)转发时被劫持的文件,要与crossorigin结合使用-->
+  <!-- https://www.cnblogs.com/ihuangqing/p/10717018.html -->
+
+  <!-- type声明代码中的脚本语言的内容类型,当值为module时,代码块会被当成es6的代码,才能出现import与export语句 -->
+  <script type="application/ecmascript" integrity="" defer src="./1.js" crossorigin="use-credentials" async>
+  // 此处称为行内js代码,因为src中有引用的js代码,所以
+    let a=function(){
+      // script标签会把js中的代码字符串给解析成闭合标签!所以要转义
+      console.log('<\/script>')
+    }
+  </script>
+  <!-- 注意此处!js文件后缀不一定要用.js结尾浏览器也能解析,不过服务器会对文件拓展名来响应正确的MIME类型!
+  正是因为不必须是.js结尾,所以才能使react的jsx,ts被编译成浏览器认识的脚本 -->
+  <!-- src中请求的文件不受跨域限制,所以有jsonp出现,其实发送了get请求,请求不可靠网站会有安全问题出现 -->
+  <script src="./1.s">
+  // 这里的script得等上面解释完毕才解释
+  </script>
+  <!-- 解释行内代码与src引入的外部代码,是同步的! -->
+  <script>
+    // 这里的script得等上面两个解释完毕才解释
+  </script>
+</body>
+</html>

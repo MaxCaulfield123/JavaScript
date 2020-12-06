@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 符号Symbol()能创建符号,用作对象属性,为了防止对象属性冲突而出现的唯一的标识
+    let a=Symbol('noob')
+    let b=Symbol('noob')
+    let c=Symbol('')
+    let d=Symbol('')
+    console.log(a==b,c==d);//false,false
+    let str=new String();
+    let str1='asdf';
+    console.log(typeof str,typeof str1);//new出来的str是object类型!
+    // 如果要重用符号,可以用Symbol.for()声明,.for()使用的存储区域叫做全局符号注册表
+    const qq=Symbol.for('eunuch')
+    const ww=Symbol.for('eunuch')
+    const rr=Symbol('eunuch')
+    const dd=Symbol.for()//Symbol.for(内的数据都会被转字符串)
+    console.log(qq==ww,qq==rr,dd);//true false Symbol(undefined)
+    console.log(Symbol.keyFor(qq));//Symbol.keyFor()查询全局符号注册表(也就是Symbol.for()创建的)中的符号,入参变量,出参符号键名(创建符号时传的字符串)
+
+    // 注意此案例,symbol可以防止对象属性与原型上的函数冲突!!!!!!!
+    function Foo(name) {
+      this.name = name
+    }
+    Foo.prototype.say = function() { 
+        return this.name 
+    }
+    var f = new Foo('f')
+    var say = Symbol('say')
+    // 实际给f对象的Symbol属性赋值函数
+    f[say] = function() {
+        return 'other name'
+    }
+    // 两个say,一个原型上的,一个是对象自身属性
+    console.log(f.say()); // 'f'
+    // Symbol属性调用方式
+    console.log(f[say]()); // 'other name'
+  </script>
+</body>
+</html>

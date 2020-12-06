@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let aa=Symbol.for('我是aa')
+    let obj={
+      [aa]:123,
+      [Symbol.for('bb')]:456,
+      waibiwabi:789
+    }
+    // Object.getOwnPropertySymbols(obj)获取对象符号属性,放入数组
+    // Object.getOwnPropertyNames(obj)获取对象属性,放入数组
+    // Object.getOwnPropertyDescriptors(obj)同时显示两种,并显示每个属性的属性
+    // Reflect.ownKeys(obj)显示出obj对象的两种属性--符号和普通属性
+    console.log(Object.getOwnPropertySymbols(obj));
+    console.log(Object.getOwnPropertyNames(obj));
+    console.log(Object.getOwnPropertyDescriptors(obj));
+    console.log(Reflect.ownKeys(obj));
+
+    let find=Object.getOwnPropertySymbols(obj).find((i)=>
+      i.toString().match(/bb/));
+    console.log(find);
+    let arr=[1,5,15,200]
+    // arr.find(()=>{})函数返回符合要求的arr中的第一个元素
+    //如果return的是数组则返回数组中的第一个元素,数组为true?
+    let item=arr.find((i)=>{
+      return i>14
+    })
+    console.log(item);
+    console.log(obj);
+  </script>
+</body>
+</html>

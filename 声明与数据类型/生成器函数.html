@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 生成器目前IE全版本不支持!!!!!!!!!!!
+
+    // function* 会定义一个生成器函数 generator function 返回一个Generater对象
+    
+    // 存在的意义,1用于记录执行状态,2用于让异步程序同步??
+    function* generate(a) {
+      yield a;
+      yield a + 10;
+    };
+    // 返回的对象每次调用next()都会返回{value:'yield后的值',done:'是否结束'}
+    let gen = generate(10);
+    console.log(gen);
+    console.log(gen.next());
+    console.log(gen.next());
+
+    function* abc() {
+      yield 10;
+      x = yield 'noob';
+      yield x;
+    }
+    let b = abc();
+    console.log(b.next());//10
+    console.log(b.next());//noob
+    // 如果生成的Generator对象在调用next()时传参,则参数会赋值给上一条执行的 yield语句左边的变量
+    console.log(b.next(100));
+    function* bob() {
+      yield 1;
+      // yield* 生成器函数 可以使当前函数的调用转变成调用另一个生成器函数,当前暂停.
+      // 等另一个调用结束后,再执行当前函数
+      yield* abc();
+      // 如果使用return,则done立即变为true,value为return的值,下面的yield不再执行
+      return 'R';
+      yield 99;//这里因为上面的显示返回而不再执行
+    }
+    let c = bob();
+    // 循环打印出返回值
+    for (let i = 0; i < 5; i++) {
+      console.log(c.next());
+    }
+
+
+    // 生成器创建generate实例的时候也能传递参数,被arguments(参数数组)拿到
+    // arguments.callee是递归函数指向自己的指针
+    function* idMaker() {
+      console.log(arguments);
+      var index = arguments[0] || 0;
+      while (true)
+        yield index++;
+    }
+
+    var gen1 = idMaker(5);
+    console.log(gen1.next().value); // 5
+    console.log(gen1.next().value); // 6
+  </script>
+</body>
+
+</html>

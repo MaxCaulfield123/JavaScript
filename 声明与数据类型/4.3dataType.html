@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // js的Number有一个取值区间,大于它的值为infinity,小于为-infinity
+    // Number.MAX_VALUE代表Js可计算的最大数值
+    let res=Number.MAX_VALUE+Number.MAX_VALUE;
+    console.log(isFinite(res));//测试是否处于可计算区域的函数inFinite()
+    console.log(Number.NEGATIVE_INFINITY,Number.POSITIVE_INFINITY);//打印出正负无穷
+    // NaN表示用于数值的操作失败了
+    console.log(0/0);//返回NaN
+    console.log(isNaN(0/0));//判断是否是NaN的函数isNaN(),true为是NaN
+    console.log(isNaN('blue'));//不可转换为数值,字符串可以转换为bool值,但不能直接转为Number
+    console.log(isNaN(true));//可转换为数值
+    console.log(NaN==NaN);//NaN与NaN不相等
+  </script>
+</body>
+</html>

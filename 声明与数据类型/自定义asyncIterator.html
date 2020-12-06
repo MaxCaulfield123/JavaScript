@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const delay = (time) => () => setTimeout(() => {
+      console.log(time);
+    }, time * 10)
+    // https://www.cnblogs.com/boychenney/p/12467660.html
+    // 现在我想循环这个数组,按顺序打印出3,2,4.应该用异步迭代器或for await of循环
+    
+    // 异步迭代器必须返回 Promise 对象，且该 Promise 返回 { value, done } 格式对象
+    // 异步可迭代对象（Async Iteratable）用 Symbol.asyncIterator 作为 key
+    // 异步可迭代对象（Async Iteratable）可用 for-await-of 进行迭代
+    const arr = [delay(3), delay(2), delay(4)]
+    let i = 0;
+    var aab = {
+      [Symbol.asyncIterator]() {
+        return {
+          next() {
+            if (i < 3) {
+              return Promise.resolve({ value: ++i, done: false });
+            }
+
+            return Promise.resolve({ done: true });
+          }
+        };
+      }
+    };//匿名函数自调用前一个代码块一定要加分号,不然会报错
+    // (intermediate value)(...) is not a function
+    (async function () {
+      for await (num of aab) {
+        console.log(num);
+      }
+    })();
+
+  </script>
+</body>
+
+</html>

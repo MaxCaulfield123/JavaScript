@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // 句后加;有助于提高性能
+    // 变量被叫做标识符
+    // 标识符有很多关键字不能命名,而且严格区分大小写!
+    function a(){
+      // 使用var关键字在此处声明的标识符,在局部作用域中!
+      var b=1;
+      // 不使用var会创建全局变量,但是"use strict"模式中禁止使用此方式
+      c=1;
+      // 定义多个变量,无需换行也行
+      var n=1,q=2,r=3;
+    }
+
+    // 变量提升,下面的两个函数内容是相等的,都打印出undefined
+    function a1(){
+      console.log(obj);
+      var obj={}
+    }
+    function a2(){
+      var obj;
+      console.log(obj);
+      obj={};
+    }
+    a1();a2()
+    
+  </script>
+</body>
+</html>

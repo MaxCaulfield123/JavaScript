@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 通常如果想要得到整数,用parseInt()
+    // Number('')会返回0而,parseInt()如果传入的第一个字符不是+,-,数字,则直接返回NaN
+    // 
+    console.log(parseInt(''));
+    console.log(parseInt('134blue'));//打印出134,忽略blue
+    console.log(parseInt('134.5'));//134,忽略浮点后
+    console.log(parseInt('10xA'));//10,10x开头解释为16进制
+    console.log(parseInt('AF'));
+    console.log(parseInt('AF',16));//parseInt()第二个参数是告诉计算机数据的进制数
+
+    // parseFloat()与parseInt()类似,它会忽略第二个小数点
+    console.log(parseFloat('22.34.22'));//22.34
+  </script>
+</body>
+</html>

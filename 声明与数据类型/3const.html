@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // const与let基本相同
+    const obj=1;
+    // obj={};报错,不允许修改变量;
+    const obj1=[];
+    // 而const所声明的引用类型对象内的数据可以被改变
+    obj1[0]='hanmeimei';
+    console.log(obj1);
+    let j=0
+    for(const i=7;i<j;j++){
+      // 注意循环中要用这种方式来使const声明变量,
+      // 因为const声明的变量不能在循环迭代中改变,会报错
+    }
+    for (const j in obj1){
+      // 这样也行,总之const声明的j不会被循环改变都行
+    }
+  </script>
+</body>
+</html>

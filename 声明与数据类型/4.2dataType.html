@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    'use strict';
+    // 在声明一个将来要保存对象的变量时,要用Null表示目前是空对象!保持语义,与undefined区分
+    let obj=null;
+    // 这里会隐试转换,===才是FALSE
+    console.log(null==undefined);
+    // Boolean(参数)能把任意数据传入参数,转为Bool值
+    // string类型''空字符串为false,Number类型NaN为false
+    console.log(true===1);//false
+    console.log(Boolean(obj));//false
+    // Number类型可以声明其他进制的数,比如8进制,但0开头的8进制在严格模式下不可用,应该用0o开头表示
+    // 8进制前必须是0开头
+    // let a=070;//严格模式下报错!
+    let b=0x1f;//16进制,0x开头
+    console.log(b);
+
+    // 浮点数
+    let zs=1.0//此处因.后为零,所以会被当成整数处理
+    // 浮点数有舍入误差!
+    let float=0.1,float1=0.2;
+    if(float+float1===0.3){
+      console.log('相等')
+    }else{
+      console.log(float+float1);//0.300000004
+    }
+  </script>
+</body>
+</html>

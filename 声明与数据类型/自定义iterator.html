@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 因为Symbol.iterator的暴露,我们可以修改循环迭代行为
+    // 不能{Symbol.iterator:()=>{}}这样修改,因为Symbol.iterator其实是符号数据类型!所以要用[Symbol.iterator]这样修改!
+
+    // 返回一个对象,对象中必须包含 next函数,这个函数继续返回一个对象
+    // 该 next 函数返回的对象中必须返回包含 done 和 value 这两个字段的对象
+
+    // 看网页笔记!
+    // 简记,为对象修改迭代方法-->为[Symbol.iterator]赋值函数,函数返回包含next(){}的对象
+    // next(){}函数内进行条件限制,返回对象{done:bool是否完成结束循环,value:迭代出的值}
+    let count = 0;
+    function someIterator() {
+      return {
+        next() {
+          if (count < 3) {
+            return {
+              done: false,
+              value: count++
+            }
+          }
+          // 这里不用value,因为done为true时就停止迭代,value也打印不出来
+          return {
+            done: true
+          }
+        }
+      }
+    };
+    // for of循环只能循环有Symbol.iterator符号属性的数据类型比如String,Array,Object本来没有这个符号,所以不能用for of循环
+    // 但是我们这里给Object类型加上[Symbol.iterator]属性与我们自己定义的迭代函数,就能用了
+    // let o={//报错!Uncaught TypeError: o is not iterable
+    //   name:'xiaoming',
+    //   age:18
+    // }
+    // for(let a of o){
+    //   console.log(a);
+    // }
+    let obj = {
+      [Symbol.iterator]: someIterator
+    }
+    for(let a of obj){
+      console.log(a);
+    }
+
+    let testArr=['江山','js','Max','Java']
+    let num=0;
+    let obj2={
+      a:'asd',
+      b:'qwe',
+      [Symbol.iterator]:defineIterator
+    }
+    function defineIterator(){
+      return {
+        next(){
+          if(num>2){
+            return{
+              done:true
+            }
+          }
+          return{
+            done:false,
+            value:testArr[num++]
+          }
+        }
+      }
+    }
+    for(const a of obj2){
+      console.log(a);
+    }
+  </script>
+</body>
+
+</html>
