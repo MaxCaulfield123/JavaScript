@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class foosplitter{
+      static [Symbol.split](target){
+        return target.split('java')
+      }
+    }
+    console.log('maxjavajs'.split(foosplitter));
+    class maxSplitter{
+      constructor(str){
+        this.str=str
+      }
+      [Symbol.split](target){
+        return target.split(this.str)
+      }
+    }
+    let max=new maxSplitter('abc');
+    console.log('maxabcjs'.split(max));
+  </script>
+</body>
+</html>

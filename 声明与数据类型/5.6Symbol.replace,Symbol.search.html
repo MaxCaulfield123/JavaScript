@@ -7,10 +7,11 @@
 </head>
 <body>
   <script>
+    // Symbol.replace
     let reg=/a/
     console.log(reg[Symbol.replace]);//注意[Symbol.replace]是正则对象的函数
-    reg[Symbol.replace]=function(){
-      return '阿西吧'
+    reg[Symbol.replace]=function(a){//接收的参数a就是调用replace时的字符串
+      return a+'阿西吧'
     }
     let str1='嗷嗷a嗷啊';
     console.log(str1.replace(reg,'八个雅鹿'));//无论替换成什么都会打印出阿西吧
@@ -21,6 +22,26 @@
     }
     let str2='js爱java'
     console.log(str2.replace(javaReplace,'JavaScript'));//通过类重写,把类当作正则？
+
+    // Symbol.search
+    
+    let reg1=/max/
+    console.log('zjsaimax'.search(reg1));//search打印出在字符串中的index,没有返回-1
+    reg1[Symbol.search]=function(a){//接收的参数a就是调用search时的字符串
+      return a+'123'
+    }
+    class strings{
+      constructor(str){
+        this.str=str;
+      }
+      [Symbol.search](target){
+        return target.indexOf(this.str)
+      }
+    }
+    let astr=new strings('asd');
+    console.log(astr);
+    console.log('zjsaimax'.search(reg1));//因为重写了()内正则的search,调用时行为改变!
+    console.log(String.prototype.search);
   </script>
 </body>
 </html>
