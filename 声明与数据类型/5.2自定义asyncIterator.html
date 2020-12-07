@@ -34,12 +34,31 @@
       }
     };//匿名函数自调用前一个代码块一定要加分号,不然会报错
     // (intermediate value)(...) is not a function
+    // for await of语句必须写在异步的函数中
     (async function () {
       for await (num of aab) {
         console.log(num);
       }
     })();
 
+    class max{
+      constructor(num){
+        this.num=num;
+        this.index=0
+      }
+      async *[Symbol.asyncIterator](){
+        while(this.index<this.num){
+          yield new Promise((resolve)=>resolve(this.index++))
+        }
+      }
+    }
+    async function count(){
+      let emitter=new max(5);
+      for await (x of emitter){
+        console.log(x);
+      }
+    }
+    count()
   </script>
 </body>
 

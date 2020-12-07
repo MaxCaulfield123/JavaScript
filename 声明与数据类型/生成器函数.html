@@ -11,6 +11,8 @@
   <script>
     // 生成器目前IE全版本不支持!!!!!!!!!!!
 
+    //async可能是generator函数的语法糖
+
     // function* 会定义一个生成器函数 generator function 返回一个Generater对象
     
     // 存在的意义,1用于记录执行状态,2用于让异步程序同步??
@@ -34,7 +36,7 @@
     console.log(b.next());//noob
     // 如果生成的Generator对象在调用next()时传参,则参数会赋值给上一条执行的 yield语句左边的变量
     console.log(b.next(100));
-    function* bob() {
+    function* bob(){
       yield 1;
       // yield* 生成器函数 可以使当前函数的调用转变成调用另一个生成器函数,当前暂停.
       // 等另一个调用结束后,再执行当前函数

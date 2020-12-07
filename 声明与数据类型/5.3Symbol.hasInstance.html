@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    class max{
+      constructor(name){
+        this.name = name
+      }
+    }
+    let js=new max();
+    // instanceof 判断对象的原型链上有这个原型,返回bool
+    console.log(js instanceof max);
+    // 看这个原型有没有js这个实例,与上相同
+    console.log(max[Symbol.hasInstance](js));
+
+    // 因为instanceof也是定义在原型上的,所以我们可以从新定义
+    class max1{}
+    class chloe extends max1{
+      static [Symbol.hasInstance](){
+        return false
+      }
+    }
+    let a=new max1();
+    console.log(a instanceof max1);
+    console.log(max1[Symbol.hasInstance](a));//都是true
+    console.log(a instanceof chloe);
+    console.log(chloe[Symbol.hasInstance](a));//都是false,因为我们重写了return false
+  </script>
+</body>
+</html>

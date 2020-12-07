@@ -66,6 +66,7 @@
               done:true
             }
           }
+          
           return{
             done:false,
             value:testArr[num++]
@@ -76,6 +77,27 @@
     for(const a of obj2){
       console.log(a);
     }
+    let arr=['1','a']
+    console.log(arr[Symbol.iterator]());//array下的iterator对象
+
+    // class noob{//next()使yield返回,与我们手动返回next()可能都能使迭代器进行?
+    //   constructor(a){
+    //     this.a="a"
+    //     this.i=0
+    //   }
+    //   *[Symbol.iterator](){
+    //     while(this.i<this.a){
+    //       yield i++
+    //     }
+    //   }
+    // }
+    // function count1(){
+    //   let bb=new noob(4);
+    //   for(let cc of bb){
+    //     console.log(cc);
+    //   }
+    // }
+    // count1()
   </script>
 </body>
 

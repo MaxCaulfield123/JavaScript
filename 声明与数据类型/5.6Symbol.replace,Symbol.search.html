@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let reg=/a/
+    console.log(reg[Symbol.replace]);//注意[Symbol.replace]是正则对象的函数
+    reg[Symbol.replace]=function(){
+      return '阿西吧'
+    }
+    let str1='嗷嗷a嗷啊';
+    console.log(str1.replace(reg,'八个雅鹿'));//无论替换成什么都会打印出阿西吧
+    class javaReplace{
+      static [Symbol.replace](target,replacement){
+        return target.split('java').join(replacement)
+      }
+    }
+    let str2='js爱java'
+    console.log(str2.replace(javaReplace,'JavaScript'));//通过类重写,把类当作正则？
+  </script>
+</body>
+</html>

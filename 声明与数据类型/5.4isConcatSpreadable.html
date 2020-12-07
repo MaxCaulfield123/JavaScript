@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 数组或类数组对象有[Symbol.isConcatSpreadable]这个属性,接受bool值,表示在用concat时是否打散自身
+    let arr=['max','chloe']
+    let arr1=['js','js']
+    console.log(arr[Symbol.isConcatSpreadable]);//默认是undefined
+    arr[Symbol.isConcatSpreadable]=false;
+    console.log(arr.concat(arr1));//设置为false时arr没打散自身,直接concat
+    arr[Symbol.isConcatSpreadable]=true;
+    console.log(arr.concat(arr1));//设置为true时打散自身再concat
+
+    // 这里定义一个类数组对象(1有Length,2属性为数字下标)
+    let obj={
+      length:2,
+      0:'baz'
+    }
+    console.log(arr.concat(obj));
+    obj[Symbol.isConcatSpreadable]=true;
+    console.log(arr.concat(obj));//类数组对象也能被concat(),对象中的length如果大于对象长度,多出为元素empty
+
+  </script>
+</body>
+</html>
