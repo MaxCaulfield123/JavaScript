@@ -16,6 +16,26 @@
     let a=Infinity;
     let b=0;
     console.log(a*b);//NaN
+
+    // 相除,用/表示,也会调用Number()进行转化 
+    // 除法不能表示商,则返回infinity
+    // 任一数为NaN,返回NaN
+    // 0/0返回NaN
+    // 非0有限值/0返回infinity或-infinity
+    // infinity/第二个数,则根据第二个数的符号返回infinity或-infinity
+    console.log(-123/0);
+    console.log(123/0);
+    console.log(0/0);
+
+    // 取余,用%表示,也会调用Number()进行转化,被除数%除数=商...余数
+    // 无限值%有限值,返回NaN
+    // 被除数%除数,返回NaN
+    // Infinity%Infinity 返回NaN
+    // 有限值%无限值 返回前面的有限值
+    // 0不是0的数 返回0
+    console.log(Infinity%199);
+    console.log(10%0);
+  
   </script>
 </body>
 </html>
