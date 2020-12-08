@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 隐试转换类型的时候调用?
+    // Symbol.toPrimitive是在对象转换为字符串或数值或未指定的类型时,执行的函数,官方说是转为原始值时调用
+    // 例如Object类型转为[Objecj Object]这样的字符串
+    class Max{
+      constructor(a){
+        // 这里得是this的符号函数重写,不是this则执行时找不到实例的Symbol.toPrimitive,会报错
+        // [Symbol.toPrimitive]不找原型链上的,只找实例自身原型上的??
+        // 不加this,undefined is not a function
+        this[Symbol.toPrimitive]=function(a){
+          switch (a) {
+          case 'number':
+            return 100;
+            break;
+          case 'string':
+            return 'isString';
+            break;
+          case 'default':
+          default:
+            return 'isDefault'
+            break;
+        }
+        }
+      }
+    }
+    let js=new Max();
+    console.log(3+js);//3isDefault
+    console.log(3-js);//-97 转为数字
+    console.log(js.toString());//[Object Object]
+  </script>
+</body>
+</html>

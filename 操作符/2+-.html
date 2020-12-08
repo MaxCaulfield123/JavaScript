@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 对于+-来说,还是会对不是number类型的数据调用Number()后再运算,object类型会调用valueOf()
+    let a=12;
+    console.log(+a);//没有变化
+    let s1='01'
+    let s2='1.1'
+    let s3='max'
+    let b=false;
+    let o={
+      valueOf(){
+        return 1000;
+      }
+    }
+    console.log(+s1,+s2,+s3,+b,+o);
+    // -运算符会把数据变为负数,也会调用隐试转换
+    console.log(-s1,-s2,-s3,-b,-o);
+  </script>
+</body>
+</html>

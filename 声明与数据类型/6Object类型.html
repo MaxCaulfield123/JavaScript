@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 什么是Object?对象Object其实就是一组数据与函数的集合
+    // Object是派生其他对象的基类
+    let o = new Object({ a: 1 });
+    console.log(o);
+    let n = new Object;//不传参也可以这样写,但不推荐
+    console.log(n);
+    // 每个Object实例,都有如下方法!
+    console.log(o.constructor);//构造当前o对象的构造函数
+    console.log(o.hasOwnProperty('b'));//判断o这个对象是否有这个属性,属性必须传入字符串,返回bool
+    console.log(Object.prototype.isPrototypeOf(o));//判断当前原型是否是一个对象的原型
+    console.log(o.propertyIsEnumerable('a'));//判断o对象内的a属性是否可被枚举,必须传入字符串
+    console.log(o.toLocaleString());//返回对象的字符串表示,表示对象在本地的执行环境(o是在Object环境中执行的?)
+    // 这两个方法通常是隐试转换时自动调用
+    // 在数值运算里，会优先调用valueOf() ，如a + b；
+    // 在字符串运算里，会优先调用toString() ，如alert(c) 
+    console.log(o.toString());//返回对象的字符串形式
+    console.log(o.valueOf());//valueOf()返回对象的原始值,toString()将该对象的原始值转为字符串返回
+    // valueOf()转换返回的具体值
+    // Array	数组的元素被转换为字符串，这些字符串由逗号分隔，连接在一起。其操作与 Array.toString 和 Array.join 方法相同。
+    // Boolean	Boolean 值。
+    // Date	存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC。
+    // Function	函数本身。
+    // Number	数字值。
+    // Object	对象本身。这是默认情况。
+    // String	字符串值。
+  </script>
+</body>
+
+</html>

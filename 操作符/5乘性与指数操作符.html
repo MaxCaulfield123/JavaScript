@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 相乘,用*表示,如果有不是数值的操作数,则会调用Number()函数进行转化
+    // 处理特殊值时遵从特殊的行为
+    // 不能表示乘积时,返回Infinity或-Infinity
+    // 如果相乘数有一个Number()后为NaN,则返回NaN
+    // Infinity乘0,返回NaN
+    // Infinity乘非0有限数值,返回Infinity或-Infinity
+    let a=Infinity;
+    let b=0;
+    console.log(a*b);//NaN
+  </script>
+</body>
+</html>

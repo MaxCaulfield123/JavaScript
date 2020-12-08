@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // ++与--有两个版本,放变量前和放变量后D
+    // ++与--可以可以用在任何数据类型上
+    // 放变量前先改变变量,然后再对语句求值
+    let age=22;
+    let age2=21;
+    let num=--age+age2;
+    // 注意自减后变量值自身已经改变!
+    let num1=age+age2;
+    console.log(num,num1);//结果一样,age在num中先--,然后求和
+
+    //++或--放在变量后会先对语句求值，然后再对变量进行操作
+    let a=22,a2=21;
+    let n=a++ + a2;//43, “语句” 先赋值给左边的变量后再给变量自增
+    let n1=a + a2;//44,自增结束
+    console.log(n,n1);
+    // 对于大多数据类型会先被Number()转数字后,再自增或自减 
+    let asd='asd';
+    console.log(asd++);
+    // 对于对象则会先调用对象的valueOf()转化,然后再赋值,这里重写valueOf
+    let obj={a:1,valueOf(){
+      return -100
+    }}
+    console.log(++obj);
+  </script>
+</body>
+</html>

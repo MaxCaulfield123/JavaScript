@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let o={a:'aasd',b:'noob'}
+    with(o){
+      console.log(a);
+    }
+    o[Symbol.unscopables]={
+      a:true
+    };//禁止o对象中的属性被在with中作用域查找!!!!
+    with(o){
+      console.log(a);//Reference Error,a is undefined!!
+    }
+    console.log(o.a);//但是这里还是能访问到a属性
+  </script>
+</body>
+</html>

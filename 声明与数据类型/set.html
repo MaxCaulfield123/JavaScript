@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Set是se6新出的数据结构,类似数组,但没有重复值!
+    let over=new Set()
+    let obj={a:1,b:3}
+    let arr=['2','5','2','7',obj]
+    arr.forEach(e => {
+      // Set用add()添加函数
+      over.add(e)
+    });
+    console.log(over);
+    console.log(over.has('2'));//通过has判断set类型是否有某元素
+  </script>
+</body>
+</html>

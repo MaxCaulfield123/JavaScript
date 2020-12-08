@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 逻辑非,用!表示,会调用Boolean()将数据转为Bool后取反
+    let a='';
+    // 两个!,!!相当于调用了Boolean()
+    console.log(!a,!!a,Boolean(a));
+
+    // 逻辑与 用&&表示,它并不一定返回bool值!而是遵从一系列规则!
+    // 对象&&第二个数,返回第二个数
+    // 第一个数&&对象,则第一个数的Boolean()为true时,返回对象
+    // 对象&&对象,返回第二个对象
+    // 如果有一个值为null,NaN,undefined,则返回它自身
+    let obj1={}
+    let obj={
+      Boolean(){
+        return false;
+      }
+    }
+    console.log(obj1&&obj);//只返回第二个数,因为都是对象!
+    // 逻辑与有短路特性
+    let found=false;//第一个数为true时报错,因为maxaijs未声明,false时不报错,因为短路了,不查询maxaijs变量
+    let res=found&&maxaijs;
+    console.log(res);
+
+    // 逻辑 或用||表示,它并不一定返回bool值!而是遵从一系列规则!
+    // 对象&&第二个数,返回对象
+    // 第一个为false的数值&&第二个数,返回第二个数
+    // 第一个对象&&第二个对象,返回第一个对象
+    // 如果有一个值为null,NaN,undefined,则返回它自身
+    let objmax={a:1}
+    let objmax1={a:1}
+    console.log(objmax||objmax1);//返回第一个对象!
+    // 逻辑或也有短路特性
+    let found1=true;//第一个数为false时报错,因为maxaijs未声明,true时不报错,因为立即返回true造成短路了,不查询maxaijs变量
+    let res1=found1||maxaijs;
+    console.log(res1);
+  </script>
+</body>
+</html>
