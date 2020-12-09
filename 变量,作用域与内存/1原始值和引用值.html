@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // js包含两种不同类型的数据,原始值和引用值
+    // 原始值是对数据实际值的直接操作,undefined,null,boolean,string,number,symbol都是原始数据类型
+    // 引用值是操作该变量所引用的内存中的数据,js不允许访问内存!!所以得间接通过引用!
+
+    // 引用类型的数据能随时动态添加,修改,删除其属性
+    let person=new Object();
+    person.name='jj';
+    console.log(person.name);//jj
+
+    // 原始值则不能
+    let p1='person'
+    p1.name='ss'
+    console.log(p1.name);//undefined
+    // new String()如果使用new关键字,则js会创建一个Object类型的实例,但其行为类似原始值!!!
+    let p2=new String('person');
+    console.log(p2===p1);//false,就证明new出来的String与不用new的原始类型String不是一种数据类型
+  </script>
+</body>
+</html>

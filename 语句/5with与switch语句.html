@@ -27,12 +27,13 @@
     }
     // 如果要用switch比对进行对数字范围的判断,应该这样写
     let num=22;
-    switch(true){//用true和false进行判断,因为比较符返回的是bool值!
+    switch(true){//用true和false进行比对,因为比较符返回的是bool值!
       case num<5:
         console.log('num小于5!');
       break;
       case num<30:
         console.log('num小于30大于5!');
+        break;
       default:
         console.log('case大于等于30!');
     }
