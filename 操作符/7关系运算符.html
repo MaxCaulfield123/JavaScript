@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 关系运算符,返回bool,对不同的数据类型会转换后比较
+    // 任何数据与NaN比较都会返回false
+    // 如果 数值>其他数据类型 则对第二个数转换为数值
+    // 字符串>字符串 则(逐个!)比较字符串中对应字符的编码!!
+    // 对象>其他数据类型,则会调用对象的valueOf(),没有valueOf()则调用toString()比较
+
+    // 大写字母的编码都小于小写字母
+    console.log('Back'<'back');//true
+    // 比较数值字符串时,也是比较字符编码
+    console.log('23'<'3');//true
+    console.log('a'<3);//false,'a'被转为NaN
+  </script>
+</body>
+</html>

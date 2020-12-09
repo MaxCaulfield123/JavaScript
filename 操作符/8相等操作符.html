@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // == 与 !=的隐试转换
+    // bool值会被转为1或0
+    // 字符串!=数值 会先将字符串转为数值
+    // 对象与另一个不是对象的数据比较,会将对象调用valueOf()转换后比较
+    // NaN不等于任何数
+    // 比较两个对象时,比较的是引用值
+    console.log(null==undefined);//null与undefined相等,因为他们类似
+
+    // ===与!==
+    // 这个相比是不带类型转换的比较,数据类型不同就直接返回false
+    console.log(null===undefined);//返回false,因为他们是不同的数据类型
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 加用+表示
+    // -Infinity+Infinity返回NaN
+    // +0 + -0返回+0;
+    console.log(0 + -0);
+    // 如果都是字符串则会拼接
+    // 如果一方为对象,布尔值,则会调用toString()转换,undefined与null用String()转换
+    let str='js is'
+    // 用括起来,让解释器先执行括号中的语句
+    console.log(str+(100+80));
+
+    // 减用-表示
+    // 任何数是NaN则返回NaN
+    // 同号Infinity相减返回NaN
+    // 0- -0返回-0
+    // 0-0 返回+0
+    // 注意减法会调用Number()转换字符串,bool,null,或undefined,而对于对象,则会调用valueOf(),没有则调用toString()方法
+    let str1='22';
+    console.log(str1-4);//18
+  </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // with的作用是将对象的作用域应用到代码块上
+    let obj={a:1,b:'eunuch'}
+    with(obj){
+      // 这个作用域内,每个变量都先被看为局部变量,如果没有该局部变量,则会先找obj有没有同名属性
+      console.log(a,b);
+    }
+
+    // switch(){}语句用来对比数据是否符合几个值!!
+    switch(obj.a){
+      case 2:
+        console.log('a是2!');
+        break;//注意要break跳出switch循环
+      case 1:
+        console.log('a是1!');
+        break
+      default://default为不满足上面任何一情况时的行为
+        console.log('a不是2也不是1!');
+    }
+    // 如果要用switch比对进行对数字范围的判断,应该这样写
+    let num=22;
+    switch(true){//用true和false进行判断,因为比较符返回的是bool值!
+      case num<5:
+        console.log('num小于5!');
+      break;
+      case num<30:
+        console.log('num小于30大于5!');
+      default:
+        console.log('case大于等于30!');
+    }
+
+  </script>
+</body>
+</html>

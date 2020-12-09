@@ -25,7 +25,7 @@
     // infinity/第二个数,则根据第二个数的符号返回infinity或-infinity
     console.log(-123/0);
     console.log(123/0);
-    console.log(0/0);
+    console.log(0/0);//NaN
 
     // 取余,用%表示,也会调用Number()进行转化,被除数%除数=商...余数
     // 无限值%有限值,返回NaN
@@ -33,9 +33,16 @@
     // Infinity%Infinity 返回NaN
     // 有限值%无限值 返回前面的有限值
     // 0不是0的数 返回0
-    console.log(Infinity%199);
-    console.log(10%0);
-  
+    console.log(Infinity%199);//NaN
+    console.log(10%0);//NaN
+    
+    // 指数操作符,用**表示,也可以用Math.pow(数据,指数)
+    console.log(5**2);
+    console.log(Math.pow(5,2));
+    // 也有指数赋值操作符**=,类似*=,+=
+    let num=10;
+    num**=2//把num的指数设置为2,计算后赋值给num
+    console.log(num);
   </script>
 </body>
 </html>

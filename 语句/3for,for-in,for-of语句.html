@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // for循环中可以不使用变量声明关键字
+    // for(;;){//注意for循环中分号必须加!!!
+    //   console.log('王八蛋');
+    // }这是一个死循环
+    for(var a=10;a<20;a++){//var声明的会变为全局变量,所以我们通常用let形成闭包
+      console.log(a);
+    }
+    console.log('a是全局变量吗?',a);
+    let max=10;
+    let js=0;
+    for(;js<max;){//注意,把声明变量提到外边,把循环一次后执行的语句放入代码块中,看起来就像while(){}循环一样!
+      console.log(js+'js');
+      js++
+    }
+
+    // for(in){}用来枚举对象的所有非符号属性名,注意属性名在对象中没有顺序
+    // 不用const 也可以
+    for(const propName in window){//所以不同浏览器的打印顺序不同
+      document.write(propName+',')
+    }
+
+    // for(of){}用来遍历可迭代对象的元素
+    // for-of 会按照可迭代对象的next()产生值的顺序迭代元素
+    //es8增加了for-await-of循环
+    for(const el of [1,4,5,7]){
+      console.log(el);
+    }
+  </script>
+</body>
+</html>

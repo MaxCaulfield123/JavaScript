@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //标签语句能让break或continue作用于一个循环
+    aIterator:for(var i =0;i<10;i++){
+      for(var j=0;j<10;j++){
+          console.log(j);
+        if(j==5){
+          // 外层循环每次都会循环到内层循环,不过内层循环在循环到5时,break出当前标签的循环
+          // 没有标签则会break最近的循环,有标签则可以break掉外层循环
+          break aIterator;
+        }
+      }
+    }
+    console.log(i);//0外层循环被break
+
+    // break能跳出当前循环,continue能跳过当前循环块下方未执行的代码,表示立即迭代
+    let arr=[]
+    label:for(let a=0;a<10;a++){
+      for(let s=0;s<10;s++){
+        if(a==5){
+          break label;//跳出当前内层循环
+        }
+        if(a==2){
+          continue;//忽略label块内,当前位置的下方代码,从新迭代
+        }
+        arr.push(a)
+      }
+    }
+    console.log(arr);//40个元素,2时continue一次,5时直接外层循环停止
+    
+  </script>
+</body>
+</html>
