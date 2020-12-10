@@ -15,7 +15,7 @@
 
     // 模板字符串还可以当做函数参数,此处收集剩余参数到a中
     function fun(arr,...a){
-      console.log(arr);//注意这里有个raw
+      console.log(arr);//注意这里的打印有raw
       for(const key in a){
         console.log(a[key]);
       }

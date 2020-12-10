@@ -47,14 +47,14 @@
         this.index=0
       }
       async *[Symbol.asyncIterator](){
-        while(this.index<this.num){
+        while(this.index<this.num){//Symbol符号定义的例如迭代,match等行为,函数内,this指向执行行为,函数的实例
           yield new Promise((resolve)=>resolve(this.index++))
         }
       }
     }
     async function count(){
       let emitter=new max(5);
-      for await (x of emitter){
+      for await (x of emitter){//emitter的Symbol.asyncIterator内的this指向emitter
         console.log(x);
       }
     }

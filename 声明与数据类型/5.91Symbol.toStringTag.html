@@ -16,6 +16,7 @@
     console.log(js[Symbol.toStringTag]);//自定义类没有toString,undefined
     class Chloe{
       constructor(){
+        // toStringTag控制对象toString时的返回值
         this[Symbol.toStringTag]='Chole'
       }
     }

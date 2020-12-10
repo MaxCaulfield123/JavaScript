@@ -20,7 +20,7 @@
     console.log(o.hasOwnProperty('b'));//判断o这个对象是否有这个属性,属性必须传入字符串,返回bool
     console.log(Object.prototype.isPrototypeOf(o));//判断当前原型是否是一个对象的原型
     console.log(o.propertyIsEnumerable('a'));//判断o对象内的a属性是否可被枚举,必须传入字符串
-    console.log(o.toLocaleString());//返回对象的字符串表示,表示对象在本地的执行环境(o是在Object环境中执行的?)
+    console.log(o.toLocaleString());//返回对象的字符串表示,表示对象在本地的执行环境[object Object](o是在Object环境中执行的?)
     // 这两个方法通常是隐试转换时自动调用
     // 在数值运算里，会优先调用valueOf() ，如a + b；
     // 在字符串运算里，会优先调用toString() ，如alert(c) 
@@ -29,6 +29,8 @@
     // valueOf()转换返回的具体值
     // Array	数组的元素被转换为字符串，这些字符串由逗号分隔，连接在一起。其操作与 Array.toString 和 Array.join 方法相同。
     // Boolean	Boolean 值。
+    let date=new Date()
+    console.log(date.valueOf());//转换成时间戳了!
     // Date	存储的时间是从 1970 年 1 月 1 日午夜开始计的毫秒数 UTC。
     // Function	函数本身。
     // Number	数字值。

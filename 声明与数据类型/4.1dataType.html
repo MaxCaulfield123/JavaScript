@@ -16,7 +16,7 @@
     console.log(typeof null);//object,注意null其实在底层相当于对空对象的引用
     console.log(typeof function(){});//function,typeof区分函数与对象,但严格来说函数也是对象
     
-    // undefined是未初始化变量(声明但为赋值),它的出现是为了区分空对象指针null与未初始化变量的区别
+    // undefined是未初始化变量(声明但未赋值),它的出现是为了区分空对象指针null与未初始化变量的区别
     let b;
     // 对未声明的变量只能执行typeof,执行delete没意义
     console.log(typeof c);

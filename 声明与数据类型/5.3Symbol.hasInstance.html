@@ -21,15 +21,15 @@
     // 因为instanceof也是定义在原型上的,所以我们可以从新定义
     class max1{}
     class chloe extends max1{
-      static [Symbol.hasInstance](){
-        return false
+      static [Symbol.hasInstance](){//下方是调用chloe类!所以用statice
+        return 'waibiwaibi'
       }
     }
     let a=new max1();
     console.log(a instanceof max1);
     console.log(max1[Symbol.hasInstance](a));//都是true
-    console.log(a instanceof chloe);
-    console.log(chloe[Symbol.hasInstance](a));//都是false,因为我们重写了return false
+    console.log(a instanceof chloe);// instanceof只显示Symbol.hasInstance的返回值是true还是false
+    console.log(chloe[Symbol.hasInstance](a));//直接调用符号能显示返回的具体字符串
   </script>
 </body>
 </html>

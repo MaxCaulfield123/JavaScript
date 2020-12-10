@@ -23,14 +23,14 @@
         return tar.includes('喂')
       }
     }
-    console.log(str.match(max))//这是调用的match是不是max上的?str传给了class中tar这个参数？
+    console.log(str.match(max))//这是调用的match是str原型链上的max类内的静态方法!!str传入max的方法中!
     console.log('啊啊啊'.match(max));
     let reg1 = /abc/;
     reg1[Symbol.match] = false;//启用检查报错，因为reg1是正则，不是字符串,不启用则正常执行
     //Symbol.match的另一个用处是在 String.prototype.startsWith()，String.prototype.endsWith() 和 String.prototype.includes() 
     // 这些方法使用时，会检查（）内是否是字符串,如果不是会报TypeError错误
     // Symbol.match的另一个作用是是否启用检查！
-    console.log('a'.startsWith(reg1));//调用的是reg1的match函数
+    console.log('a'.startsWith(reg1));//false调用的是reg1的match函数
 
     var re = /foo/;
     re[Symbol.match] = false;

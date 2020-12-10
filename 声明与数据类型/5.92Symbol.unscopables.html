@@ -9,7 +9,7 @@
   <script>
     let o={a:'aasd',b:'noob'}
     with(o){
-      console.log(a);
+      console.log(a);//aasd
     }
     o[Symbol.unscopables]={
       a:true

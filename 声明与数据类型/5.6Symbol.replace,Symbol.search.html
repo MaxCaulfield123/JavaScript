@@ -21,7 +21,7 @@
       }
     }
     let str2='js爱java'
-    console.log(str2.replace(javaReplace,'JavaScript'));//通过类重写,把类当作正则？
+    console.log(str2.replace(javaReplace,'JavaScript'));//通过类重写
 
     // Symbol.search
     
@@ -30,17 +30,19 @@
     reg1[Symbol.search]=function(a){//接收的参数a就是调用search时的字符串
       return a+'123'
     }
+    console.log('zjsaimax'.search(reg1));//因为重写了()内正则的search,调用时行为改变!
     class strings{
       constructor(str){
         this.str=str;
       }
-      [Symbol.search](target){
+      [Symbol.search](target){//target是目标被放进来,不是'asd'字符串,所以indexOf返回-1?
+        console.log('目标',target,this.str,target.indexOf(this.str));
         return target.indexOf(this.str)
       }
     }
     let astr=new strings('asd');
-    console.log(astr);
-    console.log('zjsaimax'.search(reg1));//因为重写了()内正则的search,调用时行为改变!
+    console.log(astr,astr[Symbol.search]('s'));
+    console.log('asd'.indexOf('s'));
     console.log(String.prototype.search);
   </script>
 </body>
