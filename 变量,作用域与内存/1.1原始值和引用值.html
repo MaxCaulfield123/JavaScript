@@ -23,6 +23,18 @@
     // new String()如果使用new关键字,则js会创建一个Object类型的实例,但其行为类似原始值!!!
     let p2=new String('person');
     console.log(p2===p1);//false,就证明new出来的String与不用new的原始类型String不是一种数据类型
+    console.log(typeof p2,typeof p1);//Object,String
+
+    // 原始值类型赋值时,会复制一个新数据给对方
+    let ys=p1;
+    p1='nzgsm?'
+    console.log(ys);//不会改变,两个变量独立使用互不干扰
+
+    // 而引用类型的数据在直接赋值时,只是复制了一个指针给新变量,指针指向内存中的对象
+    let obj=new Object({a:1})
+    let obj1=obj;
+    obj1.a=3;
+    console.log(obj);//修改赋值后的obj1,obj被改变,两者其实是同一数据,只是引用的变量名不同
   </script>
 </body>
 </html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 通常我们对数据类型的判断用 typeof 关键字,null与Object都会返回Object
+    // typeof 遇到函数与正则表达式时会返回function
+    let arr=[]
+    console.log(typeof arr);//object
+    // 如果要判断object具体是哪个类型,则会通常用instanceof操作符判断它是谁的实例(Array还是RegExp的)
+    // 任何引用类型数据都是Object的实例,所以arr instanceof Object会返回true
+    console.log(arr instanceof Object);//true
+    console.log(arr instanceof RegExp);//false
+    console.log(arr instanceof Array);//true
+    
+  </script>
+</body>
+</html>

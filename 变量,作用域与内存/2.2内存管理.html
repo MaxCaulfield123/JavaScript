@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 分配给浏览器的内存很少,给移动浏览器的内存更少
+    // 把变量赋值为null叫做解除引用
+    // 最好把全局变量与全局属性的值在不用时设置为Null
+    function max(name){
+      let a=new Object();
+      a.name=name;
+      return a
+    }
+    let js=max('js')
+    console.log(js.name);
+    js=null;//不需要时,对全局变量js解除引用
+    console.log(js);
+    // 用块作用域能更早的回收废弃数据的内存(let,const)
+
+    // Chorme的V8会创造隐藏类的属性于被构造的对象中(对象初始值不超出30个字符串时)
+    function a(){
+      this.title='asd'
+    }
+    let bbc=new a()
+    let wsc=new a();
+    // 现在为止以上用一个隐藏类(因为他们共享同一个构造函数和原型)
+    bbc.name='asd'//我们修改对象的属性,就会新增一个隐藏类,
+    delete bbc.name//使用delete也会在v8下新增隐藏类
+    bbc.name=null//应该这样释放数据
+    //先创建new出对象,再修改其属性,则会根据这种行为的频率与隐藏类的大小而影响频率
+    //所以应该把外面的修改属性行为,放进构造函数中,使new出的对象继续共享隐藏类,从而提升性能
+    function b(params) {
+      this.title='asd'
+      this.name=params
+    }//推荐这样优化v8下的网页
+
+  </script>
+</body>
+</html>

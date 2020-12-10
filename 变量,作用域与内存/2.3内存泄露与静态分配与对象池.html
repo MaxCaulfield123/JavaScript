@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 内存泄露的两种方式1意外声明全局变量2闭包
+    function max(params) {
+      max='js'
+    }//1
+    let str='1';//被引用无法释放
+    setInterval(()=>{
+      console.log(str);
+    })//2闭包
+    function chloe(){
+      let arr=[1]//被引用,内存泄露无法释放
+      return function rachel(){
+        return arr
+      }
+    }//2闭包(外部作用域被内部函数所引用,造成内存无法释放)
+
+    // 静态分配就是用对象池,对象池中包含了一堆放置的,已经初始化(new Object())的对象
+    // 对象池应该有一块能初始化对象的代码,用于将借出的对象(属性被修改过的)拿回来洗一洗再放起来(初始化属性)
+    // 在需要使用对象时,从对象池中拿一个,用完再调用对象池中的回收函数放回去
+    // 为什么要用对象池?为了尽可能减少new Object()(也就是初始化对象)的次数,从而让浏览器的垃圾回收程序不会对当前代码块执行多次回收(影响效率)
+
+    // 并非所有对象都适合拿来池化――因为维护对象池也要造成一定开销。
+    // 对生成时开销不大的对象进行池化，反而可能会出现“维护对象池的开销”大于“生成新对象的开销”，
+    // 从而使性能降低的情况。但是对于生成时开销可观的对象，池化技术就是提高性能的有效策略了。
+  </script>
+  <!-- 对象池的案例 -->
+  <script src="./对象池.js"></script>
+</body>
+</html>

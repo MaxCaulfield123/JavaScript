@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function max(){
+      // 严格模式下会报错
+      a=5;//函数中未声明就初始化的变量会放到全局中
+    }
+    max();
+    console.log(a);
+
+    // 声明提升
+    // var a=1;它等价于下方
+    b=1;
+    var b;
+
+    // let 1不能重复声明 2只能在当前块级作用域中访问
+    //3会有声明提升!但未声明前不能访问!提升方式与var不一样
+    // 4循环条件使用,不会像var一样泄露到外部
+    // 5行为就像为当前代码块形成一个匿名函数自调用
+    // 6全局中使用let声明不会将变量放到作用域变量(window)中
+
+    // const 1声明时必须初始化(赋值)2不允许重新赋值3与let其他特性相同,也是块级作用域,也不放window
+    // const 声明的变量,编译器会将其转为实际的值,从而减少LHS查找?谷歌V8用这个优化
+  </script>
+</body>
+</html>

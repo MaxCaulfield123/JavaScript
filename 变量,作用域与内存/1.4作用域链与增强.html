@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 上下文就是我们的执行环境,有全局上下文与块上下文,上下文中储存所有变量与函数的对象叫变量对象
+    // 块内的代码执行完后,块上下文的变量对象立即销毁,而全局上下文则会在标签或网页关闭的时候才销毁
+    // var在全局作用域下声明的变量,都是全局上下文中window中的对象与方法
+    // 而let,const在全局作用域下声明的变量则不会再全局上下文window中,但在作用域解析上是一样的
+    // 每个函数的块上下文执行时,会将上下文推到上下文栈上执行,执行完后栈再将上下文返还给之前的执行上下文
+    
+    // 作用域链:控制上下文执行查找变量的顺序;函数在执行时,活动对象(最初只有arguments)为变量对象
+    // 1包含上下文(其实就是{})-2包含上下文-全局上下文(始终是最后一个变量对象,浏览器中其实就是window)
+    var color='blue';
+    function changeColor(){
+      if(color=='blue'){//执行时先在自己的变量对象(arguments)查找color,发现没有!
+        color='black'//然后去外面一层(外面没{}了,只有window)找,找到了color并赋值
+      }else{
+        color='pink'
+      }
+    }
+    changeColor()
+    console.log(color);
+
+    let str='asd'
+    function a(){//a函数的作用域有max与b变量
+      let max='123';
+      console.log(str);//bstr报错!说明作用域不能访问其子作用域内的变量,但能访问父作用域的对象
+      function b(){//该作用域只有bstr一个变量
+        let bstr='456'
+        let max='456'
+        console.log(max,str);//max为456因为在局部作用域中找到了max这个变量,就不再向上一级查找,直接使用局部作用域中的变量
+      };
+      b()
+    }
+    a()
+
+    function c(){
+      let obj={a:1,b:'3'}
+      try{//trycatch与with会添加一个作用域到作用域链的最上方
+
+      }catch(err){
+        console.log(err);
+      }
+      with(c){//with将()内的对象作用域放到作用域链的最上方
+        var a=5;//var 声明的a变量会被泄露到函数作用域中
+        let b=2;//with中的Let声明的变量也会被限制在{}中,外界访问不到
+      }
+      console.log(a);//5
+      // console.log(b);//b is not defined
+    }
+    c()
+    // console.log(c());
+
+    function kuai(){
+      let a='123'
+      {//可以直接写一个{}表示一个块!
+        let a='456'
+        return a
+      }
+    }
+    console.log(kuai());//456,查找到当前作用域,停止向上级查找
+  </script>
+</body>
+</html>

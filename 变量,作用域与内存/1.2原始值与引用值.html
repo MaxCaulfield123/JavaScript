@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数参数的传递其实就是赋值给局部变量,原始类型与引用类型数据会表现不同
+    function max(a){
+      // 传递参数时,值被复制到局部变量,也就是arguments的属性中
+      a='rgb'
+    }
+    let str='zjs'
+    max(str)
+    console.log(str);//还是zjs,函数内部修改的是局部原始类型数据
+    function chloe(obj){
+      obj.name='sxc'
+    }
+    let obj=new Object();
+    chloe(obj)
+    console.log(obj.name);//sxc,按值传递后函数修改了引用的内存中的引用类型数据
+
+    function rachel(obj){
+      obj.name='amber';
+      obj=new Object()//此处会将局部变量obj重新赋值为新对象,原有的引用被释放
+      obj.name='max'//此处修改局部作用域中的对象,函数完成后会销毁
+    }
+    let person=new Object()
+    rachel(person);
+    console.log(person.name);//amber
+  </script>
+</body>
+</html>
