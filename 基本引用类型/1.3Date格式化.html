@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Date类型的方法
+    let date=new Date()
+    console.log('日期以毫秒表示,与valueOf()相同',date.getTime());
+    console.log('以毫秒数设置改变日期',date.setTime(1607667665195));
+    console.log('获取年数',date.getFullYear());
+    console.log('设置年数,参数为四位数字',date.setFullYear(1998));
+    console.log('获取月数-1,0为1月,11为12月',date.getMonth());
+    console.log('设置月数',date.setMonth(10));//0为1月,11为12月,0-11外则会减年数或加年数
+    //同理的还有getDate()获取日,setDate()设置日,1-31大于就加月份
+    // getDay()获取周几 setDay()设置周几,0周一6周日
+    // getHours()获取小时,setHours()0-23
+    // getMinutes()获取分,setMinutes()设置分 0-59
+    // getSeconds()获取秒,setSeconds()设置秒 0-59
+    // getMilliseconds()获取时间中的毫秒,setMilliseconds()设置毫秒
+    // 以上所有函数都有setUTC与getUTC!!!例如setUTCHours()
+    // getTimezoneOffset()获取UTC与本地时区偏移量,单位为分钟
+  </script>
+</body>
+</html>

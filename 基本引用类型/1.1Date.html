@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 其实js中没有类,引用数据是由引用类型new出来的,class其实是引用类型?
+    // new Date()会创建一个保存当前时间的实例
+    let time=new Date();
+    // 如果要给予其他时间应该在()中传入毫秒数
+    // Date.parse()接受一个字符串,将字符串表示的时间转换为时间戳!字符串格式如下
+    // 月/日/年 4/22/2021
+    // 月名 日,年 May 23,2019
+    // Tue May 23 2019 00:00:00 GMT-0700
+    // 如果传入的格式不正确,会返回NaN
+    console.log(Date.parse('12/10/2020'));
+    // new Date()中如果传入字符串,则会自动调用Date.parse()先将字符串转为时间戳,然后再给new Date()
+    console.log(new Date('march 29,2020'));//如果29日换成32日超出,那么交由浏览器返回具体日期
+
+    // Date.UTC()返回时间戳,传入数值参数,年份与月份必填,注意月份-1!!
+    // Date.UTC(年,月份-1,日,24小时制的小时,分,秒)
+    console.log(new Date(Date.UTC(2019,8,19,17,55,30)));
+    // Date.UTC()也会被new Date()隐试调用,但默认是本地时区
+    console.log(new Date(2018,10,03,04,04));
+    // Date.now()获取现在时间戳
+    console.log(Date.now());
+  </script>
+</body>
+</html>

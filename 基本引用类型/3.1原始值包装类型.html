@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 三个特殊的引用类型 String Boolean Number,这些类型既有其他类型的特点,也有原始类型的行为
+    // 声明一个原始类型的字符串
+    let str='黄河小手枪';
+    // 这里为什么能调用str的函数呢?str不是对象,是原始值
+    let s1=str.substring(2);
+    console.log(s1);
+    // 因为在执行上述代码时,后台进行了很多处理来实现上述操作,大概操作如下
+    // 1读取到s1变量保存在内存中的值时,创建一个String类型的实例let s1=new String()
+    // 2调用实例上的特定方法 let s2=s1.substring(2)
+    // 3销毁实例 s1=null
+  </script>
+</body>
+</html>

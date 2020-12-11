@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // reg.exec(str)
+    let str='mom and dad and baby'
+    // 每一个括号都被称为一个捕获组(子表达式)
+    let pattern=/mom (and dad (and baby)?)?/ig;
+    // exec()这个方法,如果正则中有g,则会调用一次返回一个匹配值,如果没有g则只会返回第一个匹配值
+    let matches=pattern.exec(str)
+    // 符合捕获组的字符串,会被放入数组中
+    console.log(matches);
+
+    let str1='cat,bat,fat,sat';
+    let str2='wat,aat'
+    // 如果加y,则下次只会在lastIndex的位置上找!lastIndex上的字符如果不匹配就返回Null!
+    let pattern1=/.at/ig;//不加g,exec()只返回第一个!
+    let match=pattern1.exec(str1)
+    console.log(pattern1.lastIndex);
+    pattern1.lastIndex=2;//lastIndex可以设置,让y跳过粘滞检索
+    let match1=pattern1.exec(str2)
+    console.log(pattern1.lastIndex,match1);//lastIndex是记录在正则上的,字符串不同,开始检索的位置还是会被影响!
+    
+    console.log(pattern1.test(str1));//正则.test(str)返回bool
+    console.log(pattern1.toString());//返回字面量形式
+    console.log(pattern1.toLocaleString());//同上
+    console.log(pattern1.valueOf());//返回正则本身
+  </script>
+</body>
+</html>

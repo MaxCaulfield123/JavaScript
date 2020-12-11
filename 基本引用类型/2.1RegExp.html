@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 正则通过RegExp类型创建
+    // let zz=/正则/flags,flags控制正则表达式的行为
+    // flags有:g全局模式,查找字符串的全部内容,i不区分大小写,m查找多行(默认只查找一行)
+    // y粘附模式,只查找lastIndex自身及之后的字符串
+    // u unicode模式,匹配unicode吗;s表示元字符,匹配字符串包括其中的特殊字符如\n,\r
+
+    // 一些字符在正则中有特殊作用,必须转义才能匹配字符串,这些字符叫做元字符
+    // ([{\^$|}])?*+.都是元字符 .表示匹配一个任意字符(除了换行符)
+    let patten1=/[bc]at/i;  //匹配cat或bat
+    let patten2=/\[bc\]at/i; //匹配[bc]at
+
+    // 正则还能用new RegExp('字符串形式的正则','flags')创建
+    let patten3=new RegExp('a[sf]','ig')//注意二次转义!
+    // 上面等于/a[sf]/,如果想要匹配[],需要/a\[sf\]/对[]转义
+    // 但在字符串中\也是转义的意思 所以a\[sf\]在字符串转成正则时会变成a[sf],需要写两个\\转义在字符串中\的含义
+    // 所以该这样写 'a\\[sf\\]'字符串
+
+    // 创建RegExp对象时可以传入已有的正则当做参数
+    let re1=/cat/;
+    let re2=new RegExp(re1)//传入
+    let re3=new RegExp(re1,'i')
+    console.log(re1,re2,re3);
+  </script>
+</body>
+</html>

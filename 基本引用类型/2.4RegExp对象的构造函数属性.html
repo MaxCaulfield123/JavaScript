@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //RegExp构造函数有一系列属性,不建议在生产环境使用(没有web标准)!
+    let str='dingdang,wocao!'
+    let pattern=new RegExp('(.)ang','ig')
+    pattern.exec(str);
+    console.log(RegExp.input);//上一次被检索的字符串
+    console.log(RegExp.lastMatch);//RegExp上次匹配到的字符串
+    console.log(RegExp.lastParen);//最后匹配的捕获组,也就是()中的正则匹配到的内容
+    console.log(RegExp.leftContext);//上次匹配到的字符--左边的字符
+    console.log(RegExp.rightContext);//上次匹配到的字符--右边的字符
+
+    // 也可以通过简写访问
+    console.log(RegExp.$_,'----------');//上一次被检索的字符串
+    console.log(RegExp["$`"]);//上次匹配到的字符--左边的字符
+    console.log(RegExp["$'"]);//上次匹配到的字符--右边的字符
+    console.log(RegExp["$&"]);//RegExp上次匹配到的字符串
+    console.log(RegExp["$+"]);//最后匹配的捕获组,也就是()中的正则匹配到的内容
+  </script>
+</body>
+</html>

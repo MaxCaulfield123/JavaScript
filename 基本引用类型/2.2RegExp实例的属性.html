@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let patten=new RegExp('asd+\\d{3,5}','ig');
+    console.log(patten);
+    console.log(patten.global);//有无g标记
+    console.log(patten.ignoreCase);//有无i标记
+    console.log(patten.unicode);//有无u标记
+    console.log(patten.sticky);//有无y标记,查找lastIndex之后的字符串
+    console.log(patten.lastIndex);//下一次搜索开始的位置
+    console.log(patten.multiline);//是否有m标记(查找多行字符串)
+    console.log(patten.dotAll);//有无s标记(查询特殊字符如\n)
+    console.log(patten.source);//正则转为字符串
+    console.log(patten.flags);//正则的标记字符串
+  </script>
+</body>
+</html>

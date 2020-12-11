@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // GMT格林威治时间,地球自转计时 UTC铯原子进行固定震荡次数,原子计时
+    // Date类型的toLocalString(),toString(),valueOf()方法被重写了
+    // toLocalString()返回与本地环境一致的日期时间,较老的浏览器可能会返回不同
+    let date=new Date(2020,11)
+    console.log(date.toLocaleDateString(),date);//第一个输出2020/12/1
+    console.log(typeof date.toString());//string类型
+    console.log(typeof date.valueOf());//转时间戳,数字类型
+
+    // Date对象的几个格式化时期方法
+    // 星期 月份 日 年
+    console.log(date.toDateString());
+    // 显示时分秒与时区
+    console.log(date.toTimeString());
+    // 显示当前地区时间的格式化
+    console.log(date.toLocaleDateString());
+    console.log(date.toLocaleTimeString());
+    // 显示UTC时期
+    // 不建议用date.toGMTString()
+    console.log(date.toUTCString());
+  </script>
+</body>
+</html>
