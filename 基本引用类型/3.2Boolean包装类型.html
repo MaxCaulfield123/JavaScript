@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // new出来的bool类型会重写valueOf()类型,不会直接返回bool对象的bool值,而是返回自身对象?
+    let abool=new Boolean(false);
+    let result=abool&&true;//abool因为是对象!所以被valueOf!被转为true!与自身bool值无关!
+    console.log(result);//true
+    let othbool=false;
+    let res=othbool&&true;
+    console.log(res,othbool instanceof Boolean);//false false
+
+    // typeof 判断原始值还是引用值(new 原始是引用值),instanceof判断是否是构造函数构造出的对象
+    // instanceof 构造函数!!!
+  </script>
+</body>
+</html>

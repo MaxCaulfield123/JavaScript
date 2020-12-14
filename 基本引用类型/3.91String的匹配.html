@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // str.match(正则)与正则.exec(str)返回相同数组
+    // 第一个元素为匹配到的字符串,index为下标,input被匹配的字符串,group正则()中匹配的字符串
+    // match中如果正则加g,则不返回下标,直接返回元素
+    let str='maxjsa'
+    let pattern=/a/i;
+    
+    console.log(str.match(pattern));
+    console.log(pattern.exec(str));
+    // 还有str.search(正则),返回被找到的元素的下标
+    console.log(str.search(pattern));
+
+    // str.replace(正则或字符串替换文本);
+    console.log(str.replace(/sa/,'schloe'));//正则不加g则只替换第一个,加g全替换
+    // 第二个参数,替换文本有几个特殊字符,用来表示正则表达式的属性的值
+    // 第二个参数也可以是有return的函数
+    // '$$'为$,  $&为调用replace的字符串,与RegExp.lastMatch相同
+    // $' 匹配子字符串之后的字符串,相当于RegExp.rightContext
+    // $` 匹配子字符串之前的字符串,相当于RegExp.leftContext
+    // $n 匹配的第n个捕获组的字符串,n是0-9,$nn为 0-99个捕获组的字符串
+    console.log(str.replace(/sa/,"$`"));
+    // replace()第二个参数是函数的情况下
+    str.replace(/a/g,function(match,index,fullstr){
+      console.log(match,index,fullstr);//三个参数分别为匹配到的字符串,其下标,调用replace的原字符串
+      return 'asd'
+    })
+
+    // str.split(正则或字符串,返回的数组长度)用来将字符串按指定的字符分隔成数组
+    console.log(str.split(/a/,2));
+  </script>
+</body>
+</html>

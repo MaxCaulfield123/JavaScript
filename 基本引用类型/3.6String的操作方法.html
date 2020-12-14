@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let str1='hello,';
+    console.log(str1.concat('js!','and ','max!'));
+    //1 str.concat(str) 用于拼接字符串,可接受多个参数
+
+    // 2提取字符串的三个方法 substr(开始下标,长度),slice(开始下标,结束下标),substring(开始下标,结束下标)
+    // 第二个参数为结束下标的slice(),substring()含头不含尾
+    // 上三个函数如果没有第二个参数,则截取到字符串尾
+    console.log(str1.substr(1,4));
+    console.log(str1.substring(1,4));
+    console.log(str1.slice(1,4));
+
+    // 上三个函数遇到负值的时候表现方式也不同
+    // substr()将第一个负数参数加上字符串长度得到坐标,第二个负数失效
+    console.log(str1.substr(-5));//ello,
+    // slice()将所有负数加上字符串长度得到坐标
+    console.log(str1.slice(-4,-1),str1.slice(2,5));//相同
+    // substring()将所有负值当做0,并且可以反向截取
+    console.log(str1.substring(3,-1));//hel,0-3的字符
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let str='maxjs'
+    console.log([...str]);//使用...也可以打散字符串到数组中,每个字符对应一个元素
+    
+    // 获取迭代函数返回的对象,手动迭代
+    let returnObj=str[Symbol.iterator]();
+    console.log(returnObj.next());
+    console.log(returnObj.next());
+    console.log(returnObj.next());
+    console.log(returnObj.next());
+    console.log(returnObj.next());
+    console.log(returnObj.next());
+
+    // toUpperCase()转大写,toLowerCase()转小写
+    // toLocaleUpperCase()地区特定的转大写方法,按照浏览器的主机环境转unicode码,根据语种调用
+    console.log(str.toUpperCase());
+  </script>
+</body>
+</html>

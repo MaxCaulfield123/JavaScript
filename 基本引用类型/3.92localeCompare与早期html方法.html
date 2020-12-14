@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // str.localeCompare(字符串参数)按字母表比较两个字符串
+    // 参数字符串在str前返回1,一致返回0,在后返回-1
+    let str='maxjs'
+    console.log(str.localeCompare('nigger'));//-1
+    console.log(str.localeCompare('mbxjs'));//-1第一个字符相同,按顺序比较下一个.会根据地区不同,用不同方式比较
+    console.log(str.localeCompare('maxjs'));//0
+    console.log(str.localeCompare('abc'));//1
+
+    // 在早期有很多生成html标签的函数例如 anchor(name) 生成 <a name="name"><a>,现在没人用了
+  </script>
+</body>
+</html>

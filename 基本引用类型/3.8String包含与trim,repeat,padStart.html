@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let str='tell me why?'
+    // 字符串包含方法 startsWith(),endsWith(),includes()
+    // str.startsWith(字符串,开始下标),包含开始下标
+    console.log(str.startsWith('me',5));
+    // str.includes(字符串,开始下标),包含开始下标
+    console.log(str.includes('me',5));
+    // str.endsWith(字符串,当做结束的下标),不包含结束下标
+    console.log(str.endsWith('me',7));
+
+    // trim(),trimLeft(),trimRight()返回一个新字符串,新字符串去掉原有字符串的前后空格
+    let str2='  fuck shit foolish   '
+    console.log(str2.trim());//没有空格哦!
+
+    //str.repeat(整数参数),表示将原有字符串复制参数次数后,拼接成一个新字符串返回
+    let str3='呐 ';
+    console.log(str3.repeat(20)+'喜欢二次元的人一定很善良把?');
+
+    // padStart()与padEnd(长度数值,填充字符串)方法,使字符串以填充字符串填充长度,如果长度小于原字符串,返回原字符串
+    let str4='max';
+    console.log(str4.padEnd(5,'jsz'));//如果不足以放下整个填充字符串,则截取填充字符串
+  </script>
+</body>
+</html>

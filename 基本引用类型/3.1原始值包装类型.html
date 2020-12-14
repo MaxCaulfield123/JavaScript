@@ -17,6 +17,17 @@
     // 1读取到s1变量保存在内存中的值时,创建一个String类型的实例let s1=new String()
     // 2调用实例上的特定方法 let s2=s1.substring(2)
     // 3销毁实例 s1=null
+    // 原始值与引用值的区别之一是对象的生命周期,引用值离开作用域时被销毁,原始值代码执行过程中销毁
+    // 原始值自己赋值s1.abc='asd'时,之后访问undefined是因为存储属性的对象被销毁了
+
+    // new Object()是工厂方法,会根据传入的原始数据类型,创建相应的包装对象实例
+    let a=new Object('asd')
+    let b=new Object(123)
+    let c=new Object(true)//Object传入啥类型的数据,就是啥类型的实例
+    console.log(typeof a,typeof b,typeof c);//不过new出来的全是Object
+    console.log(a instanceof String);
+    console.log(b instanceof Number);
+    console.log(c instanceof Boolean);//全是true
   </script>
 </body>
 </html>

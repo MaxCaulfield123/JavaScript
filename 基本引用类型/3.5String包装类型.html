@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let a1=String.fromCharCode(0x00C5)
+    let a2=String.fromCharCode(0x212B)
+    let a3=String.fromCharCode(0x0041,0x030A)
+    console.log(a1,a2,a3);//Å Å Å  这三个码元对应的unicode字符都相同
+    console.log(a1===a2,a1===a3,a2===a3);//全是false,因为码元不同
+    // js 字符串的比较其实是比较对应unicode的码元
+    // 所以应该用str.normalize(参数)进行比对,参数有'NFD','NFC','NFKD','NFKC'
+    // 上述四种规范化形式,用来规范字符串
+    console.log(a1.normalize('NFC')===a2.normalize('NFC'));//true
+  </script>
+</body>
+</html>

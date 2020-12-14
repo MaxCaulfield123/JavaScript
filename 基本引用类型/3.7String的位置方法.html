@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // indexOf(字符串,开始搜索的包含位置)从前到后搜索字符串中参数的下标,找不到返回-1
+    // lastIndexOf(字符串,开始搜索的包含位置)从后到前搜索字符串中参数的下标,找不到返回-1
+    // 开始位置之前/之后的字符串会被忽略
+    let str='hello max and js';
+    console.log(str.indexOf('a',8));
+    console.log(str.lastIndexOf('a',7));//从7下标位置开始,从后到前,找到第一个
+    
+    // 查找一个字符串在字符串中的所有下标,放入数组
+    let str2='Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi animi ipsam minima blanditiis at impedit. Adipisci velit omnis sapiente soluta ab eos tempora voluptates ducimus, hic, dolor placeat, quam quis!'
+    let posi=str2.indexOf('s');
+    let arr=[]
+    while(posi!=-1){
+      arr.push(posi);
+      posi=str2.indexOf('s',posi+1)
+    }
+    console.log(arr);
+  </script>
+</body>
+</html>
