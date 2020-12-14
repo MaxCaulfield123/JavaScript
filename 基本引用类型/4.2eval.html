@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // eval()本身就是一个解释器,解释其参数字符串,编译成代码在eval()执行时执行
+    eval(`function max(){
+      console.log("max is the best");
+    }`)//严格模式禁止使用eval()声明变量与函数
+    max();
+    // eval()中的代码是在当前作用域中执行
+    let num=4
+    function a(){
+      let num=3;
+      eval('console.log(num)')//3
+    }
+    a()
+  </script>
+</body>
+</html>

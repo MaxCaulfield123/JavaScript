@@ -15,6 +15,15 @@
     // 例如 isNaN() isFinite()
 
     // uri编码与解码 https://www.cnblogs.com/huaxingtianxia/p/7125862.html
+    // 为什么要用encodeURI(),encodeURIComponent()对地址进行编码?--->因为网页URL只认字母数字以及部分特殊符号,其余的不是有效URL
+    let str='www.baidu.com/你好////';
+    let encode=encodeURI(str);
+    console.log(encode);//对中文进行编码,才能直接打开,在每个字节前加上%
+    console.log(decodeURI(encode));//解码
+    // 发送get或post请求时的具体编码方式,由meta标签中 charset属性值决定
+    let encode1=encodeURIComponent(str);//会对所有非字母字符编码
+    console.log(encode1);
+    console.log(decodeURIComponent(encode1));//解码
   </script>
 </body>
 </html>

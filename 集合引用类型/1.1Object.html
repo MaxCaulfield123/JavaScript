@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 创建对象的两种方式
+    let obj=new Object();//可以忽略new!
+    obj.name='dingding';
+    obj.age=22;
+    // 字面量创建方法,不会调用Object构造函数
+    // 下方就是一个表达式上下文(期待返回值的上下文) 左{表示一个表达式的开始
+    // {}如果出现在语句上下文中,表示语句块的开始
+    let obj1={
+      'name':'dangdang',
+      age:22,
+      11:33
+    }//属性名可以是字符串或数值!数值自动转为字符串
+    console.log(obj1[11]);//存取属性可以用 . 或者[]来访问,[]能通过变量访问属性
+  </script>
+</body>
+</html>

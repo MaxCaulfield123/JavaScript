@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Global对象的所有属性如下
+    // undefined,NaN,Infinity,Object,Array,Function,Boolean,String,Number,Date,RegExp,Symbol,Error,
+    // EvalError,RangeError,ReferenceError,SyntaxError,TypeError,URIError
+    // 除了前三个，其余全是构造函数
+
+    // window为浏览器为Global对象的拓展，的代理，它涵盖了Global的所有属性且包含其他属性
+    var color='red'//全局变量都会放进window(除了let 与 const声明的)
+    console.log(window.color);//red
+  </script>
+</body>
+</html>
