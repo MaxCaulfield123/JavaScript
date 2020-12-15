@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在WebGl(专注于2D,3D图形的函数集合OpenGL下的一个API)中,JS数组与这个api的数组之间不匹配,所以出现了定型数组解决此问题
+    // Float32Array其实是一种定型数组,是一种'视图',它允许JS访问一块名为ArrayBuffer的预分配内存
+    // ArrayBuffer 是所有定型数组与视图的基本单位
+    const buf=new ArrayBuffer(16)//在内存中分配16字节
+    console.log(buf,buf.byteLength);
+    // ArrayBuffer()一旦分配就无法改变大小,不过可以用slice复制一部分到新实例中
+    // slice方法其实包含两步，第一步是先分配一段新内存，第二步是将原来那个ArrayBuffer对象拷贝过去
+    const buf1=buf.slice(4,10);
+    console.log(buf1.byteLength);
+    // 要读取写入ArrayBuffer必须通过视图,视图引用的都是ArrayBuffer中存储的二进制数据
+    // ArrayBuffer中存储的二进制数据叫做视图,每一个视图都是一个构造函数
+    
+  </script>
+</body>
+</html>
