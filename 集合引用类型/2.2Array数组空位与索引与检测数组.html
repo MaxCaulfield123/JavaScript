@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 用字面量创建数组时,可以用逗号表示空位
+    let arr=[,,,,,];//逗号表示空元素,五个空元素,在ES6中每个元素实际上是undefined
+    console.log(arr);//length:5,
+    for(let i of arr){
+      console.log(i);//5个undefined
+    }
+    let arr1=[1,,,2]//逗号间是空元素
+    console.log(Array.of(...arr1));
+    console.log(Array.from([,,,]));//[undefined*3]
+    // ES6之前的方法会忽略数组中的这个空位,具体行为因方法而异
+    console.log(arr1.map((i)=>7));//空位打印出empty
+    console.log(arr1.join('-'));//join视空位为空字符串
+
+    // arr[索引值],索引值小于数组长度时返回对应元素,大于时数组长度自动拓展到索引值+1;
+    let arr2=[1,4,7];
+    arr2[4]=9;
+    console.log(arr2);//(5) [1, 4, 7, empty, 9]
+    // 还可以通过length改变数组具体元素,length改为小于原长度,则数组会删除元素
+    arr2.length=2;
+    console.log(arr2);//7被删除
+    // length大于数组长度,则会拓展数组,加入undefined元素填充
+    arr2.length=99;
+    console.log(arr2);//[1,4,empty*97]
+
+    // 检测数组,在两个iframe中的数组,iframe与本地的数组会有不同的构造函数,所以不适用instanceof
+    // 应该用Array.isArray(变量);
+    console.log(Array.isArray(arr2));
+  </script>
+</body>
+</html>

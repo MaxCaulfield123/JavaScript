@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let colors=['red','blue','green',{a:1}]
+    console.log(colors.toString());//arr.toString()会把元素调用toString(),然后拼接为用逗号分隔的字符串,
+    console.log(colors.valueOf());//返回原数组
+    let obj={
+      toString(){
+        return 'max'
+      }
+    }
+    let obj1={
+      toString(){
+        return 'js'
+      }
+    }
+    // 如果有元素是undefined或null,则在这几个函数中会被转为''空字符串
+    let arr=[obj,obj1,undefined]
+    console.log(arr.toString());//调用每个元素的toString()的验证,toLocaleString()会调用每个元素的toLocale~
+    // alert(arr),alert会调用对象的toString(),因为其本身只接受字符串参数
+    console.log(arr.join('-'));//arr.join()也会调用元素的toString()函数
+  </script>
+</body>
+</html>

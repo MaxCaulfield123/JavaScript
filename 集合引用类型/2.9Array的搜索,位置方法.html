@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // arr.indexOf(元素,开始检索的位置),arr.lastIndexOf(),arr.includes()都是ES7加入数组原型的,都接受两个参数
+    let arr=[1,'a',{a:1},3,6]
+    console.log(arr.indexOf({a:1}));//用===比较,所以返回-1
+    console.log(arr.indexOf('a'));//找到了返回下标
+
+    // arr.find(),arr.findIndex().前者查找符合条件的数组中的函数,后者查找符合条件的下标,都用到了断言函数
+    // 根据返回的判断条件,返回数组中符合条件的第一个元素后不再查找
+    let a=arr.find((item,index,array)=>{
+      console.log(item,index,array);
+      return item>2
+    })
+    console.log(a);
+    let b=arr.findIndex((item,index,array)=>{
+      return item==='a';
+    })
+    console.log(b);//返回下标
+  </script>
+</body>
+</html>

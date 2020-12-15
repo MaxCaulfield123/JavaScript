@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // arr.fill(填充元素,起始索引,结束索引)用来将数组中指定位置的元素替换成自定义新元素,
+    ///包含开始,不包含结尾索引,没有结束索引或没有索引,则为替换所有
+    let arr=[0,0,0,0,0]
+    console.log(arr.fill('max',-3,-1));//负值加上数组长度得到下标
+    console.log(arr.fill(4,10,15));//索引值高于/低于数组长度会被忽略,部分符合数组则填充部分
+    console.log(arr.fill(4,15,11));//索引范围写反会忽略
+
+    // ints.copyWithin(插入位置,复制的元素开始下标,结束下标) 没有下标则复制数组全部元素;用于将自身元素复制给自身指定位置
+    let arr1,reset=()=>{arr1=[0,1,2,3,4,5,6,7,8,9]};
+    reset();
+    arr1.copyWithin(4);
+    console.log(arr1);//[0,1,2,3,0,1,2,3,4,5] 没有下标,复制全部元素到插入位置,超出忽略
+    reset();
+    arr1.copyWithin(0,6)
+    console.log(arr1);//将6下标后的元素覆盖0开始的元素
+    reset();
+    arr1.copyWithin(0,5,8)//5-8位的元素复制到0下标的位置上
+    console.log(arr1);
+    reset()
+    arr1.copyWithin(0,-4,-1)//可以用负坐标,负值加上数组长度得到坐标
+    console.log(arr1);
+    reset()
+    // arr.copyWithin()与arr.fill()一样,都会在坐标超出时忽略,坐标只满足部分时覆盖部分
+  </script>
+</body>
+</html>

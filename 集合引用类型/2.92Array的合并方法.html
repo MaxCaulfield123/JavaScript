@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 合并函数arr.reduce((合并值,当前元素,下标,array)=>{return 合并值+现有值},合并值的初始值)
+    let arr=[1,2,3,4,5]
+    console.log(arr.reduce((prev,item,index,arr)=>{
+      return prev+=item;//return出的任何值会作为prev参与下一次迭代
+    },100));//115,以100为prev初始值
+    // arr.reduceRight()从后向前汇总,其余与reduce无区别
+  </script>
+</body>
+</html>

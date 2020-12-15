@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // ES6中,Array的原型上添加了三个检索数组内容的方法
+    // arr.keys()返回索引的迭代器
+    // arr.values()返回数组元素的迭代器
+    // arr.entries()返回数组 索引/值 键值对的迭代器
+    let arr=['黄鹤','小姨子','跑啦!']
+    // console.log(arr.keys());
+    // console.log(arr.values());
+    console.log(arr.entries());//跟以上一样返回一个 Array iterator
+    // 可以将迭代器直接转为数组实例,通过Array.from();
+    console.log(Array.from(arr.keys()));//(3) [0, 1, 2]
+    console.log(Array.from(arr.values()));//(3) ["黄鹤", "小姨子", "跑啦!"]
+    console.log(Array.from(arr.entries()));//(3) [Array(2), Array(2), Array(2)]
+    // 通过解构访问数组中的值
+    for (const [index,i] of Array.from(arr.entries())){
+      console.log(index,i);
+    }
+  </script>
+</body>
+</html>

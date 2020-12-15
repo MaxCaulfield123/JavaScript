@@ -20,6 +20,36 @@
     // 对现有数组进行浅克隆
     let arr3=Array.from(arr2);
     console.log(arr3,arr2===arr3);
+    // 可以将可迭代对象转为数组
+    const iter={
+      *[Symbol.iterator](){
+        yield 1;
+        yield 2;
+        yield 3
+      }
+    }
+    console.log(Array.from(iter));
+    // 通过函数中的arguments把参数转数组
+    function getArray(){
+      console.log(Array.from(arguments));
+    }
+    getArray(2,5,7)
+    // 类数组对象转数组
+    let obj={
+      0:'a',
+      1:'b',
+      2:'d',
+      length:3
+    }
+    console.log(Array.from(obj));
+    // Array.from()的第二个参数可以给映射函数,这个函数参数为原类数组的每个元素,return出新建数组的元素
+    let a1=[1,2,3,4]
+    let a2=Array.from(a1,x1=>x1**2)//箭头函数,返回元素的2次方
+    let a3=Array.from(a1,function(x){ return x**this.ex },{ex:2})//第三个参数为函数中this的指向
+    console.log(a1,a2,a3);//a2,a3返回2次方的元素
+
+    // Array.of()用于将传入的参数变为数组,它与new Array()有功能上的不同吗?
+    console.log(Array.of(9,9,9));
   </script>
 </body>
 </html>

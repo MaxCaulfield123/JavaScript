@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // arr.push()与arr.pop()数组的栈方法
+    // 这两个函数使我们可以把数组当做一种类似栈结构(后进先出,Last-In-First-Out)
+    let arr=[]
+    let count=arr.push('max','js','chloe');//arr.push()接受任意数量的参数推入数组,返回推入数组的长度
+    console.log(arr,count);
+    let item=arr.pop()//arr.pop()取出数组的最后一项,返回取出的元素
+    console.log(item);
+
+    // arr.shift()与arr.push()能把数组当做队列使用
+    let arr1=[];
+    arr1.push('saber','emiya','lancer')
+    console.log(arr1.shift());//arr.shift()从数组开头取出一个元素返回
+    arr1.unshift('archer','assassin')//arr.unshift()往数组开头推入元素,返回length
+    console.log(arr1);
+  </script>
+</body>
+</html>

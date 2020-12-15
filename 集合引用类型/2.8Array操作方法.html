@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // arr.concat()创建一个arr数组的副本,然后拼接参数,最后返回这个副本
+    let arr=['red','green']
+    let arr1=arr.concat('black',['purple','white'])
+    console.log(arr,arr1);//arr没有改变!!返回的是新建的数组!
+    // 上面的concat()中的参数数组被打散了!想要不打散,应该用对象中的[Symbol.isConcatSpreadable]符号控制
+    let obj={
+      [Symbol.isConcatSpreadable]:false,//设置concat时不打散数组
+      0:'a',
+      1:'b',
+      length:2
+    }
+    console.log(arr.concat(obj));//['red','green',['a','b']]
+
+    // arr.slice(开始元素,结束元素)用于截取数组中的元素,不改变原数组!返回截取元素,没有结束元素截取到底,负数参数则加上长度
+    let arr2=['max','js','chloe','rachel','kate']
+    let a= arr2.slice(1,3);
+    console.log(arr2,a);//原数组不改变
+
+    // arr.splice(起始下标,删除元素的个数,替换的元素) 能删除,插入,替换元素,返回被删除的元素,原数组会被改变
+    arr2.splice(1,0,'saber')//删除元素为0时,可以把新元素插入到指定元素上
+    console.log(arr2);
+    arr2.splice(1)//只有起始下标则删除到底
+    console.log(arr2);
+    let arr3=['a','b','c','d'];
+    arr3.splice(0,2,'我是被加入的元素','多个被加入的新元素')//替换前两个元素为新元素
+    console.log(arr3);
+  </script>
+</body>
+</html>
