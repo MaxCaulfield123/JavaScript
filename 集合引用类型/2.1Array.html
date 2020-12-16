@@ -48,7 +48,7 @@
     let a3=Array.from(a1,function(x){ return x**this.ex },{ex:2})//第三个参数为函数中this的指向
     console.log(a1,a2,a3);//a2,a3返回2次方的元素
 
-    // Array.of()用于将传入的参数变为数组,它与new Array()有功能上的不同吗?
+    // Array.of()用于将传入的参数变为数组,它与new Array()的不同在于前者传数字会当成元素,后者当成长度创建空数组
     console.log(Array.of(9,9,9));
   </script>
 </body>

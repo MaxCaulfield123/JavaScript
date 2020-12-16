@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // map是一种新的集合数据类型,真正的实现键/值对存储机制,其大多数特性都能通过Object实现
+    // Map的实例叫做映射实例
+    const m=new Map()//新建一个map数据类型
+    console.log(m);
+    const m1=new Map([
+      ['键1','值1'],
+      ['键2','值2'],
+      ['键3','值3']
+    ])//可以传入一个包含键值对数组的可迭代对象给new Map()
+    console.log(m1.size,m1);//3 m.size属性看map实例有多少键值对
+    // 传入自定义的可迭代对象给Map构造函数创建实例,返回值就是键值对
+    let obj={
+      [Symbol.iterator]:function*(){
+        yield ['max','js']
+        yield ['chloe','js']
+        yield ['rachel','js']
+      }
+    }
+    const m2=new Map(obj);
+    console.log(m2,m2.size);
+    console.log(m2.has('max'));//m.has('键名')方法检测是否有键名,返回bool值
+    console.log(m2.get('max'));//m.get('键名')方法返回键名对应的键值,没有返回Undefined
+    // 用m.set('键名','键值').set()方法为已有map数据添加键值对,.set()方法返回映射实例
+    m2.set('Kate','js').set('saber','me')
+    console.log(m2.get('Kate'));//js
+    // 用m.delete('键名')来删除键名对应的键值对
+    m2.delete('saber');
+    console.log(m2.has('saber'));//false
+    // 用m.clear()来清除所有映射实例下的键值对
+    m2.clear();
+    console.log(m2);//map(0){}
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定型数组可用普通数组的大部分方法,函数
+    // 定型数组不可调整大小,修改长度,所以不能用会改变原数组长度的数组方法,类似concat,pop,push
+
+    // set(数组,位置)能复制数组元素到当前定型数组的索引位置
+    const container=new Int16Array(8)
+    container.set(Int8Array.of(1,2,3,4))//定型数组.set(数组)设置数组元素为定型数组的前几个元素
+    console.log(container);//1,2,3,4,0,0,0,0
+    container.set([5,6,7,8],4)//把数组中的元素打散复制到4位置后,元素溢出会报错!
+    console.log(container);//1,2,3,4,5,6,7,8
+
+    // subarray()从定型数组中复制一些值给新建的定型数组,返回新建定型数组
+    const intarr=new Int16Array([1,2,3,4,5,6]);
+    let newarr=intarr.subarray();//不传参数复制定型数组全部元素
+    console.log(newarr);
+    let newarr1=intarr.subarray(1,3)//复制指定下标的元素到新建定型数组,没有结束下标就复制之后所有,含头不含尾
+    console.log(newarr1);
+
+    // 定型数组与定型数组之间没有方法直接拼接,所以得手写
+    function con(construct,...intarr){//函数声明...表示收集
+      let num=intarr.reduce((prev,item)=>{
+        // 注意prev初始值是item!所以要声明初始值!
+        return  (prev)+item.length
+      },0)//获取要拼接的数组的总长度
+      // 创建总长度的定型数组
+      let newarr=new construct(num)
+      let num1=0;
+      intarr.forEach((item,index)=>{
+        newarr.set(item,num1)
+        num1=num1+item.length
+      })//循环调用set把元素复制给newarr
+      return newarr;
+    }
+    const arr=con(Int16Array,new Int8Array([1,9]),new Int16Array([2,4]))
+    console.log(arr);//[1,9,2,4]
+    console.log(arr instanceof Int16Array);//true
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 字节序表示计算机系统维护的字节顺序的约定,有两种约定:大端字节序(最高有效位在第一个字节) 小端字节序(与大端相反
+    // DataView视图遵循指定的字节序,默认为大端字节序
+    const buf=new ArrayBuffer(2);
+    const view=new DataView(buf);
+    // 设置第一位与最后一位都是1
+    view.setUint8(0,0x80)//0x8为二进制的1000
+    view.setUint8(1,0x1);
+    // 按大端字节序读取Uint16
+    // 0x80在前 0x01在后
+    // 0x8001=2^15+2^0=32768+1=32769
+    console.log(view.getUint16(0));//32769
+    // 按小端字节序读取Uint16
+    // 0x01在前 0x80在后
+    // 0x0180=2^8+2^7=256+128=384
+    console.log(view.getUint16(0,true));//384 get/set系列的第二个参数表示是否启用小端字节序
+
+    // 还可以按小端字节序写入缓冲内存
+    view.setUint16(0,0x01,true);
+    console.log(view.getUint8(0));//1
+  </script>
+</body>
+</html>

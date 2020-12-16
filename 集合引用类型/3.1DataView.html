@@ -7,8 +7,9 @@
 </head>
 <body>
   <script>
-    // DataView是一种视图,专为文件I/O网络I/O设计
+    // ArrayBuffer中存储的二进制数据叫做视图,每一个视图都是一个构造函数
     const buf=new ArrayBuffer(16)
+    // DataView是一种视图,专为文件I/O网络I/O设计
     // 必须是对已有的ArrayBuffer读取或写入时才能创建,可以使用全部或部分ArrayBuffer,
     //维护了对ArrayBuffer内存的引用与视图在缓冲区的开始位置
     const view=new DataView(buf);
@@ -20,7 +21,13 @@
     console.log(view1.byteLength);//8
     console.log(view1.byteOffset);//0
     console.log(view1.buffer===buf);//true
+    // 一个缓冲内存能放多个视图,视图可以重叠,重叠部分发生变化时,两个视图都会变化
+    const view2=new DataView(buf,2,10)//与view1重叠的view2
     // https://www.cnblogs.com/chris-oil/p/8615559.html
+
+    // DataView(内存缓冲,起点) 起点就是地址
+    // 要读取缓冲,还要ElementType来把Number转换到缓冲内的二进制格式,ElementType就是DataView的函数
+    
   </script>
 </body>
 </html>

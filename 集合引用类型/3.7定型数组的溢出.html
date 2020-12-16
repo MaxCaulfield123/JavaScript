@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定型数组每个字节对应一索引,一字节代表8位2进制数据,所以定型数组存储的数有大小范围
+    // 索引是找到四个连续字节所在内存位置的数
+    let arr=new Int8Array(2);//创建每个元素8位的数组
+    arr[0]=1200;
+    console.log(arr);//80 1200大于有符号最大存储的127,所以转换成二补数储存,改为二补数的流程如下
+    // 1200转2进制,索引取后八位,发现是1开头的,表示负数,所以将其转为正数:自身-1然后取反数得到正数后就是80,因其原来是负数所以加上负号
+    arr[1]=-129;
+    console.log(arr);//-129小于储存的最小数-128,所以转换成二补数储存
+    // 符号字节-129转为二补数:转二进制--是负数所以取反--得到126的二进制--加一得127
+
+    let arr1=new Uint8Array(2);//创建每个元素8位2字节的数组
+    // 对于无符号字节数组,向上溢出会取二进制的后几位(具体根据构造函数是创建几位的数组决定)
+    arr1[0]=1200;
+    console.log(arr1);
+    // 对于负数,会将其转为正数,然后取二进制的后几位
+    arr1[1]=-10;
+    console.log(arr1);
+  </script>
+</body>
+</html>

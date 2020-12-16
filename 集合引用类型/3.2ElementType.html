@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1字节 1Byte==8Bit 8位 == 0000 0000 ==0~256的区间.四位2进制0000的最大值是16进制的f,10进制的15
+    const buf=new ArrayBuffer(2);//分配两个字节的内存
+    const view=new DataView(buf,0,2)//创建视图,存储在buf内存中
+    // getInt8()表示将上述两字节的buf按8位划分,分出两个字符,所以有0,1两个索引?
+    console.log(view.getInt8(0));//0 访问具体二进制位数据,为0
+    console.log(view.getInt8(1));//0
+    console.log(view.getInt16(0));//0
+    // console.log(view.getInt16(1));//Uncaught RangeError: Offset is outside the bounds of the DataView
+    // 将整个缓冲内存设为1 255的二进制是11111111
+    view.setUint8(0,255)
+    view.setUint8(1,0xff)//也能用16进制设置 ,四位2进制 1111 对应16进制f
+    console.log(view.getInt8(0),view.getUint8(0));//-1 255 -1是因为打印有符号整数,转为2补数了
+    // 视图的ElementType有 get/set[U]Int8() get/set[U]Int16() [U]int32() Float32 Float64
+    // 以上的二进制格式转换函数,都有get或set方法
+  </script>
+</body>
+</html>
