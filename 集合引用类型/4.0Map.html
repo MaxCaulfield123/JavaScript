@@ -27,8 +27,10 @@
     }
     const m2=new Map(obj);
     console.log(m2,m2.size);
-    console.log(m2.has('max'));//m.has('键名')方法检测是否有键名,返回bool值
-    console.log(m2.get('max'));//m.get('键名')方法返回键名对应的键值,没有返回Undefined
+    //m.has('键名')方法检测是否有键名,返回bool值
+    console.log(m2.has('max'));
+    //m.get('键名')方法返回键名对应的键值,没有返回Undefined
+    console.log(m2.get('max'));
     // 用m.set('键名','键值').set()方法为已有map数据添加键值对,.set()方法返回映射实例
     m2.set('Kate','js').set('saber','me')
     console.log(m2.get('Kate'));//js
@@ -38,6 +40,25 @@
     // 用m.clear()来清除所有映射实例下的键值对
     m2.clear();
     console.log(m2);//map(0){}
+    
+    // Map的映射实例允许任何js数据类型作为键名,在匹配键名时map映射实例使用特殊的规范算法SameValueZero来比对,类似===
+    const m3=new Map();
+    let a=function(){};
+    let b=Symbol.for('aa');
+    let c={}
+    let d={b:2}
+    m3.set(a,'function').set(b,'Symbol').set(c,'qwer').set(d,'zxcv');
+    console.log(m3);
+    // 对象当映射实例属性时,即使对象内的值发生变化,也不影响获取键值
+    c.tellmewhy='nowhy';
+    console.log(m3.get(c));
+
+    // SameValueZero也可能导致冲突
+    const m4=new Map();
+    const o=+0,p=-0;
+    console.log(o===p);//true;两个原始变量值相等
+    m4.set(o,'tellmewhy');//设置o变量为键名
+    console.log(m4.get(p));//tellmewhy 传参p当做键名查找,结果能查找到元素
   </script>
 </body>
 </html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Map映射实例与Object的主要区别是Map映射实例会记录键值对的插入顺序
+    // 映射实例的[Symbol.iterator]与entries()引用同一个函数,entries()是返回数组元素键值对的函数
+    const m=new Map([[1,3],['b',9]])
+    console.log(m[Symbol.iterator]());//ƒ entries() { [native code] }
+    console.log(m.entries());
+    console.log(m[Symbol.iterator]===m.entries);//true
+    for (let a of m.entries()){
+      console.log(a);//打印出每个键值对的数组
+    }
+    // 映射实例有默认迭代器,所以可以直接打散键值对到数组中
+    console.log([...m]);
+  </script>
+</body>
+</html>
