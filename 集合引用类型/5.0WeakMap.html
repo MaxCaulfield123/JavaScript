@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // WeakMap弱映射是一种集合类型数据,它的Api是Map的子集.为js带来了增强的键值对储存机制
+    // Weak弱指的是js垃圾回收程序对 '弱映射'中键的方式
+    let obj1={a:1}
+    let obj2={max:'js'}
+    // 弱映射中的键只能是对象或继承对象原型的数据类型!
+    // 创建WeakMap类型
+    const wm=new WeakMap([
+      [obj1,'tellmewhy'],
+      [obj2,'nowhy'],
+      //['abc','qwe']//有无效键名时会报错Uncaught TypeError: Invalid value used as weak map key
+    ])
+    console.log(wm.get(obj1));
+    // 原始值可以用包装类型创建后,应用到弱映射的键上
+    let str=new String('chloe')
+    wm.set(str,'rachel');
+    console.log(wm.get(str));
+    // 可用set(),get(),has(),delete()
+    wm.delete(str)
+    console.log(wm.has(str));//false
+  </script>
+</body>
+</html>

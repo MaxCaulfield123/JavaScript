@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // ES6 的 Set是一种集合数据类型.Set就像加强的Map
+    // 创建Set类型时可以传入可迭代对象,对象中的数据会作为Set的元素
+    const s=new Set(['max','chloe','js'])//传入数组
+    const m=new Set({
+      *[Symbol.iterator](){
+        yield 'max',
+        yield 'js',
+        yield 'chloe'
+      }
+    })
+    console.log(s,m);
+    // set实例.size获取set实例的长度, .add()增加值, .has()检索是否有参数元素, delete() 删除元素, clear()清空所有元素
+    console.log(s.size);//3
+    s.add('rachel').add('tellmewhy')//add返回s自身
+    console.log(s.has('rachel'));//true
+    s.delete('chloe');
+    console.log(s);//没chloe
+    s.clear()
+    console.log(s);//set(0)
+
+    // Set数据类型可以储存任何js数据类型,也使用SameValueZero检查匹配性
+    // Set类型不允许值重复
+    console.log(m.size);//3
+    m.add('max');
+    console.log(m.size);//3,因为m有max字符串了,所以不重复添加
+    // Set的delete()会返回bool值,表示集合是否有这个值
+    console.log(m.delete('chloe'));//true表示删除
+    console.log(m.delete('chloe'));//false表示未找到
+  </script>
+</body>
+</html>

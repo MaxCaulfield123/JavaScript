@@ -18,6 +18,45 @@
     }
     // 映射实例有默认迭代器,所以可以直接打散键值对到数组中
     console.log([...m]);
+    let obj={
+      name:'dingding',
+      age:22,
+      // [Symbol.iterator](){
+      //   return{
+      //     next(){
+      //       console.log('asd');
+      //       return{
+      //         value:1,
+      //         done:true
+      //       }//加了迭代器就能打散了
+      //     }
+      //   }
+      // }
+    }
+    //console.log(...obj);//没有迭代器的对象不能被打散!Uncaught TypeError: Found non-callable @@iterator
+
+    // 映射对象的forEach的参数方法前两个参数对应key与value
+    m.forEach((key,value,arr)=>{
+      console.log(key,value,arr);
+    },window)//forEach第二个参数为参数函数内部this指向
+    // m.keys()返回一个迭代器,遍历这个迭代器会返回顺序的键名
+    // m.keys()与m.values()在遍历中修改遍历原始值,映射实例不被修改
+    // 如果修改的是引用类型的keys值,则映射实例内也会被修改
+    for(let key of m.keys()){
+      key='max'
+      console.log(key);//max,把key设置为max
+      console.log(m.get('max'));//undefined 找不到m中以max的键名值
+    }
+    // m.values()同上只不过返回键值
+    for(let val of m.values()){
+      console.log(val);
+    }
+
+    // 选Object还是Map?
+    // 内存上:给定的内存上,Map比Object要多存储50%的键值对,因浏览器而异
+    // 插入数据时:Map稍快一些
+    // 查找数据时:Object更好,浏览器会优化类数组对象.
+    // 删除时:Map更好,Object的delete问题很多,只能用伪删除(设置为Null)
   </script>
 </body>
 </html>

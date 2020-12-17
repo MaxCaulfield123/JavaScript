@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="d1"></div>
+  <script>
+    // WeakSet与WeakMap及其相似,只不过一个类似数组,弱引用元素,一个是映射,弱映射键名
+    // WeakSet类型是Set的子集,只能存储引用类型数据,弱表示其中的元素如果没有被外部引用,则会被回收
+    const ws=new WeakSet([{a:1}])
+    setTimeout(() => {
+      console.log(ws);
+    }, 10000);//空的,被回收了!!
+    let obj1={
+      a:1,b:2
+    }
+    let obj2={
+      max:'js',
+      chloe:'rachel'
+    }
+    const ws1=new WeakSet([obj1,obj2])//如果传入原始类型会报错!
+    // 用包装类型创建的原始值可以放进WeakSet数组中
+    let str=new String('max')
+    ws1.add(str);
+    console.log(ws1.has(str));//true
+
+    //WeakSet没有迭代对象,不能迭代,所以不能用clear()一次销毁所有元素
+    // WeakSet只用引用类型数据当元素是因为,如果用原始值当元素,则其分不清 'max' 与'max'这两个相等的字符串
+
+    // WeakSet的作用较少,其中一个就是储存可能会被回收的dom元素,通过查看WeakSet实例来确认dom是否被回收
+    const div=document.getElementById('d1');
+    const ws2=new WeakSet([div])
+    // 这样当d1这个dom元素被回收时,weakset中的元素也会被回收
+  </script>
+</body>
+</html>

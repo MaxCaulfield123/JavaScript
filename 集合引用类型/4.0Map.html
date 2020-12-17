@@ -41,7 +41,7 @@
     m2.clear();
     console.log(m2);//map(0){}
     
-    // Map的映射实例允许任何js数据类型作为键名,在匹配键名时map映射实例使用特殊的规范算法SameValueZero来比对,类似===
+    // Map的映射实例允许任何js数据类型作为键名,在匹配键名时map映射实例使用特殊的算法SameValueZero来比对,类似===
     const m3=new Map();
     let a=function(){};
     let b=Symbol.for('aa');

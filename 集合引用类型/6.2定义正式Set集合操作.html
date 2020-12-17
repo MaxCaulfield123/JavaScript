@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定义一个类,类包含集合的各种拓展操作
+    class XSet extends Set{
+      union(a,...b){
+        const unionSet=new XSet(a)//因为XSet继承Set且XSet没有构造函数,所以会用Set的构造函数,相当于new Set(a);
+        for(let i of b){
+          for(let o of i){
+            console.log(o);
+            unionSet.add(o)
+          }
+        }
+        return unionSet;
+      }
+    }
+    const max=new XSet([1,3])
+    const js=new Set([2,4])
+    const chloe=new XSet([5,7])
+    console.log(max,js,chloe);
+    const res=max.union(max,js,chloe);
+    console.log(res);
+  </script>
+</body>
+</html>

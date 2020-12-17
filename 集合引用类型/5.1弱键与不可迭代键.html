@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // WeakMap的weak意为键名对引用类型的引用是非正式的,是"弱弱的拿着键"的意思,不会阻止键名引用数据的回收!
+    // 而WeakMap中值并不是弱引用,只要键存在并引用键值,键值就不会被当成垃圾回收!
+    const wm=new WeakMap()
+    // 键名的数据没有被引用,所以会被回收,被回收后wm中的这个键值对就不存在!
+    wm.set({},'val')
+    console.log(wm);//现在能打印出来是因为没有执行回收!
+    setTimeout(()=>{
+      console.log(wm);
+    },10000)//被回收!找不到wm中的键值对了!
+    let obj={};
+    wm.set(obj,'max')
+    console.log(wm.has(obj));
+    obj=null;//清空obj对对象的引用,会导致wm中键没有被引用,所以回收
+    setTimeout(()=>{
+      console.log(wm);
+    },10000)//被回收!找不到wm中的键值对了!
+    
+    // 因为WeakMap中的键值对随时会被销毁,所以不提供迭代能力!!
+    // 因为没迭代能力,所以WeakMap没有clear()一次销毁所有键值对的方法
+    // WeakMap只用引用类型对象作为键名是为了保证分辨键名,如果用两个相等的字符串 str='max' str1='max' 则会导致区分不出来!
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Set类型保存插入值的顺序,其values与keys属性返回同一个迭代器函数
+   const s=new Set(['v1','v2','v3'])
+   console.log(s.values===s.keys,s.values===s[Symbol.iterator]); //true,true
+   for(let i of s.keys()){//遍历迭代器
+     console.log(i);//v1,v2,v3
+   }
+  //  因为有默认迭代器,所以能直接打散
+  console.log(...s,s);
+  // Set实例的entries()方法返回迭代器,返回每个值的重复出现
+  for(let i of s.entries()){
+    console.log(i);//[v1,v1] [v2,v2]..set实例的键名是值本身,但是索引还是01234!
+  }
+  s.forEach((i,item,arr)=>{
+    // Set类型的forEach的回调函数内参数 为 值 键名(set中等于值) set实例 
+    console.log(i,item,arr);
+    i='max'//原始值的修改行为只限于当前上下文,不影响set数组内;对象内的属性可以影响
+    console.log(i);
+  },window)//第二个参数为this指向
+  console.log(s);//没有被修改为Max
+  </script>
+</body>
+</html>

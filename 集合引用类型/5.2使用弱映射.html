@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 使用弱映射第一种办法就是存储私有变量
+    // 弱映射可以实现私有属性的一种方式,用闭包把弱映射藏起来
+    // 私有属性:外界无法访问的属性
+    // 下面的代码啥也不是,就是通过一个类实例修改闭包的弱映射
+    const User = (() => {
+      const wm = new WeakMap();
+      class User {
+        constructor(id) {
+          // 1为实例新建一个符号为id的属性
+          this.idProperty = Symbol('id');
+          // 每次调用此构造类型,就为wm设置一次键值对
+          this.setId(id)
+        }
+        setPrivate(property, value) {
+          // property 为传入的符号为Id的属性名 id为new创建实例时的传参
+          const privateDate = wm.get(this) || {}//获取wm中此实例对应的值,没有就新建对象
+          privateDate[property] = value;//值的符号属性对应的是传入的参数
+          wm.set(this, privateDate)//2将实例设置为键名,新建的对象设置为值,新建对象属性为新建的符号属性,值为参数
+        }
+        getPrivate(property) {
+          return wm.get(this)[property]
+        }
+        setId(id) {
+          this.setPrivate(this.idProperty, id)
+        }
+        getId() {
+          return this.getPrivate(this.idProperty)
+        }
+      }
+      return User;
+    })()
+    // 现在只能通过user实例来设置wm弱映射中的数据,相当于一个拦截
+    let a = new User('max')
+    a.setId('chloe')
+    console.log(a.getId());
+    console.log(a);
+    //
+    /**
+     * WeakMap {User => {…}}
+        [[Entries]]
+          0: {User => Object}
+            key: User {idProperty: Symbol(id)}
+            value: {Symbol(id): "max"}
+     * **/
+  </script>
+</body>
+
+</html>

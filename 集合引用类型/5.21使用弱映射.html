@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="d1"></div>
+  <script>
+    // 第二种使用方法是给dom元素关联一些数据!!,因为dom元素作为键名时,弱映射不影响dom元素回收!
+    const wm=new WeakMap();
+    let div=document.getElementById('d1');
+    wm.set(div,{msg:'我是div关联的元素'})
+    console.log(wm.get(div));//obj
+    // 如果div这个dom元素在页面上被删除了,因为我们用的是弱映射(不算键名引用),所以也会在wm中删除键值对!
+  </script>
+</body>
+</html>
