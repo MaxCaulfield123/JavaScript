@@ -9,6 +9,7 @@
   <script>
     // str.match(正则)与正则.exec(str)返回相同数组
     // 第一个元素为匹配到的字符串,index为下标,input被匹配的字符串,group正则()中匹配的字符串
+    // 正则.exec(str)如果有g则会记录下次开始的检索下标
     // match中如果正则加g,则不返回下标,直接返回元素
     let str='maxjsa'
     let pattern=/a/i;
@@ -20,7 +21,7 @@
 
     // str.replace(正则或字符串替换文本);
     console.log(str.replace(/sa/,'schloe'));//正则不加g则只替换第一个,加g全替换
-    // 第二个参数,替换文本有几个特殊字符,用来表示正则表达式的属性的值
+    // 第二个参数,替换文本中有几个特殊字符,用来表示正则表达式的属性的值
     // 第二个参数也可以是有return的函数
     // '$$'为$,  $&为调用replace的字符串,与RegExp.lastMatch相同
     // $' 匹配子字符串之后的字符串,相当于RegExp.rightContext

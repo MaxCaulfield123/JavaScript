@@ -12,8 +12,9 @@
     const buf=new ArrayBuffer(2);
     const view=new DataView(buf);
     // 设置第一位与最后一位都是1
-    view.setUint8(0,0x80)//0x8为二进制的1000
-    view.setUint8(1,0x1);
+    view.setUint8(0,0x80)//0x8为二进制的1000 0000
+    view.setUint8(1,0x1);//二进制的0000 0001
+    // 合起来是 1000 0000 0000 0001 就是32769
     // 按大端字节序读取Uint16
     // 0x80在前 0x01在后
     // 0x8001=2^15+2^0=32768+1=32769

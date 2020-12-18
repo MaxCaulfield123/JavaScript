@@ -12,11 +12,11 @@
     // String对象的 valueOf(),toString()方法会将String引用对象转为原始类型;
     console.log(str.length);//.length属性记录字符串中字符的数量
     console.log(str.charAt(2));//str.charAt(坐标)查找字符串坐标位置的字符
-    // .length,.charAt(下标)其实都是查的16码元有多少,下标对应的16码元,字符串由16码元组成
+    // .length,.charAt(下标)前者查的16码元有多少,后者下标对应的16码元,字符串由16码元组成
     // 码元UTF-16,码元与unicode编码对应,返回字符,码元==字符,16位2进制叫做一个码元
     // charCodeAt()查找指定位置的码元值
     console.log(str.charCodeAt(2));
-    // fromCharCode()接受多个数值,按照数值对应的码元值,返回字符串
+    // fromCharCode()接受多个数值,按照数值对应的码元值/码点值,返回字符串
     console.log(String.fromCharCode(0x61,0x62,120,55357,56842));//ab
 
     // 问题是unicode中的字符,码元不能一一对应,所以会有两个码元对应一个unicode字符,这种方法被称为代理对;
@@ -28,7 +28,7 @@
     console.log(String.fromCharCode(55357,56842));//打印出笑脸,浏览器能自动识别代理对所对应的uni码,不能接受双码元的码点
     console.log(String.fromCodePoint(128522));//能接受双码元的码点
     console.log(str1.codePointAt(3));//str.codePointAt(下标)返回下标位置上的对应unicode中的标识
-    // charCodeAt()按照码元查找,charPointAt()按照码点查找
+    // charCodeAt()按照码元查找,codePointAt()按照码点查找
     console.log(str1.codePointAt(4));//如果传入的码元所以不是代理对的开头,会返回错误的码点!
   </script>
 </body>

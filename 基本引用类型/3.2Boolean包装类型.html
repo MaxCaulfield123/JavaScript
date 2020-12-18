@@ -7,9 +7,10 @@
 </head>
 <body>
   <script>
-    // new出来的bool类型会重写valueOf()类型,不会直接返回bool对象的bool值,而是返回自身对象?
+    // new出来的bool类型会重写valueOf()类型
     let abool=new Boolean(false);
     let result=abool&&true;//abool因为是对象!所以被valueOf!被转为true!与自身bool值无关!
+    console.log(abool.valueOf());
     console.log(result);//true
     let othbool=false;
     let res=othbool&&true;

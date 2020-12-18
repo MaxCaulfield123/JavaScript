@@ -11,7 +11,7 @@ let factory=(function(){
         return arr.shift()
       }
     },
-    recycle(i){//回收元素,放入池中(本简单例子没初始化元素)
+    recycle(i){//回收元素,放入池中(本例子没初始化元素)
       arr.push(i)
     }
   }
@@ -30,7 +30,7 @@ let arr3=[]
 waitToRecycle.forEach((i,index)=>{
   factory.recycle(i)//其实就是将dom(引用类型)对象放入了闭包的变量中!!!
   // 为啥把dom元素放入闭包的数组中,页面上就会消失呢?
-  // 因为闭包中的数据,外界都访问不到??
+  // 因为闭包中的数据,外界包括浏览器都访问不到??
 })
 
 let arr2=['js','rachel']

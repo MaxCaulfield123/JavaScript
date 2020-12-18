@@ -8,7 +8,7 @@
 <body>
   <script>
     let str='maxjs'
-    console.log([...str]);//使用...也可以打散字符串到数组中,每个字符对应一个元素
+    console.log([...str]);//使用...也可以打散字符串到数组中(因为它有默认迭代对象!),每个字符对应一个元素
     
     // 获取迭代函数返回的对象,手动迭代
     let returnObj=str[Symbol.iterator]();

@@ -22,6 +22,10 @@
         return 0
       }
     }//比较函数要求返回小于0,大于0,等于0
+    let arr1=[];
+    arr1['max']=1;
+    arr1['ab']=2;
+    // console.log(arr1.sort(compare))对关联数组无效..;
     console.log(arr.sort(compare));//如果v1应该排在v2后,就返回1,v1应该排在前就返回-1
     // 如果数组元素是数值,则可以这样写
     console.log(

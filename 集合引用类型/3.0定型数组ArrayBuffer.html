@@ -11,7 +11,7 @@
     // Float32Array其实是一种定型数组,是一种'视图',它允许JS访问一块名为ArrayBuffer的预分配内存
     // ArrayBuffer 是所有定型数组与视图的基本单位
     const buf=new ArrayBuffer(16)//在内存中分配16字节
-    console.log(buf,buf.byteLength);
+    console.log(buf,buf.byteLength);// 16
     // ArrayBuffer()一旦分配就无法改变大小,不过可以用slice复制一部分到新实例中
     // slice方法其实包含两步，第一步是先分配一段新内存，第二步是将原来那个ArrayBuffer对象拷贝过去
     const buf1=buf.slice(4,10);
