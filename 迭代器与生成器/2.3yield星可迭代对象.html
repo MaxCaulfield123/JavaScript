@@ -29,14 +29,7 @@
       console.log(i);//1,3,5
     }
     console.log('------------');
-    function * genfun(){
-      // 当迭代时,程序先解析clg中yield* 暂停并返回值,迭代完成后clg才不会被暂停,然后才能打印
-      console.log('iter value:',yield * [1,3,5]);
-    }
-    for (let i of genfun()){
-      // i关联value属性
-      console.log(i);
-    }
+    
   </script>
 </body>
 </html>

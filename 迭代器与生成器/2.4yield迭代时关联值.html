@@ -6,6 +6,28 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <script>
+    function * genfun(){
+      // 当迭代时,程序先解析clg中yield* 暂停并返回值,迭代完成后clg才不会被暂停,然后才能打印
+      // yield*后跟可迭代对象的用法
+      console.log('iter value:',yield * [1,3,5]);
+    }
+    for (let i of genfun()){
+      // i关联value属性
+      console.log(i);
+    }
+    // 对于生成器函数产生的迭代器,循环的值就是生成器函数返回的值
+    function * inner(){
+      yield 'foo';
+      return 'done'
+    }
+    function * outer(){
+      // yield * 后跟其他生成器函数,委托
+      console.log('finalValue:',yield * inner());
+    }
+    for (let i of outer()){
+      console.log(i);
+    }
+  </script>
 </body>
 </html>

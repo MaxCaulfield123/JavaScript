@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function* num(n){
+      if(n>0){
+        yield * num(n-1);//此处返回调用自己得出的值
+        yield n-1;
+      }
+    }
+    for(let i of num(3)){
+      // 从3开始迭代,层层调用自己,
+      console.log(i);//0 1 2
+    }
+  </script>
+</body>
+</html>

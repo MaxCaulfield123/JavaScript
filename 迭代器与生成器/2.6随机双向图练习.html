@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class Node {
+      constructor(id) {
+        this.id = id;
+        this.neighbors = new Set();
+      }
+      // 连接另一个节点
+      connect(node) {
+        if (node !== this) {
+          this.neighbors.add(node);
+          node.neighbors.add(this);
+        }
+      }
+    }
+
+    class RandomGraph {
+      constructor(size) {
+        this.nodes = new Set();
+        for (let i = 0; i < size; i++) {
+          this.nodes.add(new Node(i));
+        }
+
+        // 随机连接两个节点
+        const threshold = 1/size;
+        for (let x of this.nodes) {
+          for (let y of this.nodes) {
+            if (Math.random() < threshold) {
+              x.connect(y)
+            }
+          }
+        }
+      }
+
+      // 打印当前图
+      print() {
+        for (const node of this.nodes) {
+          const ids = [...node.neighbors].map(n => n.id).join(',')
+          console.log(`节点${node.id}邻居:`, ids)
+        }
+      }
+
+      // 检测图是否连通，即没有不可达到的节点
+      isConnected() {
+        const visitedNodes = new Set()
+        const firstNode = this.nodes[Symbol.iterator]().next().value;
+
+        // for(const node of this.nodes){
+        //     if(node.neighbors.size === 0){
+        //         console.log('not full')
+        //         break
+        //     }
+        // }
+
+        // 用生成器遍历
+        function* traverse(nodes) {
+          for (const node of nodes) {
+            if (!visitedNodes.has(node)){
+              yield node
+              yield* traverse(node.neighbors)
+            }
+          }
+        }
+
+        for (const node of traverse([firstNode])) {
+          visitedNodes.add(node)
+        }
+
+        if (visitedNodes.size === this.nodes.size) {
+          console.log('full')
+        } else {
+          console.log('not full')
+        }
+      }
+    }
+
+    const g = new RandomGraph(6);
+    g.print();
+    g.isConnected()
+  </script>
+</body>
+
+</html>
