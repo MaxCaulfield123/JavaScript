@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div></div>
+  <div></div>
+  <script>
+    // 迭代:按顺序反复执行一段代码
+    // 计数循环得先知道如何使用数据结构,如何访问数据.而forEach则没标识啥时候停止,且只能用在数组上
+    // 迭代器是按需创建的一次性对象,它关联它的可迭代对象.我们不用管迭代器关联的什么数据结构,只管如何给迭代器连续的值就行
+    // 有默认迭代器工厂函数的数据结构有 字符串 数组 Map Set arguments NodeList
+    // 数字与对象没有
+    let num=1;
+    let obj={};
+    console.log(num[Symbol.iterator],obj[Symbol.iterator]);//undefined
+    let arr=[1,2,3]
+    let map=new Map([['max','js'],['rachel','chloe']])
+    let set=new Set().add(1).add('w')
+    let div=document.querySelectorAll('div')
+    console.log(arr[Symbol.iterator],map[Symbol.iterator],set[Symbol.iterator],div[Symbol.iterator]);
+    // [Symbol.iterator]属性引用一个迭代器工厂函数,这个工厂函数返回一个新迭代器
+    // 实际运用迭代器既可以直接[Symbol.iterator](),也可以直接用以下操作
+    // for-of循环, 数组解构[]=[], ...收集打散, Array.from()转化数组, new Map(), new Set(), promise.all(), promise.race(), yield*操作符
+    let arr1=['max','js','chloe']
+    for(i of arr1){
+      console.log(i);
+    }
+    // 数组解构
+    let [a,b,c]=arr1;
+    console.log(a,b,c);
+    // 打散
+    let arr2=[...arr1];
+    console.log('arr2',arr2);
+    //
+    let arr3=Array.from(arr2);
+    console.log(arr3);
+    // new Map()
+    let map1=new Map([
+      ['a','b'],
+      ['c','d']
+    ])
+    console.log(map1);
+    // new Set()
+    let set1=new Set([1,2,3,4])
+    console.log(set1);
+    // 以上操作都会用到迭代器工厂函数
+    // 自定义类中如果没有声明迭代器,则实例会使用父类迭代器工厂函数;
+    
+  </script>
+</body>
+</html>

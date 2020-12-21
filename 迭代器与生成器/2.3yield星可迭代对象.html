@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function * max(){
+      yield * [1,3,5]
+    }
+    // 等于上方
+    function * chloe(){
+      for(let i of [1,3,5]){
+        yield i
+      }
+    }
+    let a=max();
+    let b=chloe();
+    // console.log(a.next());
+    // console.log(a.next());
+    // console.log(a.next());//yield * 可迭代对象 表示迭代这个可迭代对象,并一次产出一个值
+    // yield * 可迭代对象在迭代时的行为也是类似上方
+    for(let i of a){
+      console.log(i);//1,3,5
+    }
+    for(let i of b){
+      console.log(i);//1,3,5
+    }
+    console.log('------------');
+    function * genfun(){
+      // 当迭代时,程序先解析clg中yield* 暂停并返回值,迭代完成后clg才不会被暂停,然后才能打印
+      console.log('iter value:',yield * [1,3,5]);
+    }
+    for (let i of genfun()){
+      // i关联value属性
+      console.log(i);
+    }
+  </script>
+</body>
+</html>

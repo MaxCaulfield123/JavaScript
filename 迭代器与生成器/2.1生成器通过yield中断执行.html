@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 遇到yield后执行停止,只能通过生成器对象.next()来继续执行,停止时作用域状态会保留
+    function * max(){
+      yield 123;
+      yield 'max'//会返回到value中
+      return 'abc'//会也会返回到value中,且立即将生成器对象的done设为true
+      // function a(){
+      //   yield 'abc'//无效
+      // }无效,yield 只能写在生成器函数下!不能写在嵌套的任何函数中
+    }
+    let a=max();
+    console.log(a.next());//123
+    console.log(a.next());//max
+    console.log(a.next());//abc
+    console.log(a);
+    // 生成器对象本身是可迭代对象!所以可以遍历!
+    let b=max();
+    for (let i of b){//没有yield时就不循环!
+      console.log(i);//123 max ,abc没有被打印出来因为迭代器不循环done为true的对象
+    }
+    // 使用生成器函数让of循环指定次数
+    function * chloe(i){
+      while(i--){
+        yield;
+      }
+    };
+    for (let i of chloe(3)){
+      console.log('循环!');
+    }
+  </script>
+</body>
+</html>

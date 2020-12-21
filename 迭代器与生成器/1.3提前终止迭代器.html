@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 工厂函数return的对象中不只有next()方法,还有return()方法,return控制当迭代中途停止退出时的表现,return(){}中必须返回{done:true}这个对象
+    // 当以下行为出现时,会调用return函数
+    // for-of循环通过 break continue return 或throw提前退出
+    // 解构操作未解构所有值
+    class foo {
+      constructor(limit) {
+        this.limit = limit
+      }
+      [Symbol.iterator]() {
+        let count = 0, limit = this.limit;
+        return {
+          next() {
+            return {
+              done: false,
+              value: count++
+            }
+          },
+          return() {
+            console.log('return函数被调用!我要退出啦!');
+            return { done: true }
+          }
+        }
+      }
+    }
+    const a = new foo(5);
+    for (let i of a) {
+      if (i > 2) {
+        break;//break时调用了定义的return()函数
+      }
+      console.log(i);
+    }
+    // 如果迭代器没有关闭,则会从上次迭代的地方继续迭代
+    // 数组的默认迭代器没有return()方法!,自定义会在退出迭代时调用,但不会终止迭代器(done:true没用)!
+    let arr = [1, 2, 3, 4, 5];
+    let it = arr[Symbol.iterator]();//保持对一个新建迭代器的引用
+    it.return=function(){
+      console.log('return执行');
+      return {
+        done:true
+      }
+    }//即使有return,之后的迭代还会有返回值,因为数组的迭代器不能被关闭!
+    try {
+      for (let i of it) {
+        console.log(i);//1,2,3
+        if(i>2){
+          throw 'err'
+        }
+      }
+    } catch (error) {}
+    for (let i of it){
+      console.log(i);//4,5
+    }
+
+  </script>
+</body>
+
+</html>

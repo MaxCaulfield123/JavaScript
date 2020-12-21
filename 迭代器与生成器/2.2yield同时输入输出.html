@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function * max(params){
+      // console.log(yield);//第一个yield打印不出来,因为第一次调用next()是开始执行max()函数
+      console.log(params);//第一次next执行此项
+      console.log(yield);
+      console.log(yield);
+    }
+    let a=max('waibi')
+    a.next('123')//第一次执行,将创建生成器对象的参数传入,此处传参无效!
+    a.next('def')
+    // yield同时输入输出
+    function * chloe(){
+      return yield 'foo';
+    }
+    let b=chloe();
+    console.log(b.next());//'foo' 程序读到return 然后需要读取后边的表达式,读取到yield时暂停并返回yield后的值
+    // 所以第一步执行了yield,体现了其输出功能
+    console.log(b.next('abc'));//第二次将参数'abc'传给了yield(体现了yield的输入功能) 并return出来
+  </script>
+</body>
+</html>

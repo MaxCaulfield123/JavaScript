@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 生成器(ES6)拥有在函数内部暂停和恢复代码执行的能力
+    // 任何能定义函数的地方都能定义为生成器函数(除了箭头函数,它不能定义生成器函数) *前后空格不影响
+    function* max(){
+
+    }
+    let obj={
+      *max(){
+
+      }
+    }
+    class chloe{
+     static * max(){
+
+      }
+    }
+    //生成器函数调用后产生一个生成器对象,处于suspended状态,生成器对象也实现了iterator接口,所以也有next()方法
+    let a=max();
+    console.log(a,a.next());//max {done:true,value:undefined}  调用next后处于close状态
+    // next()的value属性是函数的返回值
+    function * rachel(){
+      console.log('生成器函数调用,用next()时才会执行到此处');
+      return 'chloe'
+    }
+    let a1=rachel();//此处不会执行函数,只会返回生成器对象
+    console.log(a1.next());//chloe true
+    // 生成器对象的迭代工厂函数返回它们自身
+    console.log(a===a[Symbol.iterator]());//true
+  </script>
+</body>
+</html>
