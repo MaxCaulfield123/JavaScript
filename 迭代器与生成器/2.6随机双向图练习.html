@@ -49,7 +49,7 @@
         }
       }
 
-      // 检测图是否连通，即没有不可达到的节点
+      // 检测是否有没有连接到的节点
       isConnected() {
         const visitedNodes = new Set()
         const firstNode = this.nodes[Symbol.iterator]().next().value;
