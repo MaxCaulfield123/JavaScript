@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 定义访问器属性:原始值加_下划线,设置时用不加下划线的版本
+    let obj ={
+      name_:'dingding'
+    }
+    Object.defineProperties(obj,{
+      name:{
+        get(){//必须有get方法
+          return this.name_+'123'
+        },
+        set(newval){//没有set方法则是只读的
+          if(newval=='abc'){
+            this.name_=newval;
+          }
+        }
+      }
+    })
+    obj.name='dangdang';
+    console.log(obj.name);//dingding123
+    obj.name='abc';
+    console.log(obj.name,obj.name_);//abc123 abc,只有访问设置了访问器的属性,才会通过get
+    for (const key in obj) {
+      console.log(obj[key]);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // [[Enumerable]](是否可以for-in循环)这样的属性为描述属性特征的标识,不能用js直接访问
+    // [[Configurable]]是否能用delete删除或用访问器设置
+    // [[writable]]是否能修改
+    // [[Value]]属性实际的值,默认为Undefined
+    /*
+    Object.defineProperty(对象,属性字符串!,{
+      writable:true,
+      enumerable:true,
+      configurable:true,
+      value:'123'
+    })修改对象单一属性的特性
+    */
+    // 以下的无效果的静默错误,在"use strict"下都会报错
+    let obj={name:'abc'}
+    Object.defineProperty(obj,'name',{
+      value:'123',
+      configurable:false,
+      writable:false,
+      enumerable:false
+    });
+    for (let key in obj){
+      console.log(key);//无打印值
+    }
+    obj.name='dingding';
+    console.log(obj.name);//123
+    // 获取对象中属性的特征
+    console.log(Object.getOwnPropertyDescriptor(obj,'name'));
+  </script>
+</body>
+</html>
