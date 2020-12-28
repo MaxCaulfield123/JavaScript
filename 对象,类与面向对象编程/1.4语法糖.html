@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let name='max'
+    let a={
+      name:name
+    }//与下方相等,属性名与变量名相同时使用
+    let b={
+      name
+    }//找不到name变量会报ReferenceError
+     
+    // []能动态赋值属性名,其中可以加表达式,叫做计算属性
+    let age='max';
+    let token='343FE112H7T0';
+    function Assign(key){
+      return `${key}_${token}`
+    }
+    let obj={
+      [age]:'js',
+      [Assign('hasToken')]:true//[]中调用函数返回计算属性
+    }
+    console.log(obj);
+    // 方法名可以简写
+    let obj1={
+      getNow(){
+        console.log(new Date.now());
+      },
+      [age](){
+        console.log('tell me why');//简写与计算属性一起使用
+      }
+    }
+  </script>
+</body>
+</html>

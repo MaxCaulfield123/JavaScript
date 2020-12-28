@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 判断NaN与+-0时,有时===不给力
+    // 可以用Object.is(a,b)来判断ab是否相等
+    console.log(NaN===NaN);//false
+    console.log(Object.is(NaN,NaN));//true!
+  </script>
+</body>
+</html>

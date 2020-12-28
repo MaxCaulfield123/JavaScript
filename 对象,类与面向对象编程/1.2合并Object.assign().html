@@ -7,7 +7,44 @@
 </head>
 <body>
   <script>
-    // Object.assign(目标对象,对象1,对象2)复制多个对象的属性合并到目标对象中
+    // Object.assign(目标对象,对象1,对象2)复制多个对象的属性合并到目标对象中,浅克隆(原始克隆,引用引用),返回合并后的目标对象
+    // 对象的可迭代属性,自有属性(Object.hasOwnProperty()为true),字符串和符号为键的属性会被复制到目标对象中
+    // 会调取对象的get获取属性!调用对象的set设置属性,而不是调用属性的访问器的get与set
+    let obj={
+      name:'max',
+      set name(i){//set必须有参数,不然报错! set 属性名(设置时传参){}
+        console.log(i,'max的set被调用拉!');//i为undefined,因为不涉及赋值操作,没有把值传过来!!
+      }
+    }
+    let obj1={
+      age:22,
+      // name:'chloe',
+      // get name(){
+      //   console.log('22岁的老人被拿值拉!');
+      // }
+    }
+    let obj2={
+      age:23
+    }
+    
+    let result=Object.assign(obj,obj1,obj2);//多个参数对象有相同属性,合并时以最后一个对象为准
+    console.log(result);//对象内的clg都会被打印,且get与set不会被复制!+
+    console.log(obj===result);//true
+    // Object.assign()如果复制期间出错,则会终止复制且不会回滚已复制内容,所以可能复制一半!
+    let a={};
+    let b={
+      name:'dingding',
+      get asdf(){
+        throw new Error('我错啦!')
+      },
+      age:23
+    }
+    try{
+      var c=Object.assign(a,b)
+    }catch(e){
+      console.log(e,c);
+    }
+    console.log(a);//name:dingding age没有被复制过来! 
   </script>
 </body>
 </html>
