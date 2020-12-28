@@ -8,17 +8,21 @@
 <body>
   <script>
     // 定义访问器属性:原始值加_下划线,设置时用不加下划线的版本
+    // 可以直接在对象中定义 _要保护的属性,也可以在defineProperties()中定义
     let obj ={
-      name_:'dingding'
+      // name_:'dingding'
     }
     Object.defineProperties(obj,{
+      _name:{
+        value:'max'
+      },
       name:{
         get(){//必须有get方法
-          return this.name_+'123'
+          return this._name+'123'
         },
         set(newval){//没有set方法则是只读的
           if(newval=='abc'){
-            this.name_=newval;
+            this._name=newval;
           }
         }
       }
@@ -30,6 +34,13 @@
     for (const key in obj) {
       console.log(obj[key]);
     }
+    // 通过Object.defineProperties()定义的属性,默认都是false
+    // 访问器属性,独有get,set 
+    console.log(Object.getOwnPropertyDescriptor(obj,'name'));
+    // 数据属性,独有value与writable
+    console.log(Object.getOwnPropertyDescriptor(obj,'_name'));
+    // Object.getOwnPropertyDescriptors获取所有属性的特征
+    console.log(Object.getOwnPropertyDescriptors(obj));
   </script>
 </body>
 </html>

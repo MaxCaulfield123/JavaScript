@@ -23,16 +23,16 @@
     let obj={name:'abc'}
     Object.defineProperty(obj,'name',{
       value:'123',
-      configurable:false,
-      writable:false,
-      enumerable:false
+      // configurable:false,
+      // writable:false,
+      // enumerable:false
     });
     for (let key in obj){
       console.log(key);//无打印值
     }
     obj.name='dingding';
     console.log(obj.name);//123
-    // 获取对象中属性的特征
+    // 获取对象中属性的特征,Object.defineProperty()定义的属性默认都是true
     console.log(Object.getOwnPropertyDescriptor(obj,'name'));
   </script>
 </body>
