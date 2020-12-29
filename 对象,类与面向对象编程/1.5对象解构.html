@@ -7,7 +7,65 @@
 </head>
 <body>
   <script>
+    // 解构,声明或使用已有变量来匹配对象!
+    // {匹配属性:变量}=obj
+    let obj={
+      name:'dingding',
+      age:22
+    }
+    let {name:jgName,age:jgAge}=obj;
+    console.log(jgName,jgAge);//dingding 22
+    let {name,age,why}=obj;//解构中可以使用对象中的语法糖!相当于{name:name,age:age}=obj;
+    console.log(name,age,why);//dingding 22 undefined
+    let {abc='tellmewhy'}=obj;//解构时可以使用参数默认值
+    console.log(abc);
+
+    let a,b;
+    ({name:a,age:b}=obj);//变量名可以用之前声明过的,不过解构时必须使用()包裹!!
+    console.log(a,b);
     
+    // 解构使用到函数ToObject()(不能在运行环境访问),把被解构数据当做对象!
+    let {constructor:c}=4;//4被当做new Number()的对象!其constructor被解构出来!
+    console.log(c===Number,c);//true f Number()
+
+    let person={
+      name:'max',
+      age:23,
+      fav:{
+        play:'game'
+      }
+    }
+    let p2={};
+    (
+      {//通过解构复制对象属性,浅克隆
+        name:p2.name,//变量名可以是其他对象的属性
+        age:p2.age,
+        fav:p2.fav
+      }=person
+    )
+    console.log(p2);
+    p2.fav.play='money'
+    p2.name='js'
+    console.log(person);//play:money p2与person的fav都引用一个对象!,改变时都会改变
+    // 嵌套解构
+    // fav这个外层属性没定义时,会报错!
+    let {fav:{play}}=person;//最外层解构,将job属性指向一个变量,变量内将play属性指向语法糖变量!
+    console.log(play);
+
+    // 解构是顺序的,出错时不能回滚,所以出错后可能只解构了一部分!
+    try{
+      var {name:imname,foo:imfoo,age:image}=person;
+    }catch(e){
+      console.log(e);
+    }
+    console.log(imname,imfoo,image);//max undefined! 23
+
+    // 注意!函数的参数也能用解构!
+    // 以后看到函数参数写成了对象!就是解构!表明传参时要传对象!
+    function chloe(a,{name:newname,age:newage},c){
+      console.log(a,newname,newage,c);
+    }
+    chloe('ima',person,'imc')//person被解构并打印
   </script>
 </body>
 </html>
