@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 工厂模式是一种设计模式,表示用于创建特定对象的过程
+    // 如下函数新建了一个特定对象
+    function per(name,age){
+      let a=Object();
+      a.name=name;
+      a.age=age;
+      a.sayName=function(){
+        console.log('我是'+this.name);
+      }
+      return a;
+    }
+    let p1=per('js',22);
+    console.log(p1);
+    // 构造函数就是普通函数,只不过调用方法与内部代码不同
+    function person(name,age){
+      this.name=name;
+      this.age=age;
+      this.sayName=function(){
+        console.log('我叫'+this.name);
+      }
+    }
+    // 构造函数用new调用,任何被new调用的就是构造函数
+    let person1=new person('max',22);
+    console.log(person1);
+    console.log(person1 instanceof person);//person1是person的实例
+    console.log(person1 instanceof Object);//所有自定义创建的对象都是Object的实例
+    console.log(person1.constructor==person);//对象.constructor==构造函数 true
+    console.log(person1.__proto__==person.prototype);//true 实例继承构造函数的原型
+
+    // 以上构造函数代替了普通函数,没有显示创建对象,使用this指向新对象,没有return
+    // 造成以上区别的原因在于 new关键字 调用了构造函数,new做的事有以下几件
+    // 1新建一个对象
+    // 2将对象的__proto__指向构造函数的prototype
+    // 3将this指向新建的对象
+    // 4!!如果构造函数返回非空对象,则new将非空对象赋值给变量,如果没有返回,则将新建对象返回给变量!!(构造函数中return 引用对象会替代新建的对象!)
+
+    // 构造函数没有new调用时,this指向发生变化!
+    person('chloe',22);
+    sayName()//我叫chloe
+    // 构造函数也可以在另一个对象的作用域中调用,不能调用bind绑定?
+    let o={};
+    person.call(o,'rachel',25)
+    console.log(o);
+
+    // 构造函数的问题在于每次创建实例时都会为每个实例新建函数
+    // function person(name,age){
+    //   this.name=name;
+    //   this.age=age;
+    //   this.sayName=function(){这里等于this.sayName=new function(){clg this.name},每次都会新建!
+    //     console.log('我叫'+this.name);
+    //   }
+    // }
+    // 所以可以将相同的函数提取到构造函数外面!
+    let newSayName=function(){
+      console.log('我叫'+this.name);
+    }
+    function personNew(name,age){
+      this.name=name;
+      this.age=age;
+      this.sayName=newSayName;
+    }
+    let kate=new personNew('kate',22);
+    kate.sayName()//我叫kate
+  </script>
+</body>
+</html>

@@ -52,13 +52,12 @@
     let {fav:{play}}=person;//最外层解构,将job属性指向一个变量,变量内将play属性指向语法糖变量!
     console.log(play);
 
-    // 解构是顺序的,出错时不能回滚,所以出错后可能只解构了一部分!
-    try{
-      var {name:imname,foo:imfoo,age:image}=person;
-    }catch(e){
-      console.log(e);
+    // 解构是顺序的,嵌套解构出错时不能回滚!,所以出错后可能只解构了一部分!
+    let imname,imfoo,image;
+    try{({name:imname,foo:{bar:imfoo},age:image}=person);}catch(e){
+      console.log(e);//can not read bar
     }
-    console.log(imname,imfoo,image);//max undefined! 23
+    console.log(imname,imfoo,image);//max undefined! undefined 注意只有嵌套解构会出现!
 
     // 注意!函数的参数也能用解构!
     // 以后看到函数参数写成了对象!就是解构!表明传参时要传对象!
