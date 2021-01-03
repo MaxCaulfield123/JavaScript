@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function con(){};
+    // 每个函数都有一个prototype指向原型对象,而原型对象中又有一个constructor指向prototype对应的函数,也就是两者循环引用
+    console.log(con.prototype.constructor===con);//true
+    // 自定义构造函数的prototype默认只拥有constructor,其余都继承Object
+    console.log(con.prototype);//constructor()
+    // 构造函数的实例的[[prototype]],也就是__proto__指向构造函数的原型对象
+    // 原型链都会终止于Object对象
+    console.log(con.prototype.__proto__.constructor===Object);//true 函数的原型继承Object, Object没有继承任何对象,是最高级!
+    console.log(con.prototype.__proto__.__proto__);//null
+
+
+    let a=new con();
+    // 实例的__proto__指向构造函数的原型,__proto__目前只在部分浏览器可用
+    console.log(a.__proto__===con.prototype);//true
+    // 构造函数的所有实例都共享一个对象
+    let b=new con();
+    console.log(a.__proto__===b.__proto__);//true
+
+
+    // prototype.isPrototypeOf(实例) 判断原型对象是否是实例继承的原型对象,相当于调用a的__proto__[.__proto__]与之比对
+    console.log(con.prototype.isPrototypeOf(a));//true
+    // Object.getPrototypeOf(实例),获取实例继承的原型对象,相当于实例.__proto__的指针
+    console.log(Object.getPrototypeOf(a));//{constructor:f()}
+
+    // 可以用Object.setPrototypeOf(对象1,对象2)能将对象2设置为对象1'继承!'的原型!
+    let obj={
+      name:'dingding'
+    },obj1={
+      age:22
+    };
+    console.log(obj1.__proto__);//继承的Object的原型!
+    Object.setPrototypeOf(obj1,obj)
+    console.log(obj1.__proto__);//{name:'dingding'}继承的原型变为obj!
+    // Object.setPrototypeOf()可能影响代码性能(同时也修改其他引用对象原型的代码)
+    // 所以用Object.create()来创建更好!
+    // Object.create(参数对象),新建一个对象,将参数对象设置为新建对象的原型!
+    let obj2={
+      name:'dangadang'
+    }
+    let obj3=Object.create(obj2);
+    obj3.age=23;
+    console.log(obj3,obj3.name,obj3.__proto__);//obj2被设置为obj3的原型对象!
+  </script>
+</body>
+</html>

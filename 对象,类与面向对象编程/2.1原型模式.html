@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 每个函数都有一个prototype对象,这个对象储存实例对象共享的属性方法
+    function max() {
+
+    }
+    max.prototype.name = 'max';
+    max.prototype.age = 23;
+    max.prototype.sayName = function () {
+      console.log('我叫', this.name);
+    }
+    let obj = new max();
+    let obj1=new max();
+    // obj.sayName()
+    console.log(obj.age);//23
+    console.log(obj.sayName===obj1.sayName);//true 两个实例共享构造函数原型上的原型对象
+    console.log(max.age);//undefined
+    console.log(max.name);//max  为啥能访问name??age就是Undefined?
+  </script>
+</body>
+
+</html>
