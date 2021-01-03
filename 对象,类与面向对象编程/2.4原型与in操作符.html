@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // in 操作符不仅可以在for in 循环中使用,还可以在判断对象是否有哪个属性(无论在其自身属性上,还是原型链上)
+    function max() {}
+    max.prototype.name = 'max';
+    let a=new max();
+    console.log('name' in a);//true 此时在原型链上;
+    a.name='kate';
+    console.log('name' in a);//true 此时在自身属性上!
+    // 结合 实例.hasOwnProperty('属性')判断实例是否有自身参数属性,可以判断属性是否只在原型链上(取差)
+    function onlyInProperty(obj,params){
+      // 属性不在对象自身,且能通过对象访问到时,说明在原型链上
+      return !obj.hasOwnProperty(params)&& (params in obj)
+    }
+    console.log(onlyInProperty(a,'name'));//false 
+    delete a.name;
+    console.log(onlyInProperty(a,'name'));//true 在原型链上!
+
+    // 获取一个对象自身可枚举的实例属性 Object.keys();
+    a.name='max';
+    a.age=23;
+    a[Symbol('123')]='qwe'
+    console.log(Object.keys(a));//name age
+    // 获取实例所有属性
+    let keys=Object.getOwnPropertyNames(a);
+    console.log(keys);//name age
+    // 获取实例所有符号属性
+    console.log(Object.getOwnPropertySymbols(a));//[Symbol(123)]
+
+    // Object.keys与for-in的枚举顺序不确定
+    // 而Object.getOwnPropertyNames(),Object.getOwnPropertySymbols()与Object.assign()有规则
+    // 先升序枚举数值键,然后以插入顺序枚举字符串和符号键;
+    let k1=Symbol('k1')
+    let k2=Symbol('k2');
+    let obj={'2':2,'3':3,'1':1,first:'first'};
+    obj.second='second';
+    obj.third='third';
+    obj[k2]='k2'
+    obj[k1]='k1'
+    console.log(Object.getOwnPropertyNames(obj));//123fst
+    console.log(Object.getOwnPropertySymbols(obj));//K2 K1
+  </script>
+</body>
+</html>

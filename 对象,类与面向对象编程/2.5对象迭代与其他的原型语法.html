@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 对象迭代可以用以下两个函数,将值转为数组进行迭代
+    // Object.entries()接收一个对象,返回数组,数组中键值对以数组的形式作为元素
+    // 非字符串属性会被转为字符串,
+    let obj={
+      name:'max',
+      age:23,
+      [Symbol('123')]:'123'//Symbol属性在这两个函数中会被忽略
+    }
+    console.log(Object.entries(obj));//[[],[]]
+    // Object.values()接收对象,返回属性值作为元素的数组
+    console.log(Object.values(obj));//['max',23]
+
+    // 可以给原型赋值一个对象,彻底重写原型
+    obj.prototype={
+      faker:'24',
+      marin:'25',
+      bang:'26'
+    }//但是这时没有constructor指向obj了!,如果自己添加constructor,则默认为可枚举(真正的constructor不可枚举),得手动defineProperty
+
+  </script>
+</body>
+</html>

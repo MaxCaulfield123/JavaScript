@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 原型链在访问对象属性时会一层一层查找属性;
+    function max() {}
+    max.prototype.name = 'max';
+    max.prototype.age = 23;
+    max.prototype.sayName = function () {
+      console.log('我叫', this.name);
+    }
+    let a=new max();
+    let b=new max();
+    console.log(a.name);//max 先从自身属性搜索,没有则一级一级向上查找原型链(继承的原型对象)有没有这个属性
+    a.name='chloe';
+    console.log(a.name,b.name);//chloe max a对象的name属性在查找时遮蔽了其原型链上的name属性;
+    // 可以用delete 关键字删除对象上的属性! 使用Null清空属性值;
+    delete a.name;
+    console.log(a.name);//max chloe被清空;
+
+    // 实例.hasOwnProperty('属性')可以判断实例是否自身有参数属性;
+    console.log(a.hasOwnProperty('name'));//false;
+    a.name='rachel';
+    console.log(a.hasOwnProperty('name'));//true
+  
+  </script>
+</body>
+
+</html>
