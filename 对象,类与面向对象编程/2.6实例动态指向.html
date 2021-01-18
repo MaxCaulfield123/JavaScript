@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 实例的[[protoType]]是在创建时指向"当前"原型!这意味着后续改变构造函数的原型时,实例继承的原型还是最初的原型!
+    function a(){
+      this.age=23
+    };
+    let obj=new a();
+    a.prototype={
+      sayName(){
+        console.log('我是xxx');
+      }
+    }
+    let obj1=new a();
+    // obj.sayName()报错,obj是在原型改变前创建的,继承构造函数的最初原型
+    // obj1.sayName()//我是xxx
+
+    // 原生对象如Array,String,Object等都有原型对象保存一些函数,来操作数据
+    // 一个构造函数的原型对象,如果其属性是引用数据类型,则当其实例单独修改其prototype上的这个引用类型时,其他实例也会改变(共享)
+
+  </script>
+</body>
+</html>

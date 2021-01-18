@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 面向对象编程的继承特性主要有接口继承与实现继承 
+    // 接口继承通过继承方法签名 实现继承直接继承方法 ,Js没有方法签名,通过实现继承
+    function father(){
+      // father的实例也是son构造函数的原型对象,所以son的实例都可以访问father构造函数定义的属性!这不合适
+      // 因为这也会导致共享!
+      this.name=23;
+    }
+    father.prototype.sayName=function(){
+      console.log('第一级构造函数');
+    }
+    let a=new father();
+    // 一个构造函数的原型对象为另一个构造函数的实例时,原型链产生!
+    function son(){};
+    son.prototype=a;//a是father的实例
+    let instance=new son();
+    instance.saySelf=function(){
+      console.log('自身');
+    }
+    // instance实例调用sayName时经过三步检索 1自身instance属性 2instance的原型对象,也就是father的实例 3father的原型对象
+    // 验证方式 在instance的原型对象(也就是father的实例)内添加与father的原型中同名的函数,会调用instance的原型的!(覆盖了father的!)
+    instance.sayName()
+    instance.saySelf()
+    // 构造函数的原型对象的原型链的最高级是Object的prototype
+    // 可以用 实例 instanceof 构造函数 和 构造函数.prototype.isPrototypeOf(实例) 来判断实例与构造,原型的关系
+
+    //原型链的第一个问题:子构造函数在创建实例时,不能给父构造函数(创建子的原型对象的函数)传参
+    // 第二个:上述提到的,父构造函数构造出来的(this.xxx)对象的属性,会被子构造函数的所有实例共享!
+    // 所以很少只使用原型继承,更多的是结合call,apply将父构造函数带到子构造函数中运行,传参
+  </script>
+</body>
+</html>

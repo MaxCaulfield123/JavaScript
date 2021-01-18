@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 为了解决父子构造函数中共享属性与无法传参,可以在子构造函数使用call,apply,使父构造函数在自构造函数中运行
+    // 将父构造函数原型上的属性,提取为子构造函数实例自身的属性
+    function father(a){
+      this.age=a;
+    }
+    function son(a){
+      // 调用father构造函数,将此时的上下文的this给father
+      // 这样就实现了类似class中的super
+      father.call(this,a);
+      this.name='zjs'
+    }
+    let instance=new son('22');
+    let instance1=new son('23');
+    console.log(instance,instance1);//22 23
+    instance.age=24;
+    console.log(instance,instance1);//24 23
+    // 这样有一个问题就是 子构造函数的实例不再能访问父构造函数的原型对象了!所以此方法很少单独使用
+    // 所以以下的原型对象与call结合的方式才是最常用的继承
+    function father1(name,age){
+      this.name=name;//实例应该独有的属性放在父构造函数中被call调用
+      this.age=age
+    }
+    father1.prototype.sayName=function(){//实例间应该共享的属性与方法放到原型对象中
+      console.log(`我叫${this.name}`);
+    }
+    function son1(name,age){
+      father1.call(this,name,age);
+
+    }
+    let a1=new father1();
+    son1.prototype=a1;
+    let sonInstance=new son1('zjs','22');
+    sonInstance.sayName()
+  </script>
+</body>
+</html>
