@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 类class实例化时,会调用constructor()构造属性,new关键字与构造函数做的事一样
+    // 1新建对象 2新对象__proto__指向class的prototype 3构造函数中this指向新对象 4构造函数返回非空对象则覆盖默认返回的新建对象
+    class Max{
+      constructor(bool,name){
+        console.log('constructor运行啦!');
+        this.name=name;
+        if(bool){
+          return{
+            age:'23!'
+          }
+        }
+      }
+    }
+    // 类必须用new关键字 不然会报错,而构造函数不用new则会将全局作用域作为this指向
+    let me=new Max(false,'zjs');//如果constructor没有参数则可以省略()
+    console.log(me,me instanceof Max);
+    let js=new Max(true,'chloe')
+    console.log(js,js instanceof Max);//{age:23!} false 返回的对象替代了默认返回的new新建的对象,且不算是类的实例!
+
+    // 类其实就是一种特殊构造函数,他也有原型对象,其中有constructor指向自身
+    console.log(me.constructor);//实例访问原型链上的Max的原型对象中的constructor指向Max类
+    // 证明class其实是函数的方法
+    console.log(typeof Max);//function
+
+    // 但是类中的constructor不会被js当做构造函数
+    let a=new Max();
+    console.log(a.constructor===Max);//t
+    console.log(a instanceof Max);//t
+    console.log(a instanceof Max.constructor);//f
+    // 但是当我们把类中的constructor当做构造函数来使用时,则会被当做构造函数使用,但实例不再是类的实例
+    let b=new Max.constructor();
+    console.log(b.constructor===Max);//f
+    console.log(b instanceof Max);//f
+    console.log(b instanceof Max.constructor);//t
+
+    // 类可以在任何地方定义!,也可以被当做参数传递!
+    let arr=[
+      class Chloe{
+        constructor(age){
+          this.age=age
+        }
+      }
+    ]
+    let instance;
+    function abc(a){
+      instance=new a('23')
+    }
+    abc(arr[0]);
+    console.log(instance);//chloe{age:23}
+
+    // 类也能立即实例化 
+    let nowInstance=new class Foo{
+      constructor(a){
+        this.a=a
+      }
+    }('bar')
+    console.log(nowInstance);//Foo{a:'bar'}
+  </script>
+</body>
+</html>

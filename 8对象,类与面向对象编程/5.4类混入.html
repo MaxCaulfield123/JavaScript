@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // extends 关键字后面可以加任何返回构造函数或类的表达式
+    class Max{}
+    function afun(){
+      return Max
+    }
+    class Js extends afun(){}//允许这样做
+    
+    // 上面的afun()可以在内部嵌套多个函数,传入多个参数,每个函数返回一个继承的参数类
+    // 进而实现返回一个A继承B,B继承C的A类,让Js继承 ABC三个逐一继承的类
+    
+    function fooMixin(a){
+      return class extends a{}
+    }
+    function barMixin(a){
+      return class extends a{}
+    }
+    class Chloe extends fooMixin(barMixin(Max)){}//如上,这样的逐一继承叫做混合模式
+    // 许多js框架(如React)已经放弃了混合模式,而是改用组合模式(不继承,而是把方法提取到独立的类与对象中组合起来)
+    // 这反映了一个一个软件设计原则:组合胜过继承,这个原则被很多人遵循,在代码中能提供更强大的灵活性
+  </script>
+</body>
+</html>

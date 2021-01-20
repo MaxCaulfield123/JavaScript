@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 如果需要定义一个只能被其他类继承,不能被实例化的累时,可以用new.target保存的new关键词调用的类或函数判断
+    class Max{
+      constructor(){
+        console.log(new.target);//new.target保存实例化时 new关键词调用的类或构造函数!
+        if(new.target===Max){
+          throw new Error('此类不能被实例化')
+        }
+        if(new.target.foo===undefined){//判断派生类有foo函数
+          console.log('必须有foo函数!');;
+          return {}
+        }
+      }
+    }
+    class Chloe extends Max{
+      constructor(){
+        super()
+      }
+    }
+    // 抽象基类也能要求其派生类必须有某个函数,派生类没有定义constructor函数,默认使用父类con函数
+    let a = new Chloe()//new 啥 new.target就是啥
+    console.log(a);
+  </script>
+</body>
+</html>

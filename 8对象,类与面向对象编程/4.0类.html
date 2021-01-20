@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // es5的构造函数实现继承来模拟类的行为太杂乱,所以有了es6的class语法糖
+    // class其实背后还是使用原型与构造函数实现的;
+    class person{};//类声明不能被提前
+    let person1=class {};//两种声明类的方式
+    // 与函数不同的是,函数受作用域限制,类受块作用域限制!
+    // 类内的函数默认都是在严格模式下运行的
+    {
+      function a(){};
+      class why{}
+    }
+    //console.log(a,why);//why is not defined
+
+    let Chloe=class Max{//类名首字母最好大写,如此方式声明则只有内部才能访问到Max,外界只能访问Chloe
+      constructor(){}//构造函数
+      get myBear(){}//类支持get 属性() 与set 属性(),相当于访问器,当访问实例的与class中getset后同名的属性时,会执行class中的getset
+      static timeStop(){}//类的静态函数,只能通过类来调用,不能通过实例调用
+      say(){
+        console.log(Max.name,Chloe.name);
+      }
+    }
+    // 可以通过 类.name 获取一个类名称的字符串
+    console.log(Chloe.name);//字符串Max
+    // console.log(Max.name);//报错,Max is not defined 与类声明方式有关
+    let a=new Chloe();
+    a.say()//Max Max没报错
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 类支持在内部定义生成器与迭代器
+    class Person {//extends Array
+      *generator(){
+        yield 'max';
+        yield 'js';
+      }
+      static *generator2(){
+        yield '123';
+      }
+      *[Symbol.iterator](){
+        yield '1';
+        yield '2';
+        yield '3';
+      }
+    }
+    let a=new Person();
+    let gen=a.generator()
+    console.log(gen.next().value);
+    console.log(gen.next().value);
+    let gen1=Person.generator2();
+    console.log(gen1.next().value);
+
+    // 类支持在自身定义迭代器,来使所有实例可迭代;
+    for(var i of a){ //实例遍历时会自动查找自身,原型链上的迭代器!所以继承了Array的类实例可以遍历
+      console.log(i);
+    }
+  </script>
+</body>
+</html>

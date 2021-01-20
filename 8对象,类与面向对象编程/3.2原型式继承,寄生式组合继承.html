@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在对象间需要共享信息的时候,可以用Object.create(继承的原型对象,创建对象自身的属性)创建对象
+    // 其第一个参数对象将会作为原型对象被共享,第二个参数可以和Object.defineProperty内写属性值特征写法相同
+
+    // 以下这个函数类似于Object.create(),不需要像之前几个demo一样创建构造函数来使原型继承
+    function object(o){
+      function f(){};
+      f.prototype=o;
+      return new f();
+    }//o内的属性作为原型对象被所有返回的new f()共享
+    
+    // 寄生式继承就是像object函数一样,不直接用父构造函数创建实例作为子构造函数的原型
+    // 而是在中间加一个新构造函数作为中转(直接son.prototype=father.prototype但是这样实例会直接共享father的prototype,造成紧耦合!)
+    function inherit(f,s){//每次调用inherit()都会新建一个father原型对象的副本给s子构造函数!,原因是f()每次运行都会被新声明
+      let protot=object(f.prototype);
+      protot.constructor=s;
+      s.prototype=protot;
+    }
+    function father(name){
+      this.color=['black','green']
+      this.name=name;
+    }
+    father.prototype.sayName=function(){
+      console.log(this.name+'是我的名字');
+    }
+    function son(name){
+      father.call(this,name)
+    }
+    inherit(father,son);
+    let a=new son('周江山');
+    a.sayName()
+    inherit(father,son);//所以此处再调用一次寄生函数后,实例b继承的father的prototype其实和
+    let b=new son('max');
+    b.sayName();
+
+    b.__proto__.sayName=function(){
+      console.log('我杯盖了');
+    }
+    a.sayName();
+    b.sayName()
+    console.log(a,b);
+  </script>
+</body>
+</html>

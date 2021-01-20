@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 类中定义的方法,会自动放到类的原型对象上
+    class Person{
+      constructor(age,name){
+        this.age=age;
+        this.name=name;
+      }
+      introduce(){//这个函数被放在原型对象上,类块中只能定义函数
+        console.log('我叫'+this.name+'我的岁数是'+this.age);
+      }
+      // name:'dingding' 报错!在类中不能定义除函数外的数据类型
+      [Symbol('aa')](){}
+      ['a'+'b'](){}//类中也可以用符号与计算属性作为函数名
+
+      set name(val){//类支持为实例设置属性的访问器
+        this.name__=val;//此处必须加__ ,设置保镖属性,不然报错
+      }
+      get name(){
+        return 'aaa'
+      }
+      static saysth(){//类的静态方法,直接通过类调用无需存在实例,静态方法存在于类本身而不是类的原型对象上
+        // 此类方法适合作为实例工厂
+        console.log('saysomething');
+        return Math.random();
+      }
+    }
+    let a=new Person(23,'zjs')
+    console.log(a.__proto__.introduce);//function
+    console.log(a.name);
+    console.log(Person.saysth());//通过类调用的静态方法
+    // 类只能在外部为其添加非函数属性
+    Person.age='22';
+    console.log(Person.age);
+
+    
+  </script>
+</body>
+</html>

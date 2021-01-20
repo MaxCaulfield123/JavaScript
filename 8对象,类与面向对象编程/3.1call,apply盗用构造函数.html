@@ -24,7 +24,7 @@
     instance.age=24;
     console.log(instance,instance1);//24 23
     // 这样有一个问题就是 子构造函数的实例不再能访问父构造函数的原型对象了!所以此方法很少单独使用
-    // 所以以下的原型对象与call结合的方式才是最常用的继承
+    // 所以以下的原型对象与call结合的方式才是较常用的继承,但也存在问题
     function father1(name,age){
       this.name=name;//实例应该独有的属性放在父构造函数中被call调用
       this.age=age
@@ -33,10 +33,9 @@
       console.log(`我叫${this.name}`);
     }
     function son1(name,age){
-      father1.call(this,name,age);
-
+      father1.call(this,name,age);//第二次运行father1的构造函数
     }
-    let a1=new father1();
+    let a1=new father1();//第一次运行father1的构造函数,father1运行了两次,导致作为原型的a1对象中有不必要的属性
     son1.prototype=a1;
     let sonInstance=new son1('zjs','22');
     sonInstance.sayName()

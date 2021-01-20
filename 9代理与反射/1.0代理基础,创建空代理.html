@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在ES6中出现了代理这一数据类型,代理就是替代对象进行操作的替身!
+    // 代理通过 new Proxy(target源对象,handler代理对象)创建
+    let max={
+      name:'max'
+    }
+    let handler={}//用于储存捕获器
+    let proxy=new Proxy(max,handler)//创建代理对象
+    
+    console.log(proxy.name)
+
+    // 给源对象或代理对象赋值都会反映到双方
+    max.age=23;
+    proxy.tall='180';
+    console.log(max.tall,proxy.age);//180 23
+    // hasOwnProperty()在两个地方都会应用到源对象
+    console.log(proxy.hasOwnProperty('age'));//true
+    // instanceof 验证的是原型,而代理对象new Proxy没有原型,所以不能用
+    // console.log(proxy instanceof Proxy);报错
+  </script>
+</body>
+</html>

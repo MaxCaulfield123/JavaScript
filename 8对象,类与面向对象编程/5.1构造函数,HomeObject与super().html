@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 派生类中可以使用super调用继承的父类中的构造,静态,原型中的函数
+    // super只能在派生类的构造函数与静态方法中使用
+    class Max{
+      constructor(name){
+        this.name=name
+      }
+      introduce(name){
+        console.log(name+'是我的名字');
+      }
+    }
+    class Chloe extends Max{//注意必须是派生类
+      constructor(){//派生类中如果显示定义了构造函数,则必须调用super()或者返回一个对象,否则报错
+        // console.log(this);//派生类中调用this前必须使用super()构造函数,否则报错
+        // console.log(super);不能单独引用super,报错
+        super('waibiwaibi');
+        // return {}
+        // super().introduce('zjs')//使用super调用父类的其他函数
+        console.log(this);
+      }
+    }
+    let a=new Chloe('rachel')
+  </script>
+</body>
+</html>

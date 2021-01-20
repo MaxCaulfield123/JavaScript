@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 类使用extends关键字可以继承拥有[[construct]]和原型的对象
+    class Foo{}
+    class Bar extends Foo{};
+    function Max(){};
+    class Taa extends Max{}//这意味着类也可以直接继承构造函数
+
+    // 继承别的原型对象的类叫做派生类.而类中的this会反映调用相应方法的实例或者类
+    class Chloe{
+      afun(id){
+        console.log(id,this);
+      }
+      static anotherFun(id){
+        console.log(id,this);
+      }
+    }
+    class Rachel extends Chloe{}
+    let c=new Chloe();
+    let r=new Rachel();
+    console.log(c,r);//打印实例返回Chloe{} Rachel{}
+    c.afun('123');//123 Chloe
+    r.afun('456');//456 Rachel//返回.前的实例
+    Chloe.anotherFun('ccc');
+    Rachel.anotherFun('rrr')//this映射.前的class
+  </script>
+</body>
+</html>

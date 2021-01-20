@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 使用代理的目的是可以定义捕获器,每个代理可以有一个或多个捕获器,捕获器执行一些js代码,可以在操作代理对象影响到目标源对象前执行
+    // 捕获器是从操作系统借来的概念,意为同步中断,暂停程序执行代码后,再返回程序
+    let obj={
+      name:'dingding'
+    }
+    let handler={
+      get(){//设置获取时的捕获器,return的值是获取的值
+        return '小猫咪给爷摇起来'
+      }
+    }
+    let proxy=new Proxy(obj,handler);
+    // 通过如下三种方式访问属性时都会执行捕获器 注意即使访问没有的属性'age'也会执行
+    console.log(proxy.name,proxy['age'],Object.create(proxy)['name']);//猫咪摇*3
+  </script>
+</body>
+</html>
