@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 箭头函数用=>链接
+    let a=()=>{console.log(arguments)}
+    // 一个参数且没省略大括号时可以去掉参数小括号,其余都要加小括号
+    let b=params=>{}
+    // 当程序只有一行且return返回值的时候,可以省略大括号
+    let c=(params)=> params=params+1;//意为function c(params){return params=params+1}
+    // 箭头函数不能用arguments,super,和new.target,不能用作构造函数,且没有prototype属性
+    console.log(a.prototype);//undefined
+    a()//报错,arguments是undefined
+  </script>
+</body>
+</html>

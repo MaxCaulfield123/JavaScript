@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 捕获器必须遵循一些规则,防止捕获器定义出现反常的行为
+    // 比如一个不可配置不可写的属性,当被捕获器返回与其属性值不同的值时,会报错
+    let target={};
+    Object.defineProperty(target,'name',{
+      configurable:false,
+      writable:false,
+      value:'imfoo'
+    });
+    let handler={
+      get(){
+        return 'aaa'
+      }
+    }
+    // let proxy=new Proxy(target,handler);
+    /**
+     * Uncaught TypeError: 'get' on proxy: property 'name' is a read-only and non-configurable data property on the proxy target
+     *  but the proxy did not return its actual value (expected 'imfoo' but got 'aaa')
+     * 报错!
+    **/
+    // console.log(proxy.name);
+
+    // 如果需要创建可中断目标对象与捕获器对象联系的代理对象,则需要调用Proxy.revocable
+    const Max={
+      age:22
+    }
+    const Chloe={
+      get(){
+        return 23;
+      }
+    }
+    // 同时声明两个值 revoke表示终止联系
+    const { proxy,revoke }=Proxy.revocable(Max,Chloe);
+    console.log(proxy.age);//23
+    revoke();
+    console.log(proxy.age);//报错44 Uncaught TypeError: Cannot perform 'get' on a proxy that has been revoked
+  </script>
+</body>
+</html>

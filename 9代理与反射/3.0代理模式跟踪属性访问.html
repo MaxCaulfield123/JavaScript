@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 通过代理模式,我们可以实现一些有用的编程模式
+    // 可以追踪对象什么时候被访问,被修改
+    let obj={
+      name:'max'
+    }
+    let proxy=new Proxy(obj,{
+      get(){
+        console.log('属性被获取');
+        return Reflect.get(...arguments)
+      },
+      set(val){
+        console.log('属性被设置');
+        return Reflect.set(...arguments)
+      }
+    })
+    console.log(proxy.name);
+    proxy.name='js';
+
+
+    // 可以隐藏对象上的属性
+    let arr=['foo','bar'];
+    let obj1={
+      foo:'123',
+      bar:'456',
+      tou:'789'
+    }
+    let proxy1=new Proxy(obj1,{
+      get(target,property){
+        if(arr.includes(property)){
+          return undefined
+        }else{
+          return Reflect.get(...arguments)
+        }
+      },
+      has(target,property){
+        if(arr.includes(property)){
+          return false
+        }else{
+          return Reflect.has(...arguments)
+        }
+      }
+    })
+    console.log(proxy1.foo,proxy1.bar,proxy1.tou);//undefined undefined 798
+    console.log('foo' in proxy1,'tou' in proxy1);//false true
+  </script>
+</body>
+</html>

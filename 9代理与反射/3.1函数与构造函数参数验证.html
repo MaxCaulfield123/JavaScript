@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 可以对函数调用时的参数进行审查
+    function afun(name){
+      console.log(name);
+    }
+    // 代理函数来实现!
+    let proxy=new Proxy(afun,{
+      apply(target,thisval,argList){
+        for (const i of argList){
+          if(typeof i !=='string'){
+            throw '必须是字符串参数!'
+          }
+        }
+        return Reflect.apply(...arguments)
+      }
+    })
+    // console.log(proxy(123));// Uncaught 必须是字符串参数!
+    console.log(proxy('max'));
+
+    // 也可以对类的构造函数进行参数限制
+    class Max{
+      constructor(id){
+        this.id=id
+      }
+    }
+    let proxy1=new Proxy(Max,{
+      construct(target,argList,newTarget){
+        if(argList[0]===undefined){
+          throw '不能没有参数哦!'
+        }else{
+          return Reflect.construct(...arguments)
+        }
+      }
+    })
+    let a=new proxy1()//没参数报错!
+  </script>
+</body>
+</html>

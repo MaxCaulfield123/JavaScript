@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Es6后支持给函数参数赋予默认值
+    function max(name='dinding'){
+      console.log('我叫'+name,arguments[0]);//使用默认值时,arguments没有值,arguments只接受传入的值,不接受默认值
+    }
+    max();//我叫dingding
+    // 传undefined会使用默认值,可以用Undefined来占位
+    max(undefined)//我叫dingding
+  </script>
+</body>
+</html>

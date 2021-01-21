@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 代理还可以将不相关的部分联系在一起,从而实现各种模式!
+    // 实现新建实例时,将实例添加进一个记录数组的操作,就是VUE中的观察者数组!!
+    const arr=[];
+    class Max{
+      constructor(name){
+        this.name=name
+      }
+    }
+    let proxy=new Proxy(Max,{
+      construct(){
+        let instance=Reflect.construct(...arguments);
+        arr.push(instance);
+        return instance
+      }
+    })
+  
+    // 也可以创建一个监听函数,当数据改变后,触发监听函数
+    const arr1=[];
+    function emit(newVal){
+      console.log('新值'+newVal);
+    }
+    let proxy1=new Proxy(arr,{
+      set(target,property,value,receiver){
+        let result=Reflect.set(...arguments);
+        if(result){//如果有设置值
+          emit(Reflect.get(target,property,receiver))//触发通知函数,获取属性值并传入
+        }
+        return result;
+      }
+    })
+    proxy1.push('Max')
+    proxy1.push('Js');
+    // 上述两个代理组合起来,就是vue的观察者模式
+  </script>
+</body>
+</html>

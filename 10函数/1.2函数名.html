@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数名变量就是指向函数的指针,一个函数可以有多个名称
+    let a=function(){console.log('中国战狼');};
+    let b=a;
+    console.log(b);//f
+    b()//中国战狼
+    //函数对象有name属性,表示自身的名称信息,没有变量则是空字符串
+    console.log(b.name);//a,表示最初声明函数时的名称!
+    console.log((()=>{}).name);//''
+    console.log((new Function()).name);//new Function创建的位anonymous
+    // 如果函数是get,set和bind()实例化的函数,则访问name名称前面会加上一个前缀
+    function max(){};
+    console.log(max.bind(null).name);//bound name
+    let obj={
+      year:1,
+      get age(){
+        return this.year
+      },
+      set age(year){
+        this.year=year
+      }
+    }
+    let descriptor=Object.getOwnPropertyDescriptor(obj,'age')//获取有get set的属性描述对象
+    console.log(descriptor);
+    console.log(descriptor.get.name);//get age
+  </script>
+</body>
+</html>

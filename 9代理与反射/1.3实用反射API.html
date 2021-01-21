@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 使用反射对象Reflect时要记住1它不局限于捕获对象,2大多数它的方法在Object上都有
+    
+    // 状态标记意为,Reflect中的函数返回了bool值(即使函数与Object上相同)
+    let o={}
+    if(Reflect.defineProperty(o,'foo',{value:'bar'})){
+      console.log('success');
+    }else{
+      console.log('failure');
+    }
+    // Reflect中的函数可以替代一些操作符
+    /**
+     * Reflect.set()替代=
+     * Reflect.get()替代属性访问
+     * Reflect.construct()替代new
+     **/
+
+    //  Reflect也可以使用apply(),它等于function原型上的apply,可以避免对象上定义有自身的apply函数的情况
+    // Reflect.apply(callfun,thisval,argumentList)
+
+    // 可以用代理代理另一个代理
+    let target={name:'dingding'}
+    let proxy1=new Proxy(target,{
+      get(){
+        console.log('first proxy');
+        return Reflect.get(...arguments)
+      }
+    });
+    let proxy2=new Proxy(proxy1,{//代理proxy1这个代理
+      get(){
+        console.log('second proxy');
+        return 'max'
+      }
+    })
+    console.log(proxy2.name);//second proxy , max
+  </script>
+</body>
+</html>

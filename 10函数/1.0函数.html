@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数都是Function的实例,Function的原型又是Object的实例,所以函数都是Object的实例
+    // 与其他引用数据类型一样,函数也是,变量只是保存一个指针
+    function fun(){}
+    let a=function(){}//两者几乎等价的函数声明方式
+    // 箭头函数
+    let b=()=>{};
+    // 调用函数的构造函数,最后一个参数会被解析为执行体
+    let c=new Function('a','b',"return a+b")
+    // 时刻记住函数是对象,变量只是引用
+  </script>
+</body>
+</html>

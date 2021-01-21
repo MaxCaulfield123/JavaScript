@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // js不关心函数的参数是否传入,也不关心传入的个数,所有参数既被局部声明变量接收,也被arguments类数组对象接收
+    function max(a,b){//没有此处的命名参数,也能传参并被arguments接收
+      console.log(a+=10);
+      console.log(arguments[0],arguments[1]);//非严格模式下,arguments与命名参数的值在内存中是同一个
+      console.log(arguments.length);
+    }
+    max(10,30)
+    // 箭头函数中没有arguments接受参数,不过可以在外包裹一层普通函数给它
+    let a=()=>{console.log(arguments);}
+    a()//arguments is not defined
+  </script>
+</body>
+</html>

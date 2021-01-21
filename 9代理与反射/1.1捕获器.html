@@ -8,18 +8,38 @@
 <body>
   <script>
     // 使用代理的目的是可以定义捕获器,每个代理可以有一个或多个捕获器,捕获器执行一些js代码,可以在操作代理对象影响到目标源对象前执行
-    // 捕获器是从操作系统借来的概念,意为同步中断,暂停程序执行代码后,再返回程序
+    // 捕获器是从操作系统借来的概念,意为同步中断,暂停程序 执行代码后,再返回程序
     let obj={
       name:'dingding'
     }
     let handler={
-      get(){//设置获取时的捕获器,return的值是获取的值
+      // 捕获器有相应的参数 比如get(目标对象,查询属性,代理对象)
+      get(trap,property,recevier){//设置获取时的捕获器,return的值是获取的值
+        console.log(trap,property,recevier);
         return '小猫咪给爷摇起来'
       }
     }
     let proxy=new Proxy(obj,handler);
     // 通过如下三种方式访问属性时都会执行捕获器 注意即使访问没有的属性'age'也会执行
+    // 注意将proxy设置为原型的对象也能被捕获器捕获Object.create(proxy)['name']
     console.log(proxy.name,proxy['age'],Object.create(proxy)['name']);//猫咪摇*3
+
+    // 定义的捕获器对象中可以用Reflect对象表示映射源对象上的所有原始行为
+    let max={
+      name:'max'
+    }
+    let chloe={
+      get(){
+        // Reflect.get就是获取属性名
+        console.log(Reflect.get(...arguments))
+        return Reflect
+      }
+    }
+    // Reflect其实是一个全局对象,创建捕获所有方法时可以这样
+    // let proxy1=new Prpxy(max,Reflect)
+    let proxy1=new Proxy(max,chloe);
+    console.log(proxy1.name);//返回Reflect对象
+
   </script>
 </body>
 </html>

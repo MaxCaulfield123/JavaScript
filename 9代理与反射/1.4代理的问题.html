@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 代理的问题在于所代理的对象内的this指向
+    let wm=new WeakMap();
+    class User{
+      constructor(id){
+        wm.set(this,id)
+      }
+      set id(id){
+        wm.set(this.id)
+      }
+      get id(){
+        return wm.get(this)
+      }
+    }
+    let user=new User(123);//创建user实例,保存在wm中
+    let proxy=new Proxy(user,{});
+    console.log(proxy.id);//undefined 原型中的get获取的this指向proxy,proxy代理的对象已经在weakMap中作为键名了,访问不到
+    // 可以代理User类,然后再创建实例保存在wm中,这样就不会有访问this访问不到的情况
+    let proxy1=new Proxy(User,{});
+    let user1=new proxy1(123);
+    console.log(user1.id);//123
+
+    // 代理的另一个问题在于,当代理某些内置类型时,无法代理其中的一些槽位,导致无法使用一些函数
+    let a=new Date();
+    let proxy2=new Proxy(a,{});
+    console.log(proxy2 instanceof Date);//true
+    console.log(proxy2.getDate());//报错!访问不到!因为没有代理Date中的特殊插槽属性!
+  </script>
+</body>
+</html>
