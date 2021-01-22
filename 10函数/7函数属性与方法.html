@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数也是对象,也有一些自身的属性与方法
+    // 函数.length表示函数定义时参数的个数,注意收集参数不会被当做参数被length记录!
+    function max(a,...b){}
+    console.log(max.length);//1
+
+    // Function 继承Object 所以有toString()与valueOf()方法
+    console.log(max.toString(),max.valueOf());
+
+    // 函数也有call(),apply(),bind()这三个改变this指向的方法
+    // call()与apply()会立即调用一次函数,区别是apply中的参数会被打散;
+    function color(...a){
+      console.log(arguments,this.color);
+    }
+    let o={color:'purple'};
+    color.call(o,'abc')
+    color.apply(o,['abc','def'])
+  </script>
+</body>
+</html>

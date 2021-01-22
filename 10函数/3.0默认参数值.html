@@ -7,13 +7,22 @@
 </head>
 <body>
   <script>
+
+    function getA(){
+      console.log('getA被调用');
+      return 'A'
+    }
     // Es6后支持给函数参数赋予默认值
-    function max(name='dinding'){
+    function max(name='dinding',code=getA()){//默认参数也可以是函数的返回值,默认参数的求值只会在函数被调用时求值
       console.log('我叫'+name,arguments[0]);//使用默认值时,arguments没有值,arguments只接受传入的值,不接受默认值
     }
     max();//我叫dingding
     // 传undefined会使用默认值,可以用Undefined来占位
     max(undefined)//我叫dingding
+
+    // 箭头函数也可以使用默认参数,但是必须加括号()
+    let b=(name="dingding")=>{console.log(name);}
+    b('Chloe')
   </script>
 </body>
 </html>

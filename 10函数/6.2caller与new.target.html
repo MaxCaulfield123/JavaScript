@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // caller是Es5在函数对象上添加的属性,它表示调用当前函数的函数!
+    function outer(){
+      inner()
+    }
+    function inner(){
+      console.log(inner.caller);//如果想松耦合,可以arguments.callee.caller,但这两个caller不是同一个对象中定义的
+    }
+    outer()//outer
+    inner()//null
+
+    // 函数既可以当做构造函数调用,也可以当做普通函数调用,Es6新增的new.target可以检测函数是否是由new关键字调用的构造函数
+    // 用new 关键词调用函数时,new.target指向new调用的函数;没用new调用时为undefined
+    function max(){
+      console.log(new.target);
+      if(!new.target){
+        throw new Error('构造函数必须用new 调用')
+      }else{
+        console.log('用new调用了!');
+      }
+    }
+    // max();
+    let a=new max()
+  </script>
+</body>
+</html>

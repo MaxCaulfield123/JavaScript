@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在Es5中,函数内部有两个特殊对象arguments与this,Es6新增了new.target
+    // arguments对象保存参数对象 arguments.callee表示当前函数
+    function getNum(num,cifang){
+      if(cifang<1){
+        return 1
+      }else{
+        // return num*getNum(num,cifang-1)
+        // 也可以用arguments.callee表示当前函数,这样就不会受函数名的影响
+        return num*arguments.callee(num,cifang-1)
+      }
+    }
+    console.log(getNum(2,4));//16
+    console.log(getNum(5,3));
+  </script>
+</body>
+</html>

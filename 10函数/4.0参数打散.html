@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let arr = [1, 2, 3, 4]
+    function getReduce() {//此函数需要分别传入不同参数,求和
+      let a = 0;
+      // arguments不会被...打散影响,参数在arguments定义赋值前就被打散了
+      console.log(arguments);
+      for (let i = 0; i < arguments.length; i++) {
+        a += arguments[i]
+      }
+      return a;
+    }
+    // 不用打散...时可以用apply;
+    console.log(getReduce.apply(null,arr));//10 apply第一个参数指定谁来运行getReduce
+    // 也可以用打散收集符号 ... 调用时打散,定义时收集!
+    console.log(getReduce(...arr));//10
+    // ...必须在变量前,调用时也可以再其前后再加别的变量
+    console.log(getReduce(-1,...arr,5));//14
+    console.log(getReduce(...[-1,0],...arr));//9
+  </script>
+
+</body>
+
+</html>

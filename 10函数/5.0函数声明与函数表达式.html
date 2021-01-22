@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // js会在代码执行前读取函数声明,将其整体提升
+    console.log(max);//可以执行
+    function max(){}//函数声明,整体提升
+    // 而函数表达式包括了函数声明,js在代码执行到那一行的时候,才赋值函数定义
+    console.log(chloe);//undefined
+    let chloe=function(){}//let chloe这个声明会提前,但是赋值函数定义会留在原地
+  </script>
+</body>
+</html>

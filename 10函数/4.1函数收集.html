@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在定义函数时,可以使用...变量,收集传入的一些参数
+    function max(a,...b){//注意如果要传入的参数不全放入b数组中,则必须把收集参数写在参数最后一项,否则a会接收不到参数
+      console.log(a,b,arguments);//收集参数不会影响arguments arguments只收集调用函数时的传入的参数!
+    }
+    max(1,2,3,4);
+    // 箭头函数也可以使用...收集
+    // let chloe=(...a,b)=>{console.log(a,b)};//不把收集放最后一个报错!Uncaught SyntaxError: Rest parameter must be last formal parameter
+    chloe(1,2,3,4)
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数中的this对象在普通与箭头函数中有不同的行为
+    // 普通函数中,this指向调用此函数的对象;
+    window.color='red';
+    let obj={
+      color:'blue'
+    }
+    function max(){
+      console.log(this.color);
+    }
+    max()//red 函数中的this指向window
+    obj.sayColor=max;
+    obj.sayColor()//blue this指向调用函数的对象
+    
+    // 而在箭头函数中,this指向"定义箭头函数时"外界的this指向
+    let Chloe=()=>{console.log(this.color);}
+    Chloe();//red
+    obj.say=Chloe;
+    obj.say()//red!!!!
+  </script>
+</body>
+</html>
