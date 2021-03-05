@@ -7,7 +7,8 @@
 </head>
 <body>
   <script>
-    // caller是Es5在函数对象上添加的属性,它表示调用当前函数的函数!
+    // caller是Es5在函数对象上添加的属性,它只表示哪个函数调用了当前函数!
+    // caller与call,bind,apply无关系,后者只是表示绑定this指向!
     function outer(){
       inner()
     }
@@ -16,7 +17,6 @@
     }
     outer()//outer
     inner()//null
-
     // 函数既可以当做构造函数调用,也可以当做普通函数调用,Es6新增的new.target可以检测函数是否是由new关键字调用的构造函数
     // 用new 关键词调用函数时,new.target指向new调用的函数;没用new调用时为undefined
     function max(){

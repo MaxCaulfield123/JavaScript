@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Do123cument</title>
+</head>
+<body>
+  <script>
+    function max(){}//函数声明,整体提升
+    let a=function(){}//函数表达式,变量声明提升.创建一个函数并赋值给一个变量,这个函数被称作匿名函数(也被称作兰姆达函数)
+    console.log(a.name);// a
+    (function(){
+      console.log(arguments.callee.name);//未赋值给变量的匿名函数,name是空字符串
+    })()
+
+    let bool=false;
+    if(bool){//这种定义不同函数的方式有问题!不同的浏览器会不同处理!
+      // 最好的方法是用函数表达式 let chloe=function...
+      function chloe(){
+        console.log('hi');
+      }
+    }else{
+      function chloe(){
+        console.log('yo!');
+      }
+    }
+    chloe()
+  </script>
+</body>
+</html>

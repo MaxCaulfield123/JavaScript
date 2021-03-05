@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 递归就是函数调用自己
+    function max(num){
+      if(num<=1){
+        return 1
+      }else{
+        return max(num-1)//这里直接用函数名来调用自己,但是当此函数换名字后这里会报错
+      }
+    }
+    console.log(max(10));
+    // 换名字
+    let chloe=max;
+    max=null;
+    // console.log(chloe(10));//报错!
+
+    // 解决上述问题可以用变量保存一个函数声明;这样就可以换名字了!!!!
+    let rachel=function a(num){console.log(a.name);}
+    rachel()
+  </script>
+</body>
+</html>
