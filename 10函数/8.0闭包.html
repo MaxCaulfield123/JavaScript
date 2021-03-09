@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 闭包 外部函数的作用域中的变量被内部引用类型对象引用,并赋值或返回给全局
+    // 特点:1外部可以访问修改局部作用域变量 2每次外部函数调用都会创建单独的变量 
+    //所造成的外部作用域被引用无法释放也无法访问的情况叫做闭包
+    function max(a='max'){//a相当于声明局部变量
+      return function(){
+        console.log(a);
+      }
+    }
+    let chloe=max();
+    chloe();//max
+    console.log(a);//外部访问不到闭包的变量
+    // chloe()
+    // 闭包会造成内存泄漏,v8引擎会尽力回收被闭包泄漏的内存
+  </script>
+</body>
+</html>

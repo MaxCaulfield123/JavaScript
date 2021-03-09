@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function max(){
+      return chloe()
+    }
+    function chloe(){
+      return 'a'
+    }
+    // es6新定义了一个叫做尾调用优化的内存管理机制,可以优化部分递归;
+    // 尾调用函数:函数内部最后一行调用的函数
+
+    // es6之前 
+    // 读到max函数,推入内存任务栈中-
+    // 执行max 发现返回值需要计算chloe的返回值
+    // 读到chloe,推入内存任务栈,执行函数体并返回值
+    // 值返回给max函数,max函数执行完毕return出值;
+
+    // es6之后
+    // 读到max函数,推入内存任务栈,然后执行函数体,发现返回值需要计算chloe的返回值
+    // 此时发现把max扔出内存任务栈也没事,所以直接从内存任务栈中弹出max函数
+    // 读到chloe函数,执行chloe函数体,将返回值直接返回,然后将chloe弹出内存任务栈
+
+    // 前者多执行一个任务,后者少一个.更多符合尾调用优化的细节在308页
+    // 尾调用优化要满足4个条件
+    // 1代码在严格模式下执行(arguments对象会引用内存中的外函数!所以要禁用arguments对象)
+    // 2外部函数的返回值是对尾调用函数的调用(return max(必须运行!))
+    // 3尾调用函数后不能有额外代码
+    // 4尾调用函数不能引用外部函数作用域中的闭包
+  </script>
+</body>
+</html>

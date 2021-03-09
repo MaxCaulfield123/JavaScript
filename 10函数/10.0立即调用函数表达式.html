@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <script>
+    // 匿名函数自调用,简称IIFE,就是包个括号在函数外,后面接个用来调用函数的括号
+    (function max(a){
+      console.log(a);
+    })('这里是参数');
+    // IIFE形成了闭包
+    let divs=document.querySelectorAll('div');
+    for (var i=0;i<3;i++){//这里用let更好
+      divs[i].addEventListener('click',(function(a){
+        return function(){
+          console.log(a);
+        }
+      })(i))//i按值传递给a,a是局部作用域的被保护的闭包变量,所以真正到click时执行的函数(return出的函数)引用的是不同的a
+    }
+  </script>
+</body>
+</html>

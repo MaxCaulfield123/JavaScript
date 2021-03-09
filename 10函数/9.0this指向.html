@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 不同情况下引用函数可能会造成this指向不同
+    let a='waibiwaibi';
+    let obj={
+      a:'iama',
+      geta(){
+        console.log(this.a);
+      }
+    }
+    obj.geta()
+    // (obj.geta = obj.geta)();//会报错,书上写这样会导致this指向window
+  </script>
+</body>
+</html>
