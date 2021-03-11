@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // js中函数或块中的变量被称为私有变量
+    function Max(){//构造函数
+      let a=10;
+      function b(){
+        return false
+      }
+      this.publicMethod=function(){//这个属性上的方法被称为特权方法
+        a++;
+        return b();
+      }
+    }//这个构造函数的实例可以通过属性上的方法来访问,修改私有变量,每个实例的属性与方法都不共享!是实例私有的
+
+    // 静态变量就是实例间共享的变量
+    // 共享属性与方法的办法
+    (//匿名函数自调用形成闭包
+      function(){
+        let name='默认'//闭包保护变量
+        newobj=function(val){//构造函数
+          name=val;
+        };
+        newobj.prototype.getName=function(){//原型链不能访问其他对象自身的属性!
+          console.log(name);
+        };
+        newobj.prototype.setName=function(a){
+          name=a;
+        }
+      }
+    )()
+    let chloe=new newobj('chloe');
+    chloe.getName();
+    let rachel=new newobj('rachel');
+    chloe.getName();//rachel 证明共享
+
+  </script>
+</body>
+</html>

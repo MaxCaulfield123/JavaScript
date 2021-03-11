@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 之前两个文件其实都是通过闭包与构造函数的结合,创造出私有变量的概念
+    // 不用构造函数,也可以直接返回一个对象构造出私有变量与特权方法,这种模式叫做模块模式
+    // 模块模式模板代码
+    function max(){
+      let age=23;
+      function privatefun(){
+        console.log(this.age);
+      }
+      return {
+        isbool:false,
+        publicMethod(){
+          age++;
+          privatefun()
+        }
+      }//返回出的这个对象中的函数,是操作私有变量(闭包)的唯一接口
+    }
+    // 这种模式可以让我们使用单例对象管理其他信息;
+    function chloe(){
+      // 私有变量和私有函数
+      let components = new Array();
+
+      components.push(new BaseComponent());//BaseComponent表示构造一个实例
+
+      return {//返回的这个对象也可以做一些其他增强操作,更方便管理私有数组中的信息对象
+        // 返回的这个对象同样也可以是new BaseComponent()的实例
+        getComponentsCount(){
+          console.log(components.length);
+        },
+        addNewComponents(obj){
+          if(typeof obj =="object"){
+            components.push(obj)
+          }
+        }
+      }
+    }
+  </script>
+</body>
+</html>
