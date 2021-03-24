@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    setTimeout(console.log,1000,'123466')//setTimeout的一种用法
+    // 这种以往的异步操作,异步失败处理已经没人用了,因为必须在之前就定义好回调函数!
+    function double(val,success,failure){
+      setTimeout(()=>{
+        try{
+          if(typeof val !== 'number'){
+            throw 'type of params must be a number'
+          }
+          success(val)
+        }catch(e){
+          failure(e)
+        }
+      },1000)
+    }
+    function success(val){
+      console.log(val);
+      // 如果回调函数也需要运行double,情况会变得非常复杂!
+      // double(val,()=>console.log(val*2))
+    }
+    function failure(val){
+      console.log(val);
+    }
+    double('str',success,failure);
+    double(123,success,failure)
+  </script>
+</body>
+</html>

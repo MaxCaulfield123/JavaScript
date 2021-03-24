@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 早期的期约机制是在jquery与dojo中以deferred(迟付)api的形式出现,10年commonJs的promiseA流行,最终成为了se6的promise
+    // 期约promise其实就是一个有状态的对象,可以用New创建,创建时必须传入一个函数,称为执行器
+    let a=new Promise(()=>{});
+    console.log(a);//promise 对象
+    // promise对象有三个状态  1待定pending 2兑现resolved/fulfilled 3拒绝rejected  .  一个对象中1变为23后永不改变
+    // 期约promise 故意将异步代码封装起来,从而隔离外部的同步代码.外部js不能改变或访问期约状态,目的是js不以同步方式处理期约对象
+    // 期约从挂起到解决或拒绝时总会有一个值,挂起(默认返回undefined),拒绝(一个拒绝理由,可以是一个error对象)
+
+    // 期约无法被外部更改状态,所以只能在内部更改,所以执行器有几个参数
+    let b=new Promise((resolve,reject)=>{//这个期约的执行器函数是同步的
+        setTimeout(()=>{
+          resolve();
+          reject()//这里的reject会静默失败,因为只能改变一次状态
+        },3000)//这里是异步的
+
+    })
+    setTimeout(()=>{console.log(b)},4000)
+
+    // 期约promise不一定非要用执行器函数的参数转换状态,也可以直接创建一个解决的期约
+    let c=Promise.resolve(3,4,5);//解决的期约只返回一个值,其他值忽略
+    console.log(c);//promise fulfilled:3
+    console.log(c===Promise.resolve(c))//true 如果resolve传入的参数是一个promise对象,则返回这个对象自身,并保存期约对象状态
+    let d=new Promise(()=>{});
+    console.log(d===Promise.resolve(d));//true 返回的d与d相等
+
+    // promise.reject(失败理由) 失败理由不能被try/catch捕捉(try/catch能捕获throw的错误,不能捕获promise对象本身),也不能幂等(传入的promise对象也能被当做理由)
+    let e=Promise.reject(Promise.resolve(1));
+    console.log(e);//{rejected:promise}
+    try{
+      throw new Error('外币外币')
+    }catch(e){
+      //捕获得到
+    }
+    try{
+      let a=new Error('外比巴卜')
+      // throw Promise.reject(a)//能捕获到
+      // Promise.reject(a) //捕获不到
+    }catch(e){
+      console.log(e);
+    }
+  </script>
+</body>
+</html>
