@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    button{
+      width: 100px;
+      border: 1px solid red;
+      background-color: aqua;
+      color: yellowgreen;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <button id="start">开始</button>
+  <button id="cancel">取消</button>
+  <script>
+    // 1期约取消,原理为设置一个取消令牌类,类的实例可以通过外部传入的代码来随时取消promise对象
+    class CancelToken{
+      constructor(funParam){
+        this.promise=new Promise((resolve,reject)=>{
+          funParam(()=>{//把函数传参给构造函数的回调参数,此函数模拟取消期约
+            // 这个回调函数在funParam中是看情况被调用的,本例中按取消调用这个函数
+            setTimeout(console.log,0,'期约取消')
+            resolve();
+          })
+        })
+      }
+    }
+    const startButton=document.querySelector('#start')
+    const cancelButton=document.querySelector('#cancel')
+    function cancelableDelayedResolve(delay){//能取消的延迟期约
+      setTimeout(console.log,0,'期约开始');
+      return new Promise((resolve,reject)=>{
+        const id=setTimeout(() => {
+          setTimeout(console.log,0,'set delay')
+          resolve();
+        }, delay); //设置定时器模拟异步操作在一段时间后完成
+        // 新建一个类实例并且将能够停止期约的方法传入,这个函数接收的回调参数是类中写好的一定的
+        // 自身只是将取消方式附在了按钮上
+        const cancelToken=new CancelToken((params)=>cancelButton.addEventListener('click',params))
+        cancelToken.promise.then(()=>{clearTimeout(id)})//取消令牌一旦触发,就立马停止模拟
+      })
+    }
+    startButton.addEventListener('click',()=>cancelableDelayedResolve(3000))//必须用箭头函数返回,否则函数立即执行!
+    // 本例中当一个期约开始时,其中的操作会新建另一个期约来表示其状态,状态期约可以被取消按钮停止
+    // 取消原promise对象时,改变状态promise对象的状态,执行状态期约的.then()从而跳过原期约对象的resolve
+  </script>
+</body>
+</html>

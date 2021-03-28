@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 非重入reentrancy期约方法表示,在上一个文件中的函数then,catch,finally中的回调方法都会在同步任务完成后执行
+    // 官方解释当期约对象状态改变时,相关方法不会立即执行,而只是进入队列,等待同步任务完成后执行
+    let max=new Promise((resolve)=>resolve());
+    max.then(()=>{console.log('我是then后执行的函数')});
+    console.log('同步程序执行完成')//他先,上面后
+    // 而一个期约对象的then,catch,finally中都有方法时,这些方法按照顺序执行
+    max.finally(()=>{console.log('我在then后添加,在then后执行')})
+  </script>
+</body>
+</html>

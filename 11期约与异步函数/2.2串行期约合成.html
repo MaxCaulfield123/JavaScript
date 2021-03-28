@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 期约对象产生值传递给其他程序,后续promise对象使用之前promise对象传递的值
+    let max=Promise.resolve('max');
+    function re(val){
+      console.log(val)
+      return val;//注意必须有返回值后续才能接到!
+    }
+    max.then(re).then(re).then(re)//max*3
+
+    // 这里如果觉得链式操作繁琐,可以将promise对象放入数组中,用arr.reduce来操作
+    function addx1(val){
+      return val+1;
+    }
+    function addx2(val){
+      return val+2;
+    }
+    function addx3(val){
+      return val+3;
+    }
+    let arr=[addx1,addx2,addx3];
+    let A=arr.reduce((promise,fn)=>{
+      return promise.then(fn)//fn为数组中的每个函数
+    },Promise.resolve(1))
+    console.log(A);//promise 7
+
+    // 定义一个函数,接受回调函数参数,利用...收集来将函数放入数组调用;
+    let chloe=function(...arrs){
+      return (x)=>{
+        return arrs.reduce((promise,fn)=>{
+          return promise.then(fn)
+        },Promise.resolve(x))
+      }
+    }
+    let chloeRet=chloe(addx1,addx2,addx3);
+    console.log(chloeRet(8))//8+6=14 pending
+  </script>
+</body>
+</html>

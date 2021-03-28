@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 解决值的传递在promise对象创建时执行函数的回调函数中以参数传递
+    let max=new Promise((resolve,reject)=>{
+      resolve('foo')//reject同理
+    })
+    max.then((value)=>{
+      console.log('.then中接受到了resolve传递的值'+value)
+    })
+    // 除了try/catch与promise执行器中,throw后的代码不会执行
+    // 而promise中的throw则会被捕获成reject处理
+    // 这三种都是抛出错误给then或catch的方法
+    let chloe=new Promise((resolve,reject)=>{throw Error('出错啦')})
+    let chloe2=new Promise((resolve,reject)=>{reject(Error('出错啦'))})
+    let chloe3=Promise.reject(Error('出错啦'));
+    chloe.then(null,(val)=>{
+      console.log(val)//抛出错误的捕捉
+    })
+  </script>
+</body>
+</html>

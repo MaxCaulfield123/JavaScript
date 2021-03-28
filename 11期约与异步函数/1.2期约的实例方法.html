@@ -29,7 +29,7 @@
     // 如果then没有参数,则这个实例会使用上一个实例
     let b=new Promise((resolve,reject)=>{resolve('foo')});
     console.log(b,b.then());//这样打印出来的是pending?因为执行器函数中的内容被异步执行了?
-
+    setTimeout(()=>{console.log(b.then())},1000)
     let p1=Promise.resolve('bar');
     let p2=p1.then();
     setTimeout(console.log,0,p2)//这样打印就能正确打印
@@ -39,8 +39,21 @@
     max.then(null,function(){console.log('reject啦!');});
     max.catch(()=>{console.log('reject')})
     
-    // Promise.prototype.finally()是只要promise对象状态改变就会触发的函数,在这个函数中可以写上述ifResolve与ifReject中重复的代码
-    
+    // Promise.prototype.finally()接受一个回调函数,是只要promise对象状态改变就会触发的函数,在这个函数中可以写上述ifResolve与ifReject中重复的代码
+    let chloe=Promise.resolve('finaResolve');
+    let finaReturn=chloe.finally(()=>{//finally也会创建一个新的promise对象,为执行finally函数的期约对象的传递
+      setTimeout(console.log,0,'此处是只要期约对象转变状态就执行的程序')
+    })
+    setTimeout(console.log,0,finaReturn)
+    // finally返回的期约只在当回调函数返回pending与reject期约对象时才被影响
+    let secFR=chloe.finally(()=>new Promise(()=>{}));
+    setTimeout(console.log,0,secFR)//pending undefined
+    // 而其中当返回的pending期约对象发生改变时,finally返回的对象也会发生改变;
+    let thirdFR=chloe.finally(()=>new Promise((resolve,reject)=>{setTimeout(()=>resolve('thirdResolve'),100)}))
+    // 以上这个函数初始返回一个Pending状态的promise对象,100ms之后返回的thirdResolve会影响到finally返回的对象!
+    setTimeout(console.log,0,thirdFR);//返回继承了chloe的期约对象,但仍是pending(为啥啊?)
+    setTimeout(console.log,200,thirdFR);//被影响改变成了fulfilled(也就是resolve)
+
   </script>
 </body>
 </html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //   A
+    //  / \
+    // B   C利用期约特性可以让以上节点对象顺序出现
+    let A=new Promise((resolve)=>{resolve()})
+    let B=A.then(()=>{console.log('B出现');})
+    let C=A.then(()=>{console.log('C出现');})
+
+    // promise.all()方法接受一个可迭代对象,返回一个新promise对象,当对象中的期约对象全部改变状态后,返回的期约对象的.then开始执行
+    let max=Promise.all([
+      Promise.resolve('resolve'),
+      // 如果有拒绝reject出现,则不执行then中的onSuccess(第一个参数)方法
+      new Promise((resolve,reject)=>{setTimeout(() => {//如果有多个reject拒绝,则all会只将第一个作为失败理由返回
+        reject('reject')
+      }, 1000);})
+    ]);
+    max.then((val)=>{console.log('执行完成',val);},
+    (val)=>{console.log('失败时只接受第一个错误'+val)})
+
+    // promise.race()方法接受一个可迭代对象,返回一个新promise对象,当可迭代对象中有一个解决后,返回promise对象
+    let chloe=Promise.race([//解决先发生,后续拒绝被忽略,拒绝先发生,解决被忽略
+      Promise.resolve('foo'),//必然返回foo,只有期约对象按迭代顺序返回
+      Promise.resolve('bar'),
+      new Promise((resolve,reject)=>{setTimeout(reject, 1000);})
+    ])
+    chloe.then((val)=>{
+      console.log(val)//foo只要有一个完成就执行!后续的reject不影响
+    })
+    setTimeout(() => {
+      console.log(chloe.then())//后续的reject不影响chloe这个promise对象的状态
+    }, 2000);
+  </script>
+</body>
+</html>

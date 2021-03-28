@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 因为期约对象的.then()返回一个新的期约对象,所以可以链式操作使不同的异步函数顺序执行;
+    let max=new Promise((resolve)=>{resolve('foo')});
+    max.then((val)=>{
+      setTimeout(console.log,500,val+'1')
+    }).then((val)=>{
+      setTimeout(console.log,500,val+'2')//下面俩都是Undefined
+    }).then((val)=>{
+      setTimeout(console.log,500,val+'3')
+    })//这样就可以解决之前异步操作顺序执行必须传递函数参数的地狱回调问题
+    setTimeout(() => {//注意第一个val在执行器中使用后,必须return新值,后面的then才能接住传递的值
+      console.log(max.then((val)=>{return Promise.resolve(val)}).then((val)=>{
+        console.log('我是获取的二次值'+val);
+      }))
+    }, 1000);
+  </script>
+</body>
+</html>

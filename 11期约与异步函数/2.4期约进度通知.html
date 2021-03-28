@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    "use strict"
+    // 为了实现promise对象进程可以追踪,为其添加Notify方法
+    class TrackablePromise extends Promise{
+      constructor(executor){
+        const notifyHandlers=[];//声明数组
+        super((resolve,reject)=>{//等于new Promise
+          let fun=(status)=>{
+            notifyHandlers.map((handler)=>handler(status))//第三个回调函数将notifyHandlers中的函数都传入status并运行
+          }
+          return executor(resolve,reject,fun)
+        })
+        this.notifyHandlers=notifyHandlers
+      }
+      notify(notifyinfo){
+        this.notifyHandlers.push(notifyinfo);//将打印函数推入实例属性上的数组中
+        return this;
+      }
+    }
+    let p=new TrackablePromise((resolve,reject,noti)=>{//传入预先设定好的执行器函数
+      function countdown(x){//声明一个记录函数
+        if(x>0){
+          noti(`${20 * x} 剩余`)
+          setTimeout(()=>countdown(x-1),1000)//如果x还大于0就继续执行本身
+        }else{
+          resolve()//不大于0则改变promise对象的状态
+        }
+      };
+      countdown(6)//运行记录函数
+    })
+    p.notify((x)=>setTimeout(console.log,0,'进程',x));
+    p.then(()=>setTimeout(console.log,0,'完成'))
+  </script>
+</body>
+</html>
