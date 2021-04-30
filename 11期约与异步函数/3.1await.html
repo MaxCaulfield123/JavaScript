@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // await关键字可以暂停函数的运行,并在某一时刻再恢复运行,它后面的代码是异步的,其必须出现在异步函数的定义中(async关键字只是让函数有异步定义!本身是同步的!)
+    // await 后面的值会自动被包装成有thenable接口的对象(也可以手动包装)
+
+    // await 的作用:1暂停执行,将后面的表达式放在异步进程中,待返回值后再执行当前async声明的函数下方代码 
+    // 2await 再接收到返回值后,如果是实现了thenable(有then方法)的对象,则await会解包(也就是将期约值返回出来)
+
+    // 所以 await 值 应该把它单独当做一个值来看待,特殊之处在于await暂停了当前函数
+    //async声明的函数单独返回undefined或其他值的Promise对象,await解包Promise对象,二者是不同的东西
+    // 但是当await解包reject状态的期约对象时,这个对象值会替代外部async自身返回的期约对象值
+    let max = async function () {
+      console.log(1);
+      console.log(await 3);//这里是异步的
+      // await Promise.resolve(3);
+      // return 'aaaaaaaa'
+      console.log(4);
+    };
+    max().then(console.log);
+    console.log(2);//1 2 3 4
+
+    let chloe = async function () {
+      console.log('a');
+      // return Promise.reject('dddd')
+      await Promise.reject('c')//交由
+      console.log('d');//await返回拒绝的promise对象后
+    }
+    chloe().catch(console.log);
+    console.log('b');
+  </script>
+</body>
+
+</html>

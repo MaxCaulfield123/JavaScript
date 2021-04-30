@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // window.screen记录了一系列设备屏幕信息
+
+    // window.history记录了当前窗口首次使用以来用户的导航记录,它不会暴露用户访问过的url
+    console.log(history);
+    history.go(-1)//后退一页
+    history.go(0)//刷新
+    history.go(2)//前进两页
+    history.forward();
+    history.back();//前进后退
+    
+    // history.pushState()与history.replaceState()也是跳转不过不会刷新网页,单页面应用居多,注意跳转的url必须在服务器上有
+  </script>
+</body>
+</html>

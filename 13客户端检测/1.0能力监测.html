@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 能力监测就是检查对象中是否有属性且属性是否能达到相应的效果
+    // 能力监测应该集中检测而不是什么时候用什么时候检测
+    if(typeof Object.sort){//注意使用typeof,如果Object.sort是一个普通对象而不是函数,则不能达到我们想要的相应效果
+      let arr=[];
+      arr.sort((a,b)=>a-b)
+    }else{
+
+    }
+    // 检测是否支持netScape式的插件
+    let ifNsPlugins=!!(navigator.plugins&&navigator.length);
+
+    // 能力监测可以根据特定对象是否有属性值来检测是哪种浏览器
+    class BrowserDetector{
+      constructor(){
+        this.idEdge_Gte_20=!!window.StyleMedia;//是否是edge20版本以上
+        this.isFirefox_Gte1=typeof InstallTrigger !=='undefined';//是否是firefox
+      }
+    }
+    console.log(new BrowserDetector);
+    // 注意能力检测浏览器要挑选只有一种浏览器实现的api进行判断,否侧不够准确,假设太多
+  </script>
+</body>
+</html>

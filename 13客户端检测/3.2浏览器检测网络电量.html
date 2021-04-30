@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 检测是否联网以及联网断网事件
+    const connectState=()=>console.log(navigator.onLine);
+    window.addEventListener('online',connectState)
+    window.addEventListener('offline',connectState);
+    window.addEventListener('change',connectState)
+    console.log(navigator.onLine);
+    // 关于连接网络的信息
+    console.log(navigator.connection);//带宽downlink effectiveTyoe连接速度和质量 
+    //onchange网络连接状态是否在改变 rtt网络往返时间 saveData 是否启用节流模式
+
+    // 浏览器还可以访问设备电池及充电状态的信息
+    navigator.getBattery().then((b) => {//navigator.getBattery()返回期约对象
+      console.log(b);
+      // 可以直接在b对象上添加充电事件
+      b.onchargingchange=function(){}
+    }).catch((err) => {
+      
+    });
+
+    // navigator.hardwareConcurrency返回浏览器最大工作线程数
+    console.log(navigator.hardwareConcurrency);//4
+    console.log(navigator.maxTouchPoints);//0最大触电数
+    console.log(navigator.deviceMemory);//8 设备内存
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 如下获取位置,包含经纬度,精确范围,移动速度,海拔等,浏览器会收集所有可用的无线网络包括wifi等的Ip来查询你的位置
+
+    let p=navigator.geolocation.getCurrentPosition((position)=>position,
+    (e)=>{//第二个参数失败时执行的方法
+      console.log(e);
+    },{//第三个参数是配置对象
+      enableHighAccuracy:true,//表示查询是否精确,或者使用最省电省时的方式,默认false
+      timeout:100,//表示失败回调函数(第二个参数)再接收到TIMEOUT失败码后多久调用
+      maximumAge:100//表示间隔多少毫秒的请求不取缓存,而是向服务器获取,0为每次都向服务器获取
+    });
+    console.log(p);
+  </script>
+</body>
+</html>

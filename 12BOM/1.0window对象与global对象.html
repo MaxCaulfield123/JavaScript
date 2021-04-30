@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>点击位移</button>
+  <button>点击相对自身位移</button>
+  <script>
+    // BOM提供了与网页文档无关的,浏览器的功能对象,其核心是window对象,
+    //window对象(浏览器实例),它即作为ECMAScript运行时的Global对象,也作为浏览器窗口的js接口
+
+    // script运行时需要global对象作为最上级作用域,浏览器中window对象被当做global了!
+
+    // 注意使用let或const声明的变量不会被放入全局对象中
+    let a=123;
+    console.log(window.a);//undefined;
+    // let b=c;//报错c未声明,不能用这种方式验证c是否存在
+    let b=window.c//如果c不存在,b=undefined
+
+    // 窗口位置
+    // 位移 窗口对象.moveTo(x,y)移动到相对屏幕左上角的位置的距离,moveBy移动相对浏览器窗口原位置的距离
+    // 注意必须获取窗口对象
+    /**
+     * 不能设置那些当前浏览器窗口 的大小。
+        当一个窗口里面含有一个以上的 Tab 时，无法设置窗口的大小。
+     * 
+     * /@author zjs
+    let btn=document.getElementsByTagName('button')[0];
+    btn.onclick=function(){
+      let windowA=window.open('','','width=200,height=100');
+      windowA.moveTo(10,110)
+    };
+    let btn1=document.getElementsByTagName('button')[1];
+    btn1.onclick=function(){
+      let windowA=window.open('','','width=200,height=100');
+      windowA.moveBy(100,100)
+    };
+
+    // 像素比
+    // 物理像素(设备的一个一个小亮点) css像素(浏览器自己弄得虚拟像素) 浏览器把多少个物理像素当做一个css像素可以由以下api查看
+    console.log(window.devicePixelRatio);//不同设备不同比值!
+  </script>
+</body>
+</html>

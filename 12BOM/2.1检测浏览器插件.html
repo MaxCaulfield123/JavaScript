@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 浏览器插件 navigator.plugins
+    console.log(navigator.plugins);
+    function checkPlugins(name){
+      name=name.toLowerCase();
+      for(let plugin of navigator.plugins){
+        plugin=plugin.name.toLowerCase();
+        if(plugin.indexOf(name)!==-1){
+          return true
+        }
+      }
+      return false;
+    }
+    console.log(checkPlugins('flash'));//false
+    // 上述可以检测新版浏览器插件,旧版插件都是com做的,需要知道com标识符;用new ActiveXObject(名称)来验证是否有com标识符
+  </script>
+</body>
+</html>

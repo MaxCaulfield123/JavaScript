@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 平行执行，顺序接收。
+    let randomDelay = async function (id) {//用契约对象与random模拟出不同时间改变状态的对象
+      let time = Math.random() * 1000
+      return new Promise((resolve) => {
+        return setTimeout(() => {
+          console.log(id + ' finished');
+          resolve(id)
+        }, time);
+      })
+    };
+    async function max() {
+      let a1=randomDelay(1)
+      let a2=randomDelay(2)
+      let a3=randomDelay(3)
+      let a4=randomDelay(4)
+      let a5=randomDelay(5);
+
+      console.log(`'a1'+${await a1}`);;
+      console.log(`'a2'+${await a2}`);;
+      console.log(`'a3'+${await a3}`);;
+      console.log(`'a4'+${await a4}`);;
+      console.log(`'a5'+${await a5}`);;
+    }
+    max();//平行执行多个函数,利用await的暂停来顺序接收值
+  </script>
+</body>
+
+</html>

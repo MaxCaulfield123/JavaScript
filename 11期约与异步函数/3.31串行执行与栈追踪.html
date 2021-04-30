@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 在用期约对象来串行不同函数并将返回值交由下一个函数执行时,需要用一大堆.then()
+    // 而await不用;
+    function add1(x) { return x + 3 }
+    function add2(x) { return x + 1 }
+    function add3(x) { return x + 2 }
+    async function add(x) {
+      for (let fn of [add1, add2, add3]) {
+        x = await fn(x);
+        console.log(x);
+      }
+    }
+    add(1)//4 5 7
+  </script>
+</body>
+
+</html>

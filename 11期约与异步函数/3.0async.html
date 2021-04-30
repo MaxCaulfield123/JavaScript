@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 传统的promise返回的值,需要在.then(函数)的处理程序中来接收,es8为此提供了async/await关键字
+    // async可以放在函数声明,表达式,箭头,与方法的函数名称前
+
+    // async关键字的作用
+    // 1async关键字只是让函数有异步定义!函数本身是同步的主程序!
+    // 2async关键字的函数必然返回一个契约对象!
+    let obj={
+      async asyncFun(){//async后的这个函数是同步的!!!!!!
+        console.log(1)
+      }
+    }
+    let a=async ()=>{};
+    obj.asyncFun()
+    console.log(2);//1 2
+    // 如果异步函数返回了值,则这个值会被resolve包装成promise对象;
+    let max=async function(){
+      return 33;
+      // return Promise.resolve(33)也一样
+    }
+    max().then((a)=>{
+      console.log(a);
+    })//33 等于下方
+    max().then(console.log)//33
+    
+    // 异步函数的返回值不仅可以被自动包装成有then方法的期约对象,也可以由程序员自己创建一个有then方法的对象返回
+    let chloe=async function(){
+      let thenable={
+        then(callback){//其实自动包装的期约对象中的then就是类似这样的
+          callback('我是自己创建的')
+        }
+      }
+      return thenable;//可以自己创建thenable对象然后被包装,直接return ['abc'] 也会被包装成promise对象
+    }
+    chloe().then(console.log)//我是自己创建的
+    console.log(chloe().then());//Promise对象
+
+    // async中如果用throw来抛出值,或者return Promise.reject()则可以用catch来捕获值
+    let rachel=async function(){
+      // throw 4
+      return Promise.reject(4)
+    }
+    rachel().catch(console.log)//4
+  </script>
+</body>
+</html>

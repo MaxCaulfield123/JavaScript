@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="window.open('www.baidu.com','_blank','left=100,height=300,width=100')">111</button>
+  <script>
+    // window.open(Url,窗口名称,特性字符串,是否替换历史记录当前条目)
+    // 窗口名称意为打开的窗口网页的名称,如果已经有一个同名窗口,则在这个窗口打开URl,否则打开URl并命名为参数
+    // 特性字符串表示窗口大小位置,是否最大,是否显示菜单栏和地址等信息,打开的不是新窗口会忽视这个参数,如果没有此参数则为默认值
+
+    // window.open()返回新窗口对象,此对象与普通window对象没区别,但是可以应用resizeTo(),moveTo()等函数
+    // 如果弹窗被其他应用或浏览器插件屏蔽,则会报错,可以在js中用try/catch来检测
+    try {
+      let w = window.open('www.baidu.com', '_blank', 'left=100,height=300,width=100');//加上第三个参数以阻止默认当前浏览器打开
+      if (w !== null) {//如果弹窗被浏览器屏蔽,w会是null
+      w.resizeTo(200, 200);
+      w.moveTo(500, 1000)
+      // 窗口对象.close()关闭窗口,只能关新打开的浏览器窗口
+      setTimeout(() => {
+        w.close()
+        console.log(w.closed);//true是否已关闭
+        console.log(w.opener === window);//新窗口对原有窗口的指针,反之没有
+        w.opener = null;//使新窗口完全运行在浏览器独立的线程中(双方无法通信)
+      }, 3000);
+    }
+    } catch (error) {
+      if(error){alert('新窗口被屏蔽啦')};
+    }
+    
+  </script>
+</body>
+
+</html>

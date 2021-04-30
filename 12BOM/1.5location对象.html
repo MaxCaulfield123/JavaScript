@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- location.assign(url)和.href一样可以跳转网页 -->
+  <button onclick="location.assign('https://www.baidu.com')">点击跳转</button>
+  <script>
+    // location对象记录了当前窗口中加载文档的信息,以及通常的导航功能
+    console.log(window.location===document.location);//true 指向同一个对象
+    console.log(location.href===location.toString());//true
+
+    // 可以用URLSearchParams对象来get(),set(),delete()查询字符串,这个对象可遍历
+    let str='?loginName=dingding&password=123456';
+    let qs=new URLSearchParams(str);
+    console.log(qs.toString());//loginName=dingding&password=123456
+    console.log(qs.get('loginName'));//dingding
+    for(let i of qs){
+      console.log(i);//[loginName,dingding] ["password", "123456"]
+    }
+
+    // 给location.hash赋值时会添加历史记录但不会加载新url,其他的会重新加载url
+    location.replace('www.baidu.com')//不添加历史记录的跳转页面,跳转后不能回退
+    // location.reload()//重新加载网页,可能是在缓存中,其后的代码可能执行所以最好在最后一行
+    // location.reload(true)//从服务器重新拉取网页
+  </script>
+</body>
+</html>

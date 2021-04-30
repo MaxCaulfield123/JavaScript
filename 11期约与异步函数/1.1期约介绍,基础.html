@@ -10,6 +10,7 @@
   <script>
     // 早期的期约机制是在jquery与dojo中以deferred(迟付)api的形式出现,10年commonJs的promiseA流行,最终成为了se6的promise
     // 期约promise其实就是一个有状态的对象,可以用New创建,创建时必须传入一个函数,称为执行器
+    // promise构造函数与其执行器是同步执行的，then方法本身是同步执行，then方法中的内容加入微任务异步执行
     let a=new Promise(()=>{});
     console.log(a);//promise 对象
     // promise对象有三个状态  1待定pending 2兑现resolved/fulfilled 3拒绝rejected  .  一个对象中1变为23后永不改变

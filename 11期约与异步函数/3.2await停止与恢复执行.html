@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在以下三个函数的运行中，暗含了await导致的异步执行顺序
+    async function foo(){
+      console.log(await Promise.resolve('foo'));
+    }
+    async function bar(){
+      console.log(await 'bar');
+    }
+    async function max(){
+      console.log('max');
+    }
+    foo();
+    bar();
+    max();//max bar foo
+    
+    // 下面的例子很好的解释了再有await时的运行顺序
+    async function lizi(){
+      console.log(2);
+      console.log(await 4);//await关键字暂停执行，为立即可用的值Null向消息队列中添加一个任务，主进程结束后会执行消息队列中的任务
+      console.log(5);
+    }
+    console.log(1);
+    lizi();
+    console.log(3);
+  </script>
+</body>
+</html>
