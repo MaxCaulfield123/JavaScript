@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="abc" id="max" lang="zh-CN" title="外币外币" data-one-selfDefinition-data=2>123</div>
+  <script>
+    // Element类型表示Html或Xml暴露出的元素标签名,子节点和属性
+    let div=document.getElementById('max');
+    console.log(div.id,div.title,div.className,div.tagName);//注意tagName在HTMl上会只返回大写的
+    div.className='chloe';
+    console.log(div.className);
+
+    // 元素.getAttribute() 元素.setAttribute() 元素.removeAttribute() 用来对属性进行修改,可以查取自定义属性
+    console.log(div.getAttribute('class'));//chloe
+    console.log(div.getAttribute('data-one-selfDefinition-data'));//2
+    // 实际开发中,getAttribute()等多用于获取自定义属性,而其他属性多是通过 DOM对象.属性访问
+    console.log(div.className);
+
+    // Element类型有个属性叫做attributes 可以通过它来添加,查找,删除属性
+    console.log(div.attributes.getNamedItem('id'));
+    // div.attributes.getNamedItem('id').nodeValue/.nodeName代表值/属性
+    // div.attributes.removeNamedItem(属性名)  div.attributes.setNamedItem(节点)
+
+    // 添加节点 xxx.appendChild() xxx.insertBefore() xxx.replaceChild()
+  </script>
+</body>
+</html>

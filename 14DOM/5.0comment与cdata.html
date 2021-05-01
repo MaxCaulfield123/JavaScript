@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div><!-- 1asdfas11 --></div>
+  <script>
+    // comment也就是注释,拥有和text除了splitText外所有的操作文字方法,html标签外的注释访问不到;
+    let a=document.getElementsByTagName('div')[0].firstChild//注意空格会使firstChild改变
+    console.log(a.data);//访问注释节点的data属性
+    // document.createComment() 
+
+    // 在XML中的CDATA区块中,可以在xml中用document.createCDataSection()创建
+  </script>
+</body>
+</html>

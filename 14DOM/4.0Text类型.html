@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="a">123</div>
+  <script>
+    let a=document.getElementById('a').firstChild;//注意获取的是div对象下的文本节点!
+    console.log(a.data,a.nodeValue);
+    // 文字节点.appendData(),xxx.deleteData(),xxx.insertData(),xxx.replaceData(),xxx.splitText(),xxx.substringData()
+    // 可以用以上方式增删改查,分割提取文字节点的文字
+    a.appendData('<strong>abc</strong>') 
+    // 可以用document.createTextNode('asd')创建文本节点;
+    let text=document.createTextNode('外比巴卜');
+    document.body.appendChild(text)
+    // 父元素.normalize()合并相邻文字节点, 蚊子节点.splitText(位置)拆分文字节点
+  </script>
+</body>
+</html>

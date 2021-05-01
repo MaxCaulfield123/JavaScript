@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // document类型是文档中表示节点的类型
+    console.log(document.documentElement);
+    console.log(document.body);
+    console.log(document.doctype);
+    console.log(document.title='waaw');//标题,可更改
+
+    console.log(document.URL);//当前网页的URL
+    console.log(document.domain);//域名,可以删除一部分域名以达到不同域名共同使用js对象通信,但不能添加
+    // 例如www.w3c.com 与p2p.w3c.com 同时删除www p2p可以通信,但之后不能添加回来
+    console.log(document.referer);//打开当前网页的来源URL
+
+    // document.getElementById() document.getElementsByTagName('asd')
+    // ByTagName这个方法返回HTMLCollection类数组对象,与NodeList对象相似,可用[1],.item(1)获取其中的元素,不区分大小写
+    // HTMLCollection对象还有namedItem('name值')方法,通过标签的name属性来获取一项元素
+    // HTMLCollection对象的中括号传入数字则后台调用item(数子),传入字符串则调用namedItem(字符串作为name值)
+    // document.getElementsByName().document对象还包含其他集合
+
+    // document.implementation对象提供了DOM相关的信息与能力
+    console.log(document.implementation);
+    // document.implementation.hasFeature('特性',版本)方法用于检测浏览器是否实现相关方法;
+
+    document.write('外币外币')
+    document.writeln('外币外币,....../n')
+    // window.onload=()=>{//系统加载完成后加会覆盖页面
+      document.write("<script src='1.js'><\/script>")
+    // }
+  </script>
+</body>
+</html>
