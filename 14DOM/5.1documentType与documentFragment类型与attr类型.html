@@ -1,0 +1,32 @@
+<!DOCTYPE 这里>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    a{
+      margin:right;
+    }
+  </style>
+</head>
+<body>
+  <a id="a" href="">111</a>
+  <script>
+    console.log(document.doctype);//打印出声明的文档类型
+    // documentFragment类型可以暂存其他节点元素,再放入html文档中,但自身不会被添加到文档树中
+    let frag=document.createDocumentFragment();
+    frag.appendChild(document.createElement('a'));
+    document.body.appendChild(frag)
+
+    // 除了直接使用getAttribute(),setAttribute(),removeAttribute()直接操作节点属性外
+    // 还可以将属性当做节点访问修改
+    let a=document.getElementById('a');
+    let attr=document.createAttribute('color');
+    attr.value="green";
+    a.setAttributeNode(attr);
+    alert(a.style.color)//undefined 因为属性是直接放到标签上了,控制台的html里显示
+  </script>
+</body>
+</html>

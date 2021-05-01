@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>111111111s</div>
+  <script>
+    // 文档的样式也可以通过js动态添加
+    function getCss(url,css){
+      let style=document.createElement('style');
+      style.href=url;
+      style.type='text/css';
+      style.rel='stylesheet';//设置标签属性
+      try{//标签添加样式
+        style.appendChild(document.createTextNode(css))
+      }catch(e){
+        style.styleSheet.cssText=css
+      };
+      document.head.appendChild(style)//添加标签到文档中
+    }
+    getCss('css1.css',"div{color:red}")
+  </script>
+</body>
+</html>

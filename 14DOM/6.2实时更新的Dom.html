@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div></div>
+  <script>
+    // nodeList HTMLCollection NamedNodeMap这三个集合都是实时更新的
+    let divs=document.getElementsByTagName('div')//这个集合叫做NodeList,是实时的
+    // for(let i=0;i<divs.length;i++){//这个函数会无限循环,因为每次与length的对照都会少1(实时变化的divs.length)
+    //   let div=document.createElement('div');
+    //   document.body.appendChild(div)
+    //   console.log(i);
+    // } 
+
+    // 想要解决无限循环可以将divs.length保存在不会轮询的循环声明中
+    for(let i=0,len=divs.length;i<len;i++){
+      let div=document.createElement('div');
+      document.body.appendChild(div)
+      console.log(i);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src=2.js></script>
+  <script>
+    // 引入js脚本还可以用Js引
+    let scp=document.createElement('script')
+    scp.src='3.js';
+    document.body.appendChild(scp)
+    // 为外部js文件添加代码
+    let code="function max(){alert('hi Max')}"
+    scp.text=code;//添加到text属性上
+    // 或者是
+    scp.appendChild(document.createTextNode(code))//将代码作为文字节点添加到script标签中
+  </script>
+</body>
+</html>
