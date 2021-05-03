@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="abc">
+    <div></div>
+    <div></div>
+  </div>
+  <script>
+    let div=document.getElementById('abc');
+    console.log(div.children);//元素.children 表示当前元素所有子元素节点
+
+    console.log(document.body.contains(div));//true 元素.contains(元素)判断是不是后代
+    // 元素.compareDocumentPosition(元素)也可以根据返回码进行判断
+    // 0x1 不在文档中 0x2 参数节点在参考节点前 0x4 0x8 0x10
+  </script>
+</body>
+</html>

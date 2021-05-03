@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>11111</div>
+  <a href="">外币外币</a>
+  <script>
+    // MutationObserver观测对象可以随时取消回调函数调用,也可以一个对象复用在多个节点上
+    let observer=new MutationObserver((mr)=>{console.log(mr);});
+    let div=document.getElementsByTagName('div')[0];
+    let a=document.getElementsByTagName('a')[0];
+    observer.observe(div,{attributes:true});
+    observer.observe(a,{attributes:true});
+    div.style.color='red';//此时观察回调不会触发!
+    observer.disconnect();//取消本进程mutation的回调函数! 不论是上面的还是下面的,可以把它放到异步中,使主程序触发回调后取消异步触发的回调
+    div.setAttribute('align','right')
+    div.style.fontSize='30px'
+    a.style.color='green'//都不会触发!
+  </script>
+</body>
+</html>

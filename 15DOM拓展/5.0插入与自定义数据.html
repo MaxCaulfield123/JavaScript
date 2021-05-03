@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div data-my-name='123' id="abc">
+    <div>
+
+    </div>
+  </div>
+  <script>
+    let div=document.getElementById('abc');
+    console.log(div.dataset.myName);//可以将数据已data-开头放在dom元素上,访问时用dataset.xxx无视data-访问,注意驼峰转换
+
+    let divSon=div.firstElementChild;
+    divSon.innerHTML="外币<b>外币</b>"//innerHTMl会解析字符串中的标签;
+    console.log(divSon.innerHTML);//innerHTML返回这个元素下的所有节点,包括文本和注释
+    // 旧的浏览器中(ie与ie8之前),如果直接为innerHTML设置<script>,<style>开头的非受控元素,则会被默认删除字符串内容
+    // 所以要在前面加上_,空div,hidden的input这些受控元素防止字符串被整个删除
+
+    // outerHTML返回包括这个节点本身,以及其所有后代的html字符串
+    console.log(div.outerHTML);//为outerHTML设置字符串会替换这个元素自身.
+    
+    // Element.insertAdjacentHTML(位置,字符串)与insertAdjacentText()也是插入标签,接收两个参数;
+    // beforebegin afterbegin beforeend afterend
+  </script>
+</body>
+</html>

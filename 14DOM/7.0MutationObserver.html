@@ -24,7 +24,7 @@
     // new MutationObserver()类型的回调函数参数第一个为MutationRecord,用于记录发生了什么变化
     
     let observer1=new MutationObserver((MutationRecord,Mtobr)=>{
-      // 第一个参数MutationRecord是一个数组,改变时间为先后顺序
+      // 第一个参数MutationRecord是一个记录改变对象的数组,改变时间为先后顺序
       // 第二个参数是MutationObserver实例自身
       console.log(MutationRecord,Mtobr);
     });

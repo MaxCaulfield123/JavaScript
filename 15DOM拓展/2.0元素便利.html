@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="qwe">
+    111
+    <div></div>
+    <div></div>
+    <div></div>
+    <!-- aa111a -->
+  </div>
+  <script>
+    // 旧的dom属性无法分辨是否是元素节点,需要我们自己用nodeType判断
+    let div=document.getElementById('qwe');
+    console.log(div.firstChild,div.lastChild);//一个文字节点,一个换行/n
+    // w3c新弄了个ElementTraversal 为dom添加了新的属性,使选择节点变为选择元素节点
+    console.log(div.firstElementChild);
+    // 有如下属性
+    //childElementCount firstElementChild lastElementChild previousElementSibling nextElementSibling
+  </script>
+</body>
+</html>

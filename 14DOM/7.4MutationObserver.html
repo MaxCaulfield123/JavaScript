@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** 每个MutationObserver对象都有唯一一个记录队列!
+    * 每个MutationRecord记录的dom变化信息先是被添加到mr中,然后mr被添加进记录队列!
+    * 当目前所有微任务都执行完毕,才会将MutationObserver的回调函数放入微任务中执行(为了保证不会执行两次回调),这个过程中
+    * 可能产生别的dom变化,所以才用mr暂时记录当前变化,微任务执行完成开始执行回调函数微任务时
+    * 才将mr给回调函数执行!
+    **/ 
+  //  observer.takeRecords()可以将记录队列清空并取出信息!
+  let observer=new MutationObserver((mr)=>{console.log(mr);});//这个回调是在微任务中执行的
+  observer.observe(document.body,{attributes:true});
+  document.body.className='foo'
+  document.body.className='baz';
+  console.log(observer.takeRecords());//[mr,mr] 因为回调在微任务中执行,所以主进程可以截取!
+  console.log(observer.takeRecords());//[]
+  // 在通过disconnect()断掉回调函数后,又想操作没来得及执行回调的,记录队列中的dom变化时可以用takeRecords
+
+  // MutationObserver与dom间是非对称引用,mo对dom是弱引用,dom对mo是强引用
+  // 所以mo对象不会影响dom对象的回收,dom对象被回收则mo对象也被回收
+
+  // 回调参数MutationRecords也会对dom节点产生引用,记录队列与回调函数会耗尽mr对象,使其被回收
+  // 如果回调函数中对mr引用则会造成内存泄漏,应该把mr中的数据放入别的对象中,使js内存尽快释放
+  </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="abc">
+    <div>item1</div>
+    <div>item2</div>
+  </div>
+  <script>
+    let div=document.getElementsByClassName('abc')[0];
+    console.log(div.innerText);//item1 item2 
+    // innerText会返回所有后代的文字节点的拼接,设置时会将标签等转为纯文字,outerText同理只是包含元素自身
+    div.firstElementChild.innerText='<b>111111</b>'
+  </script>
+</body>
+</html>

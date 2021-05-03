@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>1</button>
+  <script>
+    // 可以用document.activeElement来获取焦点元素
+    // activeElement在页面刚加载完之前是null,加载完之后默认是document.body
+    let btn=document.getElementsByTagName('button')[0];
+    btn.focus();
+    console.log(document.activeElement===btn);//true
+    console.log(document.hasFocus());//true dcu.hanFocus()返回文档是否有焦点
+
+    // document.compatMode 返回浏览器渲染方式 standrads mode标准模式与quirks mode 怪异模式
+    console.log(document.compatMode);//css1compat
+
+    // document.readyState 返回字符串complete 或 loading 表示文档是否加载完毕
+    console.log(document.readyState);//complete
+
+    // document.characterSet返回文档的字符集
+    console.log(document.characterSet);//UTF-8
+  </script>
+</body>
+</html>

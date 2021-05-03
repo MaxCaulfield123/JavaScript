@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="abc" class="divs ">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <script>
+    // H5添加了与dom相关的css类扩展api
+    let div=document.body.getElementsByClassName('divs');
+    console.log(div);
+    // getElementsByClassName这个函数只返回调用它的对象为根元素下的子树中符合条件的元素节点集合
+
+    // H5还添加了简便的操作元素上的类名的方法
+    // 元素.classList.add('类名') .contains() remove() toggle('')有删除,无添加
+    div[0].firstElementChild.classList.add('divs');
+    console.log(div[0].firstElementChild.classList.contains('divs'));//true 有这个类
+  </script>
+</body>
+</html>

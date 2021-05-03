@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="abc">
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <script>
+    let div=document.querySelector('#abc')//元素/document.querySelector('css选择符')能选择第一个满足条件的后代元素
+    let ils=document.querySelector('#abc').querySelectorAll('li')//返回nodeList类数组的selectorAll
+    console.log(div.webkitMatchesSelector('#abc'));//true [前缀]matchesSelector(css选择符)能判断元素是否被这个选择符选中
+  </script>
+</body>
+</html>

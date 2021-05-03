@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>123</div>
+  <script>
+    let observer=new MutationObserver((mr)=>{console.log(mr);});
+    let div=document.getElementsByTagName('div')[0];
+    observer.observe(div,{attributes:true});
+    div.style.color='red';//触发回调
+    setTimeout(() => {
+      observer.disconnect();
+      div.style.fontSize='30px'//不触发回调
+    }, 0);
+    setTimeout(() => {
+      observer.observe(div,{attributes:true})//Mutation对象即便取消了,也能重新观测!复用性!
+      div.style.fontSize='40px'//回调函数触发!注意如果Mutation对象观察的对象两次改变一个属性且最终值相同时,后者不触发!
+      // 所以这里是40px,30px也不会触发回调
+    }, 0);
+  </script>
+</body>
+</html>

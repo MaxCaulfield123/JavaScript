@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #abc,#trd{height: 2000px;}
+    #sec{height: 300px;width: 300px;background-color: lightgreen;}
+  </style>
+</head>
+<body>
+  <button >133</button>
+  <div id="abc">
+  </div>
+  <div id="sec"></div>
+  <div id="trd"></div>
+  <script>
+    // 不要过多的操作dom树,且设置新dom元素之前最好把旧的dom从内存删除
+    let div=document.getElementById('abc');
+    let str=''
+    for(let i=0;i<5;i++){
+      // div.innerHTML+='<li>1</li>'//不要这样!访问修改dom次数过多
+      str+='<div>1</div>'//这样更快
+    }
+    div.innerHTML=str;
+    // 使用innerHTMl要注意XSS攻击,最好用相关的库对数据进行转义
+
+    // 元素.scrollIntoView(bool顶部对其还是底部对齐,{配置平滑,水平垂直对齐方式})
+    // 这个api结合事件可以让浏览器窗口滚动而不使用锚点
+    let sec=document.getElementById('sec');
+    let btn=document.getElementsByTagName('button')[0];
+    btn.onclick=()=>{
+      sec.scrollIntoView({behavior:'smooth',block:'start'})
+    }
+  </script>
+</body>
+</html>

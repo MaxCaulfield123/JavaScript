@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在调用observe函数时,传入的MutationObserverInit对象有很多可设置的属性
+    // 具体的示例用法在437页可以看到
+    let observer=new MutationObserver((mr)=>{console.log(mr);});
+    observer.observe(document.body,{
+      attributes:true,//观察属性
+      attributeOldValue:true,//是否记录旧的属性值
+      subtree:true,//观察其所有后代节点(不论多深),这里的子树的节点被移出观察对象后,还会触发回调事件
+      attributeFilter:['color'],//观察一部分属性
+      characterData:true,//是否观察文本字符
+      characterDataOldValue:true,//是否记录文本字符旧值
+      childList:true//观察其子节点(一层,直接子节点)
+  })
+  </script>
+</body>
+</html>
