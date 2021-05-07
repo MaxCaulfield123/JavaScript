@@ -1,0 +1,37 @@
+<!-- 命名空间就是在另一个独立的空间中声明变量,防止变量冲突,命名空间就是作用域的一种抽象! -->
+<!-- xhtml 可拓展的html(支持xml) -->
+<!-- 命名空间使用xmlns指定 -->
+<!-- 如果一个文档使用了多种xml语言,则可以使用xmlns:前缀="http://~~"来添加前缀,
+  注意其他元素也必须添加前缀
+-->
+<!-- 命名空间与前缀分别在哪种场合下启用? -->
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <!-- xhtml所有单标签后面要加上 / ! -->
+  <meta charset="UTF-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Document</title>
+</head>
+<body>
+  <!-- 给svg设置自己的命名空间,标识为文档的外来元素 -->
+  <s:svg xmlns:s="http://www.w3.org/2000/svg" version="1.1"
+    viewBox="0 0 100 100" style="width:100%;height: 100%">
+    <s:rect x="0" y="0" width="100" height="100" style="fill:red"></s:rect>
+  </s:svg>
+  <script>
+    // DOM2中,node类型新增了几个关于命名空间的属性,html节点声明后其内部所有节点都有!
+    console.log(document.documentElement.localName);//html 不包含命名空间前缀的元素节点名
+    console.log(document.body.namespaceURI);//http://www.w3.org/1999/xhtml 节点的命名空间url,没有则为null
+    console.log(document.documentElement.prefix);//null 命名空间前缀,没有为null
+
+    //true 元素.isDefaultNamespace(namespaceURI)返回布尔值,检测参数是否是节点的命名空间
+    console.log(document.body.isDefaultNamespace('http://www.w3.org/1999/xhtml'));
+    let svg=document.getElementsByTagNameNS('http://www.w3.org/2000/svg','svg')[0]
+    console.log(svg.lookupPrefix('http://www.w3.org/2000/svg'));//根据命名空间返回前缀
+    // 等等还有很多属性可以看书462页
+    // 上面是node变化,document有createElementNs(),createAttributeNS(),getElementsByTagNameNS()
+  </script>
+</body>
+</html>

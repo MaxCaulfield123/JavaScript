@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-// W#C// DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd" [<!ELEMENT name (#PCDATA)]>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    111111111111
+  </div>
+  <script src="alloydesigner.js"></script>
+  <script>
+    // DOM2core的其他变化
+    // DocumentType的变化
+    console.log(document.doctype.publicId);//-// W#C// DTD HTML 4.01//EN
+    console.log(document.doctype.systemId);//http://www.w3.org/TR/html4/strict.dtd
+    console.log(document.doctype.internalSubset);//没有返回<!ELEMENT name (#PCDATA)应该在XML或XHTML中才返回
+
+    // 不是一个文档的节点,ownerDocument属性不同,则在appendchild时会报错,使用以下api就不会了
+    // document.importNode(node,是否复制子树bool)能更改别的文档的节点的ownerDocument属性,并复制给变量
+
+    // 这是两个指向当前窗口的指针,defaultView除了ie8之前所有浏览器都支持,ie8之前用parentWindow
+    let a=document.defaultView;b=document.parentWindow;
+    console.log(a,b);
+
+    // 创建新的doctype节点的函数,已知的文档不可更改doctype,所以只能在新建文档中用
+    // let doctype=document.implementation.createDocumentType('文档类型名称',publicId,systemId)
+
+  </script>
+</body>
+</html>
