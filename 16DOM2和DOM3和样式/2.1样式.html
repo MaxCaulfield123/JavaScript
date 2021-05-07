@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div style="background-color: red;margin-top: 10px;width: 100px;height: 100px;"></div>
+  <script>
+    //style对象也能通过中括号或者item(序列号)访问属性
+    let div=document.getElementsByTagName('div')[0];
+    let prop,val;//将变量声明从循环中提取出来
+    for(let i=0,len=div.style.length;i<len;i++){
+      prop=div.style[i];
+      // 元素.style.getPropertyValue(属性名)能够获取对应的属性值
+      val=div.style.getPropertyValue(prop);
+      console.log(val);
+      // 可以用元素.style.removeProperty('属性名')来将css属性还原成默认值  
+    }
+    //元素.getComputedStyle(元素,伪元素字符串)获取只读的计算样式
+    let max=document.defaultView.getComputedStyle(div,null)
+    console.log(max);//一堆字符
+    console.log(max.border);//注意border有的浏览器会返回不一致的值,因为设置读取border方式不同
+  </script>
+</body>
+</html>

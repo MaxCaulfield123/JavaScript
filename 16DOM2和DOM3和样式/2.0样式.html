@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      float:left;
+      width: 100px;height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div style="background-color: red;"></div>
+  <script>
+    // 任何支持style属性的html元素在js中都有一个style属性! style不包含继承的样式
+    // css属性在js中书写时要注意驼峰大小写,而float转为js时要写成cssFloat因为float是js关键字!
+    let div=document.getElementsByTagName('div')[0];
+    div.style.cssFloat='right'//变到右边了
+    // 可以用元素.style.css属性 来修改css属性
+    div.style.opacity=0.5
+    // 混杂模式(文档渲染方式)下可以不加单位例如div.style.fontSize=20; 而标准模式必须带单位
+
+    // DOM2也给style上添加了一堆属性和方法 
+    // cssText
+    console.log(div.style.length);//3 只能获取行内样式和js中添加的样式
+    console.log(div.style.cssText);//行内样式加上js添加的样式的字符串 只能获取行内样式和js中添加的样式
+    // 可以直接div.style.cssText=字符串 来使之前的样式重写
+    div.style.cssText="float:left"//行内样式也消失
+
+
+  </script>
+</body>
+</html>

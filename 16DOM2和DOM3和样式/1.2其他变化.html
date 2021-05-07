@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <iframe  frameborder="0"></iframe>
+  <script>
+    // DOM3新增了比较节点的方法:引用同一个对象的元素.isSameNode()
+    // 类型属性attributes与child相同的isEqualNode() 
+    let div1=document.createElement('div');
+    div1.classList.add('bar');
+    let div2=document.createElement('div');
+    div2.classList.add('bar');
+    console.log(div1.isSameNode(div1));//true
+    console.log(div1.isSameNode(div2));//false
+    console.log(div1.isEqualNode(div2));//true 双方类与标签名都相等
+
+    //下方两个属性返回iframe内的document与window对象
+    // 跨域访问iframe收到不用域名不同协议的限制,此时访问其document对象则会抛出错误
+    let iframe=document.getElementsByTagName('iframe')[0]
+    console.log(iframe.contentDocument);
+    console.log(iframe.contentWindow);
+
+
+    // 很遗憾,下面的api马上要被废弃了,绝大浏览器也不支持
+    // Dom3还给节点添加了附带数据的方法:setUserData(键,值,处理函数)
+    // 处理函数有五个参数 1表示操作类型的数值 2数据的键 3数据的值 4源节点 5目标节点
+    let div=document.createElement('div')
+    div.setUserData('name','Max',function(type,key,val,src,dest){
+      // 删除节点时,源节点为Null,除复制外目标节点都为Null
+      if(type==1){
+        dest.setUserData(key,val,()=>{})
+      }
+    })
+    let newDiv=div.cloneNode(true);//true表示克隆子树
+    console.log(newDiv.getUserData('name'));
+  </script>
+</body>
+</html>
