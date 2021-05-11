@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    123
+    <p>465</p>
+  </div>
+  <script>
+    // DOM2 新增了document.creatRange()来选择文档中一定范围,从而不被节点限制
+    let range=document.createRange();
+    let div=document.getElementsByTagName('div')[0];
+    range.selectNode(div)//选择节点范围 而selectNodeContents选择内部元素作为范围
+    console.log(range.startContainer);//body第一个节点的父节点
+    // 这个范围可以用如下api调整起点与终点! 详细含义看书483
+    // range.setStartBefore/After  range.setEndBefore/After
+    // 复杂选择setStart(node,index) setEnd()
+
+    // 如果选择一段文字,则后台会自动为文字补上最近的开闭标签
+    //deleteContents() 这个方法能够从文档中删除范围所包含的内容
+    //extractContents() 会删除并返回文档片段
+    // CloneContents() 创建范围对象的一个副本，不会影响原来的节点
+    // insertNode() 向范围选区的开始处插入一个节点
+    // surroundContents() 环绕范围插入内容 
+    // 范围不选择任何文档部分称为范围折叠 可以用range.collapse(起点true/终点false)将范围折叠 range.collapsed检测
+    // 用range.compareBoundaryPoints(常量,range1)来比较两个范围的起点终点关系,具体488页
+    // cloneRange()复制范围
+    // 使用完范围后用range.detach()来把范围从创建它的文档中剥离
+
+  </script>
+</body>
+</html>

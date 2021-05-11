@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 100px;height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    // dom中CSSStyleSheet代表css样式表,包括style元素,link引入的样式表;它继承StyleSheet类型
+    // 
+    console.log(document.styleSheets);//一个集合
+    let sheet;
+    for(let i=0,len=document.styleSheets.length;i<len;i++){
+      sheet=document.styleSheets[i];
+      // 还有parentStyleSheet cssRules 等等
+      console.log(sheet.disabled);//唯一可改是否禁用这个样式表,其他详细属性在书上470页
+    }
+    // 样式表.cssRules类数组对象能获取具体的样式,选择符等,也可以用下标提取出单独一条规则
+    console.log(sheet.cssRules[0].cssText);//获取第一条样式的字符串
+    sheet.cssRules[0].style.backgroundColor='green'//可以为每条样式设置新的样式
+    // 样式表.insertRule(属性字符串(内部不加引号且用-),插入的下标位置)
+    sheet.insertRule('body{background-color:silver}',0)
+    // 样式表.deleteRule(下标)删除下标位置的css规则
+  </script>
+</body>
+</html>

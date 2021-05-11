@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .abc{
+      margin: 100px 50px;
+      width: 500px;height: 500px;
+      background-color: aqua;opacity:0.7;
+      border: 1px solid #000;
+    }
+    .abc>div{
+      margin: 10px 20px;
+      width: 100px;height: 100px;
+      background-color: lightgreen;
+    }
+  </style>
+</head>
+<body>
+  <button>123</button>
+  <div class="abc">
+    <div></div>
+  </div>
+  <script>
+    // 元素.offsetHeight为元素垂直方向所占的高度 元素.offsetLeft 元素.offsertTop 元素.offsetParent
+    // 以上几个属性表示元素距离包含元素的外元素边框内侧的距离
+    let fDiv=document.getElementsByClassName('abc')[0];
+    let sDiv=fDiv.children[0];
+    // 这几个offset属性都是只读的!!!
+    function getLeft(node){
+      let sonLeft=node.offsetLeft;
+      // offsetParent 返回offset相对偏移的父节点，不一定是parentNode，而是从内到外第一个提供尺寸的元素,比如td相对table
+      // 包含在div元素中的所有元素都以body为其offsetParent!!!!
+      let f=node.offsetParent;
+      while(f!=null){//元素是div所以这里body的offsetLeft是null
+        sonLeft+=f.offsetLeft
+        f=f.offsetParent;
+      }
+      console.log(f);
+    }
+    console.log(sDiv.offsetLeft);//79
+    getLeft(sDiv);//null
+    console.log(document.body.offsetParent);//null
+
+    // clientWidth 与 clientHeight 表示元素内容与内边距的宽高；clientLeft clientTop
+    console.log(sDiv.clientHeight,sDiv.clientWidth);//100 100
+    console.log(document.documentElement.clientWidth,document.documentElement.clientHeight);//2048 1010 常用来计算视口大小
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .abc{
+      width: 100px;height: 100px;
+      margin: 40px 90px;
+      background-color: lightgreen;
+    }
+  </style>
+</head>
+<body>
+  <div class="abc"></div>
+  <script>
+    // 元素.scrollWidth表示滚动元素的总长 scrollHeight 总高 scrollLeft左边未显示区域长度 scrollTop顶部未显示区域长度
+    // html是一开始就能滚动的元素,它的sh和sw表示文档实际宽高
+    console.log(document.documentElement.scrollHeight,document.documentElement.scrollWidth);
+
+    // 每个元素都有一个getBoundingClientRect()方法,返回一个对象包含位置信息
+    let div=document.getElementsByClassName('abc')[0];
+    let rect=div.getBoundingClientRect();
+    console.log(rect);//元素左上角距离视口左,上的位置 元素右下角距离视口左,上的位置
+  </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <ul>
+      <li></li>
+      <li></li>
+    </ul>
+    <div>
+      <p>111</p>
+    </div>
+  </div>
+  <span></span>
+  <script>
+    // TreeWalker(根节点,遍历元素类型,筛选函数,是否拓展)和NodeIterator有一样的参数
+    // 但是它能够在dom树中四处游走遍历!拥有比NodeIterator更强大的灵活性!
+    let root=document.body;
+    let filter=function(node){
+      console.log(node.tagName);//不会打印ul和p,因为子树都被reject弄掉了!
+      // TreeWalker在过滤器的返回值上新增了NodeFilter.FILTER_REJECT;
+      // 它与FILTER_SKIP的区别是前者跳过节点及其子树,后者只跳当前节点不跳子树
+      return node.tagName.toLowerCase()=='span'?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT
+      // return NodeFilter.FILTER_ACCEPT;
+    }
+    let treeWalker=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT,filter,false);
+    // treeWalker有parentNode(),firstChild(),lastChild(),nextSibling(),previousSibling()来在节点中游走
+    //console.log(treeWalker.firstChild());
+    //console.log(treeWalker.nextSibling());//都是null是因为被filter函数REJECT拦截了!
+    let node=treeWalker.nextNode();
+    while(node!==null){
+      console.log(node+'waibi');
+      node.innerHTML='遍历到span啦!'
+      node.style.fontSize='30px';
+      node.style.color='lightgreen';
+      node=treeWalker.nextNode()
+    }
+
+  </script>
+</body>
+</html>

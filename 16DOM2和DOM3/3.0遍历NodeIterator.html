@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <ul>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+    <p>11111111</p>
+  </div>
+  <script>
+    // Dom遍历有两个类型帮助进行深度优先遍历 NodeIterator与treeWalker 不能遍历选择的根节点之上的元素
+
+    // document.createNodeIterator(根节点,该访问哪些节点的数值代码,筛选节点的特定对象或函数,
+    // 是否拓展实体引用的bool html中不可拓展)
+
+    let root=document.body;
+    // NodeFilter中除了SHOW_ALL外其他都可以如下按位或组合
+    let whatToShow=NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_DOCUMENT;//第二个参数是NodeFilter中定义的数值代码,其他看478
+    console.log(whatToShow);//1
+    // 特定对象为有acceptNode(node){}函数的对象
+    let specialObj={
+      acceptNode(node){//这个函数返回两个属性,节点应该访问就返回FILTER_ACCEPT,不访问就返回FILTER_SKIP
+        console.log(node.tagName);
+        return node.tagName.toLowerCase()=='p'?
+        NodeFilter.FILTER_ACCEPT:
+        NodeFilter.FILTER_SKIP;//三元还可以这样写!
+      }
+    }
+    // 第三个参数直接传函数也行,返回一致就行
+    let filter=function(node){
+      return node.tagName.toLowerCase()=='p'?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_SKIP;
+    }
+    // 正式创建节点遍历对象
+    let iterator=document.createNodeIterator(root,whatToShow,specialObj||filter,false)
+    console.log(iterator);
+    // NodeIterator对象主要方法有nextNode()与previousNode(),从根节点开始调用一次遍历一个节点,末未返回null
+    // 循环调用nextNode(),找到想要的p标签并修改
+    let node=iterator.nextNode();
+    while(node!=null){
+      console.log(node.tagName);
+      if(node.tagName.toLowerCase()=='p')node.innerHTML='遍历成功!!';
+      node=iterator.nextNode()
+    }
+  </script>
+</body>
+</html>
