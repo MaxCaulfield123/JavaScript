@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>123</button>
+  <script>
+    // event对象是传给事件处理程序的唯一参数
+    let btn=document.getElementsByTagName('button')[0];
+    btn.onclick=function(event){
+      console.log(event);
+      // event对象有一系列参数,能够获取鼠标点击的坐标,阻止冒泡,阻止默认动作等等
+      // e.stopPropagation()阻止事件捕获和冒泡 e.preventDefault()阻止默认动作
+      // event.type触发事件的方式 e/eventPhase触发的阶段 等等
+      // 其他的在MDN上查!自己打印!
+      // event只在事件处理程序运行时存活,一旦结束就被销毁
+    }
+    // ie事件对象的event在全局作用域中保存!有特定的属性方法
+    btn.addEventListener('click',()=>{
+      console.log(window.event);
+    },false)
+    //解决浏览器兼容的核心是知道非主流浏览器的api
+  </script>
+</body>
+</html>

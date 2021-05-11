@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 注意html中的js代码不能用& "" < >这些会冲突的符号 -->
+  <form action="">
+    <input type="button" value="点我" onclick="alert('我被点啦!!'+value+username.value)">
+    <input type="text" value="我是隔壁的" name="username" >
+  </form>
+  <!-- 这里的event和this都能访问 -->
+  <button onclick="console.log(event,this)">event/this</button>
+  <button onclick="show()">触发script中的事件</button>
+  <script>
+    // 事件处理程序就是为响应事件而被调用的函数
+    // html事件处理程序就是用HTML属性来指定事件处理程序
+    // 如上的input被点击时会显示隔壁的username.value因为它的作用域被with拓展了
+    // 不用html注册事件是因为它是强耦合!
+    function show(){
+      console.log(this);
+    }
+  </script>
+</body>
+</html>
