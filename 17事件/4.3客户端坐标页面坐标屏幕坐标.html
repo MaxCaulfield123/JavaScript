@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      height: 3000px;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    // event对象中clientX与clientY为相对浏览器视口的坐标
+
+    // event对象中pageX与pageY为鼠标相对文档的坐标(滚动后y坐标变大!)
+
+    // 浏览器还可以获取event对象中鼠标相对电脑屏幕的坐标 screenX 与screenY
+    document.body.addEventListener('click',(e)=>{
+      console.log(e.clientX,e.clientY,'视口坐标');
+      // ie8及之前没有pageXY,需要用scrollTop于clientXY加起来自己算
+      console.log(e.pageX,e.pageY,'文档坐标');
+      console.log(e.screenX,e.screenY,'屏幕坐标');
+    })
+  </script>
+</body>
+</html>

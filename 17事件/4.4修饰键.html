@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 300px;height: 300px;border: 1px solid lightblue;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    // 鼠标事件还可以结合shift alt ctrl meta键来完成
+    // event对象中这几个键如果被按下,则event.shiftKey会返回true,否则返回false
+    document.body.addEventListener('click',(e)=>{
+      let keys=[];
+      if(e.shiftKey)keys.push('shift');
+      if(e.ctrlKey)keys.push('ctrl');
+      if(e.altKey)keys.push('alt');
+      console.log('keys'+keys.join(','));
+    })
+  </script>
+</body>
+</html>

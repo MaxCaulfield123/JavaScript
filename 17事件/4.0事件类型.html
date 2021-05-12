@@ -40,6 +40,10 @@
     script.addEventListener('load',()=>{},false)//script对象必须添加到文档并设置src才开始下载,随后触发Load
     script.src='';
     // appendChild script
+
+    window.addEventListener('unload',()=>{
+      // 页面卸载--从一个页面导航到另一个页面的时候会触发onunload事件,可以在这里清除引用,防止内存泄漏
+    },false)
   </script>
 </body>
 

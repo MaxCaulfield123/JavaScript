@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    window.addEventListener('resize',()=>{
+      // 缩放时会触发此事件
+      // 不应该在这里进行大量运算,否则会影响响应速度
+      // 窗口最大化或最小化时也会触发这个事件
+    },true)
+    window.addEventListener('scroll',()=>{
+      // 实际发生在html元素上
+      // 混杂模式下可以用body元素检测scrollLeft与top的变化
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .abc{
+      position: relative;
+      width: 500px;height: 500px;
+      background-color: aqua;
+    }
+    .abc>div{
+      position: absolute;
+      left: 50%;top: 50%;
+      transform:translate(-50%,-50%);
+      width: 300px;height: 300px;
+      background-color: blueviolet;
+      margin: auto;
+    }
+    .abc>div>div{
+      position: absolute;
+      left: 50%;top: 50%;
+      transform:translate(-50%,-50%);
+      width: 100px;height: 100px;
+      background-color: chartreuse;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="abc">
+    <div> 
+      <div></div>
+    </div>
+  </div>
+  <script>
+    // 焦点事件有blur focus focusin获得焦点 focusout取消焦点
+    // 前两者不冒泡,后两者冒泡且4个事件存在于一个元素时,后者的触发时机整体(取消焦点也是)先于前者
+
+    // 鼠标和滚轮事件有 click dblclick mousedown mouseup mouseenter mouseleave mousemove mouselout mouseover
+    // click与dblclick需要经过mousedown mouseup click这一完整阶段,其中任何一个事件没触发则click事件失效
+    // click也能通过enter键触发
+
+    // mouseout 为从一个元素移到另一个元素上时触发,不管是移到内部元素还是外部元素,内部元素到原始元素也会触发
+    let div=document.getElementsByClassName('abc')[0].children[0];
+    div.addEventListener('mouseout',()=>{
+      console.log('我移动出来了!');//内部外部都会触发!
+    })
+  </script>
+</body>
+</html>
