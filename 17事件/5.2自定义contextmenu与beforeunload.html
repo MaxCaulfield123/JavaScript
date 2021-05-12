@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{margin:0;padding:0}
+    ul{
+      list-style: none;
+      display:none;
+      position: relative;
+    }
+    ul>li{
+      border:1px solid lightgreen;
+      width: 200px;
+      border-bottom: none;
+    }
+    ul>li:last-child{
+      border-bottom: 1px solid lightgreen;
+    }
+  </style>
+</head>
+<body>
+  <ul id="abc">
+    <li>我是周江山</li>
+    <li>我要进大厂</li>
+    <li>我要学前端</li>
+    <li>我要买房子</li>
+    <li>我要起飞喽!芜湖!!!</li>
+  </ul>
+  <script>
+    let ul=document.getElementById('abc');
+    document.documentElement.addEventListener('contextmenu',(e)=>{
+      e.preventDefault()// contextmenu事件中取消浏览器自带菜单显示
+      ul.style.left=e.clientX+'px';//用clientXY把ul放到合适的位置
+      ul.style.top=e.clientY+'px';
+      ul.style.display='block'
+    })
+    document.documentElement.addEventListener('click',(e)=>{
+      ul.style.display='none'//添加取消右键菜单显示的事件
+    })
+
+    // 下面的失效了
+    // beforeunload在window上触发,当页面将要被卸载时提供确认
+    // window.addEventListener('beforeunload',(e)=>{
+    //   // 需要设置event.returnValue为字符串并返回
+    //   let str='Do you really need to go? i will miss you'
+    //   event.returnValue=str;//ie firefox
+    //   return str;//safari chrome
+    // })
+  </script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+  <script>
+    // 键盘包含三个事件 keydown->keypress->keyup ,前两者按住时持续触发
+    // keypress在按下键盘并产生字符时触发,dom3推荐textInput事件来记录产生字符,它在字符输入到文本框之前触发
+    // 非字符键被按下时,会持续触发keydown事件 
+    document.documentElement.addEventListener('keyup',(e)=>{
+      console.log(e.keyCode);//键盘事件的event对象的keyCode保存了键码,详细看519页
+      //console.log(e.charCode);//只有keypress事件才有e.charCode,为ASCII码
+      console.log(e.location);//dom3添加的记录按键处于什么位置,例如1左边的alt 2右边的alt
+      console.log(e.getModifierState('Control'));//这个方法记录参数按键是否处于激活状态bool 参数看521页 control-ctrl
+    })
+  </script>
+</body>
+</html>

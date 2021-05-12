@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{width: 300px;
+      height: 3000px;background-color: blueviolet;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <script>
+    // mousedown与mouseup的event对象上有button属性 记录了鼠标按键 0左键 1滚轮 2右键 ie8有独一套专门的按键 click只支持左键
+    document.body.addEventListener('mousedown',(e)=>{
+      console.log(e.button,e.detail);//e.detail记录了事件的更多信息,就click事件detail记录了点击的次数
+    });
+    
+    // mousewheel事件会在任何元素触发并冒泡到document(ie8)和window(其他浏览器)中
+    // mousewheel的event对象中有一个wheelDelta新属性记录滚动改变距离,向前滚+,向后滚-
+    document.body.addEventListener('mousewheel',(e)=>{
+      console.log(e.wheelDelta);
+    })
+  </script>
+</body>
+</html>
