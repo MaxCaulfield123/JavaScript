@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // safari浏览器有orientationchange事件,当用户旋转手机时window.orientation属性会有值
+    // deviceorientation事件在设备3d旋转时会触发 devicemotion事件在设备移动时触发
+
+    // 触摸事件有touchstart手指放到屏幕上触发
+    // touchend移开时触发 touchmove连续触发,preventDefault阻止页面滚动 touchcancel
+    document.addEventListener('touchmove',(e)=>{
+      console.log(e.touches);//当前屏幕上的触点 数组
+      console.log(e.changedTouches);//自上次用户动作之后变化的触点 数组
+      console.log(e.targetTouches);//事件目标上的触点
+    })
+    // 手指点击屏幕上的元素时,可能依次发生如下事件
+    // touchstart->mouseover->mousemove->mousedown->mouseup->click->touchend
+
+    // safari还添加了手势事件 gesturestart 两个手指依次放到屏幕上时触发,有记录旋转缩放属性 gesturechange gestureend 
+  </script>
+</body>
+</html>

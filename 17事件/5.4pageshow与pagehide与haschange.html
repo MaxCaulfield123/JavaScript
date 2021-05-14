@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 还有两个事件如下,在页面加载展示和页面卸载时触发
+    (function () {
+      let show = 0;
+      window.addEventListener('pageshow', (e) => {
+        show++;
+        // e.persisted表示页面是否从往返缓存中添加
+        console.log('page has been showed',show,e.persisted);
+      })
+      window.addEventListener('pagehide', () => {
+        console.log('page has been hide');
+      })
+    })()
+    // haschange事件在url#号后的hash值变化后触发,event有newUrl与oldUrl两个属性,必须添加到window上
+    window.addEventListener('haschange',(e)=>{
+      console.log(e.newURL,e.oldURL);
+    })
+
+  </script>
+</body>
+
+</html>

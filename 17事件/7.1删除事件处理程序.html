@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="div"><button></button></div>
+  <script>
+    // 事件处理程序的另一大优化是及时删除不用的事件处理程序
+    let div=document.getElementById('div');
+    let btn=document.getElementsByTagName('button')[0];
+    // 在使用removeChild或replaceChild或innerHTML替换节点后,节点上的事件不会被卸载!造成内存泄漏!
+    btn.onclick=function(e){
+      btn.onclick=null;//及时删除事件处理程序!!
+      div.innerHTML='已被替换!'//注意此时btn按钮被删除,事件冒泡也会被阻止!
+      // 事件委托(高层元素事件)也有利于不用删除每个子元素的事件
+    }
+    // 页面卸载(前进后退刷新)后的事件处理程序不会被删除!还会留在内存中!
+    // 所以要在onunload事件中删除所有事件处理程序,但使用onunload意味着页面不会被保存在往返缓存中
+  </script>
+</body>
+</html>

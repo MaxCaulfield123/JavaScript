@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onfocus="console.log('onfocus');">123</button>
+  <script>
+    let btn=document.getElementsByTagName('button')[0]
+    // html事件传入HTMLEvents
+    let event=document.createEvent('HTMLEvents');
+    event.initEvent('focus')
+    btn.dispatchEvent(event)
+
+    // 自定义事件传入CustomEvent 
+    let customevent=document.createEvent('CustomEvent');
+    // 可传入四个参数,事件类型以及是否冒泡等
+    customevent.initCustomEvent('maxevent');
+
+    btn.addEventListener('maxevent',()=>{
+      console.log('maxevent');
+    })
+    btn.dispatchEvent(customevent)
+    
+    // 除此以外,ie8及之前也支持事件模拟,不过接口与dom方法不同 547页
+  </script>
+</body>
+</html>

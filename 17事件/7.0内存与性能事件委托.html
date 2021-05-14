@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul id="abc">
+    <li id="a1">showSomething</li>
+    <li id="a2">console.logSomething</li>
+    <li id="a3">goSomeWhere</li>
+  </ul>
+  <script>
+    // 页面中处理程序的数量与页面整体性能直接相关,因为函数越多内存越少,且为指定事件所访问dom的次数会导致整个页面交互延迟
+    // 过多事件处理程序的解决方法之一是事件委托,利用冒泡来为target.id=元素Id的元素添加事件
+    let ul=document.getElementById('abc')
+    document.addEventListener('click',(e)=>{
+      switch (e.target.id) {
+        case 'a1':
+          alert('show')
+          break;
+        case 'a2':
+          console.log('something');
+          break;
+        case 'a3':
+          location.href='http://www.baidu.com'
+          break;
+        default:
+          break;
+      }
+    })
+  </script>
+</body>
+</html>

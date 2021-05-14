@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button ondblclick="console.log('dblclick');" onkeydown="console.log('keydown');">123</button>
+  <script>
+    // 可以模拟出任何事件在自定义时刻触发,且会被当做浏览器创建的事件 ie8之前有自己的方式
+    // 创建事件event对象document.createEvent('事件类型');
+    // 事件类型参数有UIEvents通用用户界面事件,鼠标与键盘继承这个 MouseEvents鼠标事件 HTMLEvents HTML事件
+
+    // 创建事件节点对象
+    let event = document.createEvent('UIEvents');//这里模拟触发鼠标事件
+    let btn = document.getElementsByTagName('button')[0];
+    // 鼠标事件有initMouseEvent(前四个参数必须)这个函数在543页;
+    event.initEvent('dblclick', true, true, document.defaultView);
+    // 通过元素.dispatchEvent(事件对象)来触发事件;
+    btn.dispatchEvent(event)
+
+    // 模拟键盘事件
+    if (document.implementation.hasFeature("KeyboardEvents", "3.0")) {
+      var keyevent = document.createEvent('KeyboardEvent');
+    }
+    // 下方具体传入参数在545页看,因为dom3event废弃keypress而不能模拟它
+    keyevent.initKeyboardEvent('keydown');
+    btn.dispatchEvent(keyevent)
+    // firefox也有模拟键盘事件的方法 其他浏览器有一个通用方法
+  </script>
+</body>
+
+</html>
