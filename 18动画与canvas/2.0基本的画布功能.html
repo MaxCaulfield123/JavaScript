@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 画布canvas元素要指定宽高,可以在js中用dom指定 -->
+  <canvas id='draw' height="500" width="500">看不见时显示这里</canvas>
+  <script>
+    let canvas=document.getElementById('draw');
+    // 绘制图形必须先获取绘图上下文 绘图元素.getContext(图形类型的参数)
+    // 绘图元素从左上角记录坐标
+    let context=canvas.getContext("2d")//获得2d图形的上下文
+
+    // 可以用context.strokeStyle .fillStyle来预设为边框或填充上色时的颜色
+    // 注意上色要在绘制图像前才有效
+    context.strokeStyle='red';
+    context.fillStyle='rgb(0,0,255,0.5)';//支持用alpha通道弄出透明色
+    
+    // lineWidth设置边框宽度,lineCap设置线条端点的形状,lineJoin设置线条交点的形状
+    context.lineWidth=10
+
+    // 在上下文中绘制图形 context.fillRect()填充矩形 .strokeRect()空矩形 .clearRect()矩形橡皮擦
+    // 这三个方法都接受四个参数 开始绘制矩形的左上角x,y坐标 与矩形宽高
+    context.strokeRect(100,100,50,30)    
+    context.fillRect(200,200,90,30)
+    context.clearRect(235,210,10,10)
+
+
+    // 可以使用画布元素.toDataURL()来返回canvas上的图像的url
+    // 如果画布中的图像是其他域名绘制过来的,这个方法会报错
+    let imgURL=canvas.toDataURL('image/png');
+    let img=new Image();//把图片实时塞入文档
+    img.src=imgURL;
+    document.body.appendChild(img);
+  </script>
+</body>
+</html>

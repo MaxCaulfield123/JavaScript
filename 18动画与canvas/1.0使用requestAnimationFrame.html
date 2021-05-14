@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 早期的定时动画其实就是setInterval()
+    setInterval(() => {
+      document.body.style.left++
+      max();//执行其他动画
+    }, 17);
+    // 浏览器60Hz 每秒刷新60次 所以interval最好的间隔是1000/60毫秒执行一次,刚好赶上页面重绘
+    // 这个方式的问题在于interval只是把动画更新的函数放入任务队列,而没有立即执行,可能因其他任务造成延迟
+    // 而且浏览器记录时间并不精确 有的4ms 有的10ms
+    
+  </script>
+</body>
+</html>

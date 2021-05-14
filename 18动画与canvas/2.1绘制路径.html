@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id='canvas' width="1000" height="800">看不见显示这里</canvas>
+  <script>
+    let canvas=document.getElementById('canvas');
+    let context=canvas.getContext('2d');
+    context.fillStyle='red';
+    context.strokeStyle='red'
+    // 绘制路径必须用beginPath表示要开始绘制新路径;
+    context.beginPath();
+    // arc()以中心,用半径顺时针绘画出起始角度的弧线 arcTo()绘制一条经过点的弧线
+    //moveTo(x,y)移动光标到点 lineTo(x,y)绘制一条以光标当前点到xy的直线
+    // rect(x,y,width,height)绘制一条矩形路线
+    // 此外还有二次三次贝塞尔曲线
+    context.moveTo(300,300);
+    context.lineTo(300,200);
+    context.moveTo(300,300);
+    context.lineTo(500,300);
+    context.lineTo(500,400)
+    context.closePath()//这个方法绘制一条到上次moveTo的坐标的线
+    
+    // 用fill()或stroke()来将线画出来
+    context.stroke()
+    context.fill()
+
+    //这个方法检测坐标点是否在线上
+    console.log(context.isPointInPath(300,300));
+  </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 100px;height: 100px;
+      background-color: aqua;
+      position: relative;
+    }
+    ul{
+      height: 3000px;
+    }
+  </style>
+</head>
+<body>
+  <div></div>
+  <ul></ul>
+  <script>
+    // 之前的interval不能保证每次重绘屏幕只执行一次函数
+    // requestAnimationFrame()是在重绘屏幕前调用的函数,通知浏览器js要执行动画相关函数,来使性能优化
+    let div=document.getElementsByTagName('div')[0]
+    let num=0;
+    function moveDiv(time){
+      num++;
+      div.style.left+=num+'px';
+      requestAnimationFrame(moveDiv)//递归
+    }
+    //参数函数接收一个DOMHighResTimeStamp的实例作为参数,表示下次重绘的时间
+    let rafId=requestAnimationFrame(moveDiv)//函数返回id,用于取消
+    cancelAnimationFrame(rafId)//取消函数
+
+    // 支持raf的浏览器有一个作为钩子(下次重绘之前)的任务队列,这个任务队列保证了每次重绘只执行一次回调函数
+
+    // 通过raf来达到一次重绘一次调用,来达到节流
+    let toggle=false;//添加开关与定时,来达到真正的 节流:在持续发生的事件中,通过定时控制开关减少函数调用
+    function max(){
+      console.log('页面重绘',Date.now());
+      toggle=true;
+    }
+    window.addEventListener('scroll',(e)=>{
+      if(!toggle){
+        requestAnimationFrame(max)//通过raf来调用这个函数
+        setTimeout(() => {
+          toggle=false
+        }, 500);
+      }
+    })
+  </script>
+</body>
+</html>
