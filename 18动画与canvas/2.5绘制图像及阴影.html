@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img{width: 100px;height: auto;}
+  </style>
+</head>
+<body>
+  <img src="./cos.jpg"></img>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    let img=document.getElementsByTagName('img')[0]
+    let canvas=document.getElementById('canvas');
+    let context=canvas.getContext('2d');
+    // 可以通过以下属性来设置绘画阴影
+    context.shadowColor='rgba(0,0,255,0.5)';//颜色
+    context.shadowOffsetX=5;//横向阴影
+    context.shadowOffsetY=5;//纵向阴影
+    context.shadowBlur=5;//模糊度
+
+    console.log(img,context,canvas);
+    // 使用dramImage能够将图片画入canvas
+    // 注意无论什么方式引入Img图片,浏览器都是要下载的,此处可能由于img图片没下载完而导致drawImage不显示
+    // 所以要用onload事件等Img图片下载完后再drawimage
+    window.onload=function(){
+      context.drawImage(img,30,50,100,100);
+    }
+  </script>
+</body>
+</html>

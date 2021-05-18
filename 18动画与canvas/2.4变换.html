@@ -8,7 +8,15 @@
 </head>
 <body>
   <script>
-    // 上下文变换可以操作绘制在画布上的图像
+    // 上下文变换可以操作绘制在画布上的图像,context还有以下函数来变换图形
+    // rotate(angle) 围绕原点把图像旋转angle角度
+    // scale(x,y) x轴乘x,y轴乘y来缩放图片
+    // canvas中的原点意为初始时0,0坐标上的点
+    // translate(x,y) 把原点移动到x,y位置 
+    // 除此以外还有transform() setTransform()涉及到矩阵乘法来转换图形
+
+    // 所有这些变换,包括fillStyle与strokeStyle会一直保存在上下文中
+    // canvas中有一个栈能保存这些设置,调用save()将设置推入栈中,restore()将设置恢复成上一个保存的
   </script>
 </body>
 </html>

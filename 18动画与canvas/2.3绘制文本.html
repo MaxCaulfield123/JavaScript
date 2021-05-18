@@ -12,9 +12,10 @@
     // 使用fillText(文本字符串,x,y)或strokeText()即可绘制图标
     let canvas=document.getElementById('canvas');
     let context=canvas.getContext('2d');
-    context.font='bold 14px Arial';//设置字体
+    context.font='bold 34px Arial';//设置字体
     context.textAlign='center';//设置光标在文本横向位置
     context.textBaseline='middle'//设置光标在文本纵向位置
+    
     context.fillText('外币外币',100,100)
     // measureText('字符')方法返回一个包含字符长度的对象
     console.log(context.measureText('abc').width);
