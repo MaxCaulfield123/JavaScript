@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <img src="./cos.jpg" alt="">
+  <canvas id="canvas" width="800" height="800"></canvas>
+  <script>
+    let img=document.getElementsByTagName('img')[0];
+    let canvas=document.getElementById('canvas');
+    let context=canvas.getContext('2d');
+    let pattern=context.createPattern(img,'repeat');
+      context.fillStyle=pattern;
+    window.onload=function(){
+      context.fillRect(10,10,500,500)
+    }
+    // 可以用context.getImageData(起点xy,大小宽高)来获取图像一部分的数据包括颜色rgb值等等;
+    // 详情看书566页
+
+    // 此外还有context.globalAlpha设置图像透明度和globalCompositeOperation设置图像重叠方式
+    context.globalAlpha=0.5;
+    context.fillRect(500,500,100,100)
+  </script>
+</body>
+</html>

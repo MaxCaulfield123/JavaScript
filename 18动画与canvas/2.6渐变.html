@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    // fillStyle还可以接受一个由createLinearGradient(起点x,起点y,终点x,终点y)创建的渐变对象
+    let canvas=document.getElementById('canvas');
+    let context=canvas.getContext('2d');
+    //创建渐变对象并设置渐变色,起终点
+    let gradient=context.createLinearGradient(30,30,100,100);
+    // 这个渐变对象包含addColorStop(0,'颜色')函数来设置渐变颜色;
+    gradient.addColorStop(0,'white');
+    gradient.addColorStop(1,'black');
+    // 为context的fillStyle赋值渐变对象
+    context.fillStyle=gradient;
+    // 画图
+    context.fillRect(0,0,100,100)
+
+    // 径向渐变用createRadialGradient(起点圆形圆心的xy及半径,外扩圆形圆心的xy及半径);
+    let radialGradient=context.createRadialGradient(200,200,30,200,200,60);
+    radialGradient.addColorStop(0,'lightgreen');
+    radialGradient.addColorStop(1,'green');
+    context.fillStyle=radialGradient;
+    context.fillRect(200,200,300,300)
+  </script>
+</body>
+</html>

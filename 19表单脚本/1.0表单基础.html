@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="" name='max'>
+    <!-- 以下三种元素被点击都会触发submit事件 -->
+    <input type="submit">
+    <button type="submit">123</button>
+    <input type="image" src="./20200423164813_1@凡科快图.png">
+    <!-- 以下两种元素都能重置表单 -->
+    <input type="reset">
+    <button type="reset">重置</button>
+  </form>
+  <script>
+    // form元素的dom元素有自己的属性和方法,例如submit() reset() acceptCharset服务器可以接受的字符集等在581页
+    // 可以用doucument.forms获取页面上的所有表单元素, .forms(表单Name)快速获取某一个表单
+    let form=document.forms['max'];
+    console.log(form);
+    form.addEventListener('submit',(e)=>{
+      // 先触发这个事件,再提交,所以这里可以进行用户校验,注意为了防止表单被提交两遍,这里也可以进行拦截!
+      e.preventDefault();//submit事件阻止默认的提交到服务器并刷新网页的行为
+      console.log('submit');
+    })
+    // 此外form.submit()也可以提交,但不触发submit事件
+    // form.submit()
+
+    // 重置触发事件reset
+    form.addEventListener('reset',(e)=>{
+      // e.preventDefault()//阻止重置
+      console.log('重置啦!');
+    })
+  </script>
+</body>
+</html>

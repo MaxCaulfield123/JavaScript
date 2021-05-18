@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="800"></canvas>
+  <script>
+    // webgl就是画布的3d上下文,基于OpenGL ES2.0制作的.
+    let canvas=document.getElementById('canvas');
+    // 获取3D上下文时可以传入第二个参数对象,对象包含一系列值例如是否使用alpha通道16位深度缓冲,569页详细了解后使用
+    let gl=canvas.getContext('webgl',{alpha:true})//传参gl或webgl获取3d上下文;
+    // webgl中context有一堆常量,这些常量就是opengl中去掉开头gl的方式存在,比如gl.COLOR_BUFFER_BIT;
+    // opengl与webgl中的一堆方法由 方法名+参数数量(1-4)+表示数据类型的字符串表示;
+
+    // 在绘图前先制定一种颜色清除canvas clearColor(r,g,b,alpha)方法中rgb取值[0,1]
+    gl.clearColor(0,0,0,1)//指定黑色;
+    gl.clear(gl.COLOR_BUFFER_BIT);
+
+    // 3D的默认视口是canvas元素全部,也可以使用viewport自定义视口;
+    gl.viewport(0,0,800,800)//viewport的原点在左下角
+
+    // webgl太难了,569页-579页以后看
+    // 前端会使用基于webGL的库就行了例如three.js
+  </script>
+</body>
+</html>

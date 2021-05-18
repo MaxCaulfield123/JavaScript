@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="" name='max'>
+    <input type="text">
+    <!-- 自动获得焦点 -->
+    <input autofocus type="text">
+    <button type="submit">提交</button>
+    <button type="reset" name='textbox'>重置</button>
+  </form>
+  <script>
+    let form=document.forms['max'];
+    console.log(form.elements[0],form.elements['textbox'],form.length);
+    // 如果上面的name=textbox的不止一个,则会返回一个Nodelist列表,如果有hidden或visibility被设置为None也能访问到
+    let ipt=form.elements[0];
+    // 表单字段有一些公共属性例如 disabled form name readOnly tabIndex type value
+    // 除了form外可以修改任何属性
+    ipt.readOnly=true
+    ipt.value='maxmaxamxa'
+    // 对于input与button元素可以动态修改其type属性,但select元素的type是只读的
+
+    // 还有元素.focus() .blur()方法 同样有focus,blur事件 change事件为当input或textarea元素的value变化且失去焦点时触发
+
+    let ipt2=form.elements[1];
+    ipt2.addEventListener('change',(e)=>{
+      console.log('改变啦');
+    }) 
+  </script>
+</body>
+</html>
