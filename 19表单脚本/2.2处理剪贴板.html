@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+  <script>
+    let ipt=document.getElementsByTagName('input')[0];
+    // 剪贴板也有一系列事件 beforecopy复制前触发 copy beforecut剪切前触发 cut beforepaste粘贴前触发 paste
+    // 这些事件的event对象中有clipboardData对象,包含了几个方法
+    // getData(类型参数) setData() clearData 类型参数ie有text/url 其他浏览器有MIME类型
+    ipt.addEventListener('paste',(e)=>{
+      // e.preventDefault() 表示阻止复制
+      let a=''+e.clipboardData.getData('text').toString();
+      // 很多浏览器会屏蔽一些剪贴板操作,所以可能getData为空字符串
+      console.log(e.clipboardData.getData('text'));
+      console.log(window.clipboardData.getData('text'));
+    })
+  </script>
+</body>
+</html>

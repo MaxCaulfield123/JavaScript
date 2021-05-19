@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- input的size指定宽度,maxlength指定最大长度,value为默认值 -->
+  <input type="text" size="10" maxlength="25" value="initial value">
+  <!-- textarea rows指定高度,cols指定宽度 默认值在标签内 -->
+  <textarea name="" id="" cols="30" rows="10">
+    initial value默认值
+  </textarea>
+  <script>
+    // 两个文本框都支持select()全部选中
+    let ipt=document.body.children[0];
+    // ipt.select();
+    ipt.addEventListener('focus',(e)=>{
+      // 这样在焦点时就可以选中所有文本了
+      e.target.select()
+    })
+    // select事件在ie8及以前选中第一个字符时触发,其他浏览器选择完文本后触发
+    ipt.addEventListener('select',(e)=>{
+      // 文本框元素.selectionStart/End 为选中的字符起始下标,ie8之前用document.selection.createRange().text获取选中文本
+      console.log('选中啦!',ipt.selectionStart,ipt.selectionEnd);
+    })
+    // h5支持了js中选中部分文本框中的文本 元素.setSelectionRange(起点坐标,终点坐标)
+    // 这里显示undefined是因为使用这个方法前后需要文本框有焦点才有返回值!
+    console.log(ipt.setSelectionRange(0,3));
+    // ie8之前选择部分文本用createTextRange() 具体看590页
+  </script>
+</body>
+</html>

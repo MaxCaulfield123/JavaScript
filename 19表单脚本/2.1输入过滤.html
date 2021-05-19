@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+  <script>
+    let ipt=document.getElementsByTagName('input')[0];
+    // 书中讲了输入手机号纯数字时的屏蔽方法案例
+    ipt.addEventListener('keypress',(e)=>{
+      // String.fromCHarCode(charcode码)将charcode码转为响应字符串
+      // 第一个判断解决了输入非数字的按键,如果用e.target.value则第一个字符获取不到
+      // 第二个判断是在有些低版本浏览器中backspace等按键也会被屏蔽,但这些按键的charCode都小于10
+      // 第三个判断是低版本的ie中,ctrl+v等按键会被屏蔽,所以解放ctrl按键
+      // 现在的主流浏览器用第一个足以
+      if(!/\d/.test(String.fromCharCode(e.charCode))&&e.charCode>9&&!e.ctrlKey){
+        e.preventDefault();
+      }
+    })
+  </script>
+</body>
+</html>
