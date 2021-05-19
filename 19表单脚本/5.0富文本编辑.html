@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  div{
+    width: 300px;height: 300px;
+  }
+</style>
+<body>
+  <!-- 
+    富文本编辑其实就是插入一个iframe 然后在js中将这个iframe的文档内的designMode打开;
+    然后会显示成一个可以打字的框
+   -->
+  <iframe name="max"></iframe>
+  <!-- 另外一种方式是在页面的任何一个元素上添加上contenteditable属性=true -->
+  <div contenteditable="true"></div>
+  <script>
+    window.addEventListener('load',(e)=>{
+      frames['max'].document.designMode='on';
+    })
+    // 与富文本框交互主要用execCommand()方法,具体看604页
+    frames['max'].document.execCommand('italic',false,null)
+    
+  </script>
+</body>
+</html>

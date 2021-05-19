@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 加multiple变多选 -->
+  <!-- 如果 -->
+  <select name="max" id="max">
+    <option value="sunnya">bunny</option>
+    <option value="rachel">chloe</option>
+  </select>
+  <script>
+    // 选择框select元素有如下属性和方法
+    // add(newoption,reloption)添加一个新选项到reloption前
+    // multiple是否允许多选,bool值
+    // options 所有option元素的集合
+    // remove(index)移出一个index位置的选项
+    // selectedIndex 选中项的索引值,没有选=-1
+    // size 选中框中可见的行数
+    let select=document.getElementById('max');
+
+    // 选项Options有如下方法
+    // index 选项在select中的位置下标
+    // label HTML中的label属性 selected是否选中 text选中的文本 value选项的值
+
+    // 选项处理,在选择选项时 元素.options[selectIndex]能快速找到元素
+    // 添加Option元素可以用new Option(optiontext,optionvalue) 然后append进去
+    // 也可以用 select元素.add(option元素,reloption元素)
+
+    // 移除选项selectbox.removeChild(元素) 或selectbox.remove(index)
+  </script>
+</body>
+</html>

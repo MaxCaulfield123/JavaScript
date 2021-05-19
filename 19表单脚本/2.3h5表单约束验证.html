@@ -7,8 +7,22 @@
   <title>Document</title>
 </head>
 <body>
+  <input type="text" required>
+  <input type="url">
+  <input type="email">
+  <input type="number" min="1" max="99" step="3">
+  <!-- pattern属性结合正则和js中的元素.checkValidity能知道内容是否有效 -->
+  <input type="text" pattern="^\d+$" id="max">
+  <input type="text" novalidate>
   <script>
-    
+    let ipt=document.getElementById('max');
+    ipt.addEventListener('blur',(e)=>{
+      if(ipt.checkValidity()){
+        console.log('有效');
+      }else{
+        console.log('无效');
+      }
+    })
   </script>
 </body>
 </html>
