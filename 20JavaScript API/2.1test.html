@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>这里是iframe</p>
+  <script>
+    // 接受别的页面的postMessage用message事件
+    window.addEventListener('message',(e)=>{
+      // e.data对应postMessage第一个字符串数据
+      // e.origin对应源地址
+      // e.source当不同源时为发送消息的文档的代理window对象(只能访问一定数据),同源时就是发送网站的window对象
+      console.log(e.data,e.origin,e.source);
+    })
+  </script>
+</body>
+</html>

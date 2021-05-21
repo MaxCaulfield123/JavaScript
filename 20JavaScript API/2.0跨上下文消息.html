@@ -7,9 +7,16 @@
   <title>Document</title>
 </head>
 <body>
-  <iframe id="iframe"></iframe>
+  <iframe id='iframe' src="http://127.0.0.1:5500/2.1test.html" frameborder="0"></iframe>
   <script>
-    
+    // 跨文档消息可以在不同执行上下文(不同页面或不同线程)间传递消息
+    // 主要用 其他页面的contentWindow.postMessage(消息字符串,目标源地址,传输对象的数组)来传递消息
+    let iframeWindow=document.getElementById('iframe').contentWindow;
+    // 不限制接收目标,第二个参数可以传*
+    // 第一个字符串参数可以用Json.stringify来传递数据,接受后再Json.parse()
+    window.onload=function(){
+      iframeWindow.postMessage('这是消息',"http://127.0.0.1:5500/2.1test.html")
+    }
   </script>
 </body>
 </html>

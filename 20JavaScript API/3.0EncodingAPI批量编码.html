@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 注意!!Encoding API  IE目前全版本不支持!
+    
+    // EncodingAPI主要用于字符串和定型数组的转换;
+    // 有两种方式转换字符串为定型数组二进制格式,批量编码和流编码,转为定型数组时始终使用UTF-8.流编码的支持比批量编码少
+    // 批量编码用new TextEncoder实例的encode(字符串)方法完成
+    let textEncoder=new TextEncoder()
+    let str='foo';
+    console.log(textEncoder.encode(str));//Uint8Array 102 111 111
+    // 之前提到过有的字符不只站一个UTF-8码
+    let str1='☹';
+    console.log(textEncoder.encode(str1));//占了三个位置 226 152 185
+    // 还有一个encodeInto()方法会将源字符串写入目标二进制数组,如果目标数组大小不够则中断写入
+    let fooArr=new Uint8Array(2);
+    let dict=textEncoder.encodeInto(str,fooArr);//返回一个字典对象表明读取多少字符,写入多少字符
+    console.log(dict,fooArr);
+    // encode会生成一个新UInt8Array,而encodeInto则不会 后者必须写入Uint8Array实例,使用其他类型数组会抛出错误
+  </script>
+</body>
+</html>

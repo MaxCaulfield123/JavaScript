@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 加上multiple可以多选文件 -->
+  <input type="file" multiple>
+  <script>
+    let ipt=document.getElementsByTagName('input')[0];
+    ipt.addEventListener('change',(e)=>{
+      console.log(e.target.files);
+      for(let a of e.target.files){
+        console.log(`名称:${a.name}类型:${a.type}大小:${a.size}byte`);
+      }
+    })
+  </script>
+</body>
+</html>

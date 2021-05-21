@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file" multiple>;
+  <div></div>
+  <script>
+    // new FileReader()类型可以从文件系统中读取文件并保存进自身的result属性中!
+    // 此类型有readAsText(file,[encoding码])/DataURL(file)/BinaryString/ArrayBuffer来读取文件并保存!
+    // 这个类型有三个事件 new FileReader().onprogress=fun(50ms触发一次) .onerror=fun .onload=fun
+    // 分别代表读取中,错误,和读取完成
+    let ipt=document.getElementsByTagName('input')[0];
+    let div=document.getElementsByTagName('div')[0]
+
+    ipt.addEventListener('change',(e)=>{
+      let files=e.target.files,
+          fileReader=new FileReader(),
+          type;
+      if(/image/.test(files[0].type)){
+        type='img'
+        fileReader.readAsDataURL(files[0])
+      }else{
+        type='text'
+        fileReader.readAsText(files[0])
+      }
+
+      fileReader.onerror=function(){
+        div.innerHTML='出错!文件上传不成功'
+      }
+      // onprogress事件中的参数对象event 包含total loaded lengthComputable 和即使未完成的result属性
+      fileReader.onprogress=function(e){
+        if(e.lengthComputable){//如果可以测量进度
+          console.log(`已下载:${e.loaded}总数${e.total}`);
+        }
+      }
+      fileReader.onload=function(){
+        if(type=='img'){
+          div.innerHTML=`<img src='${fileReader.result}' />`
+        }else if(type=='text'){
+          div.innerHTML=fileReader.result
+        }
+      }
+
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  // 这段代码报错运行不了!可能是抄错了
+    // 注意!!Encoding API  IE目前全版本不支持!
+    "use strict"
+    async function* chars(){
+      const decodedText='foo';
+      for(let char of decodedText){//循环字符串foo
+        yield await new Promise((resolve)=>setTimeout(resolve,1000,char))
+      }
+      
+    };
+    const decodedTextStream=new ReadableStream({
+        async start(controller){
+          for await(let chunk of chars()){
+            controller.enqueue(chunk)
+          }
+          controller.close()
+        }
+      })
+    const encodedTextStream=decodedTextStream.pipeThrough(new TextEncoderStream())
+    const readableStreamDefaultReader=encodedTextStream.getReader()
+
+      (async function(){
+        while(true){
+          const {done,value}=await readableStreamDefaultReader.read()
+          if(done){
+            break;
+          }else{
+            console.log(value);
+          }
+        }
+      })()
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 批量解码由,new TextDecoder()对象解码;
+    let textDecoder=new TextDecoder();
+    let array=Uint32Array.of(102,111,111);
+    let decodeArray=textDecoder.decode(array);
+    console.log(decodeArray);//f o o
+    // 不管是哪种定型数组都能被解码;
+    // 解码器还能处理分散在多个索引上的字符 ,例如☹
+    // 解码器还支持其他字符编码如下
+    const text=new TextDecoder('utf-16')
+    let faceArray=new Uint16Array(240,159,152,138)//这里是一个笑脸码
+    let decodeFace=text.decode(faceArray);
+    console.log(decodeFace);//这里打印不出来
+  </script>
+</body>
+</html>
