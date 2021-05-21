@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /** *
+    *所谓原子操作是指不会被线程调度机制打断的操作；
+    *这种操作一旦开始，就一直运行到结束，中间不会有任何 context switch
+    *如果这个操作所处的层(layer)的更高层不能发现其内部实现与结构，那么这个操作是一个原子(atomic)操作。
+    *原子操作可以是一个步骤，也可以是多个操作步骤，但是其顺序不可以被打乱，也不可以被切割而只执行其中的一部分。
+    *将整个操作视作一个整体是原子性的核心特征。
+    * **/
+    let sharedBuffer=new SharedArrayBuffer(2);
+    let typedArray=new Uint16Array(sharedBuffer);
+    console.log(typedArray);//Uint16Array [0]
+    // 原子操作的加减(不会被其他进程中断) Atomics.add(共享数据,索引,数值) .sub()
+    Atomics.add(typedArray,0,5)
+    console.log(typedArray);//Uint16Array [5]
+    Atomics.sub(typedArray,0,3)
+    console.log(typedArray);//Uint16Array [2]
+    // 原子操作还有 或 与 异或    0b1111中0b在c语言中代表二进制
+    //  | 或  （只要有1，那么就是1）
+    //& 与 （都是1时，结果才为1）
+    //^ 异或 （只要一样结果就是0）
+    Atomics.or(typedArray,0,0b0011);
+    console.log(typedArray);//Uint16Array [3]
+    Atomics.and(typedArray,0,1);
+    console.log(typedArray);//Uint16Array [1]
+    Atomics.xor(typedArray,0,0);
+    console.log(typedArray);//Uint16Array [1]
+
+  </script>
+</body>
+</html>

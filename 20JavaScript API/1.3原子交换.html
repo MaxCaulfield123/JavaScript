@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Atomics.exchange()先读取值并返回,再将参数值写入.可以保证连续不间断的先读后写
+    let sharedArray=new SharedArrayBuffer(2);
+    let view=new Uint16Array(sharedArray);
+    view[0]=3;
+    console.log(Atomics.exchange(view,0,4));//3 返回原有值并替代;
+    console.log(view[0]);//4
+    // Atomics.compareExchange(数据对象,索引,期待值,替换值)用来保证修改正确的值.而不是修改上次读取后,其他进程修改过的值.
+    let sa=new SharedArrayBuffer(2);
+    let typedArray=new Uint16Array(sa);
+    Atomics.store(typedArray,0,5);
+    let b=Atomics.load(typedArray,0);
+    Atomics.compareExchange(typedArray,0,b,b**2)//当期待值是b,没有被其他进程替换的时候,替换为b**2
+    console.log(Atomics.load(typedArray,0));//25
+    // 如果不是期待的值,则不会替换
+    Atomics.compareExchange(typedArray,0,24,30);
+    console.log(typedArray[0]);//25没有被替换!
+  </script>
+</body>
+</html>

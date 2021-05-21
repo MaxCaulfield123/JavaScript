@@ -8,17 +8,22 @@
 </head>
 <body>
   <script>
-    // 本文件展示不同上下文同时操作一块内存所造成的资源争抢问题
-    // 为什么同时操作会造成资源争抢?因为浏览器的js编译器和CPU架构本身有权限进行重排指令来优化!多线程的重排指令会造成冲突!
+    // 这个文件模拟了Linux Futex操作,每个工作者线程先是暂停执行且位于等待队列中,异步5000ms后唤醒一个进程,进程依次唤醒执行
     // 工作者线程内的代码
     const workerScript=`
       self.onmessage=({data})=>{
-        const view=new Uint32Array(data);
-        // 执行1000000次加操作
-        for(let i=0;i<1E6;i++){
-          view[0]+=1;
-          //Atomics.add(view,0,1)//这里使用原子锁可以让进程间的计算不冲突
-        }
+        const view=new Int32Array(data);
+        console.log('等待获得锁')
+        //这项操作仅允许同一个共享内存的 Int32Array 配合使用并且无法运行在主线程中。(可以运行在异步队列中)
+        //Atomics.wait(typedArray, index, value[, timeout])
+        //Atomics.wait()操作保证了在数据对象中索引位置上的值仍是期待值时,进程将会被睡眠,直到被唤醒或超时
+        Atomics.wait(view,0,0,1E5)
+        console.log('这个进程被锁了!已睡眠')
+        Atomics.add(view,0,1);
+        console.log('唤醒锁!');
+        //Atomics.notify(唤醒数据对象,索引,进程数) 这个api能唤醒一些等待队列中睡眠的被锁的进程
+        // 它同样不能在主进程中使用(可以运行在异步队列中),且必须使用共享Int32Array()数据对象 
+        Atomics.notify(view,0,1)
         self.postMessage(null)
       }
     `
@@ -26,7 +31,7 @@
     // blob类型就是一堆二进制数据,只不过这个数据对象类似文本
     const workerScriptBlobUrl=URL.createObjectURL(new Blob([workerScript]));
     console.log(workerScriptBlobUrl);//http://127.0.0.1:5500/049aaa3b-c32e-4ba9-bc39-aa956df2c5d6
-    // 创建容量为4的工作线程:
+    // 创建4个工作线程:
     const workers=[];
     for(i=0;i<4;i++){
       // 创建worker线程并将文本写入
@@ -43,16 +48,20 @@
     }
     // sharedArrayBuffer让多个上下文能够同时使用一块内存,与arrayBuffer有同样的api
     // 创建共享流数据对象
-    const sharedArrayBuffer=new SharedArrayBuffer(4);
-    const view=new Uint32Array(sharedArrayBuffer);
-    view[0]=1;
+    const sharedArrayBuffer=new SharedArrayBuffer(8);
+    const view=new Int32Array(sharedArrayBuffer);
+
     // 把共享流数据对象发送给每个工作者线程
     for(const worker of workers){
       worker.postMessage(sharedArrayBuffer)
     };
 
-    // 在这个文件中,4个工作者线程本应累加到4000001,但输出并不是这个数字,因为不同的工作者共同访问一个共享内存,使++这个操作冲突了
+    setTimeout(() => {
+      Atomics.notify(view,0,1)
+    }, 5000);
     
+    // 原子操作还有一个Atomics.isLockFree()意为如果原子操作可以在一定条件下操作TypeArray中的数据,则返回true
+    // 用于检测在高性能算法中是否有必要获取锁
   </script>
 </body>
 </html>

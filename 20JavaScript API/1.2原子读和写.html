@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 原子锁用两种方式解决指令重排造成冲突
+    // 1所有原子指令之间顺序永不重排
+    // 2原子读写指令也会使其他非原子不会重排,意为着同一上下文中原子读写指令之前的所有指令在原子读写指令前发生,~在~后发生
+    // Atomics.load()与.store()构建类似代码围栏 ,js引擎保证非原子指令相对~本地重排
+    let sharedBuffer = new SharedArrayBuffer(2);
+    let typedArray = new Uint16Array(sharedBuffer);
+    typedArray[0] = 1;
+    console.log(Atomics.load(typedArray, 0));//1 保证先写后读
+    Atomics.store(typedArray, 0, 2);//写入数据,保证顺序
+    console.log(typedArray[0]);//2
+  </script>
+</body>
+
+</html>
