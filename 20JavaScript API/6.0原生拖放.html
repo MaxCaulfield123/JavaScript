@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div>div{
+      width: 300px;height: 300px;
+      border: 1px dotted blue;
+    }
+    .son{
+      display: block;
+      width: 30px;height: 30px;
+      border-radius: 50%;
+      background-color: chartreuse;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <!-- 注意通过设置draggable来使默认为false的元素(除了图片,链接)可拖拽 -->
+    <p id="firdiv" draggable="true">aaaa</p>
+    <!-- <div id="firdiv" draggable="true">
+      aaaaa
+      <div class="son"></div>
+    </div> -->
+    <div id="secdiv">
+
+    </div>
+  </div>
+  <script>
+    let firdiv=document.getElementById('firdiv');
+    let secdiv=document.getElementById('secdiv');
+    function addUtil(element,event,msg){
+      element.addEventListener(event,(e)=>{
+        console.log(element.id+' - '+msg);
+      })
+    }
+    // 可以通过e.dataTransfer的setData('表示的类型,自定义也行',数据)与getData()来传输数据
+    // dataTransfer还有clearData('表示类型')与types已存储的数据数组,等有用的属性!
+    firdiv.addEventListener('dragstart',(e)=>{
+      // effectAllowed只能在dragstart中设置
+      e.dataTransfer.effectAllowed='all';
+      console.log('firdiv - dragstart',e.dataTransfer.effectAllowed);
+      e.dataTransfer.setData('a',e.target.nodeValue)
+    })
+
+    // addUtil(firdiv,'drag','drag');//drag事件只要本元素一直被拖拽就一直发生
+    addUtil(firdiv,'dragend','dragend');
+    addUtil(firdiv,'dragleave','dragleave');
+
+    // 所有元素都默认不是允许放置目标,必须把dragover和dragenter的默认行为禁用才允许放置!
+    secdiv.addEventListener('dragover',(e)=>{
+      console.log('secdiv - dragover');
+      e.preventDefault()
+    })
+    secdiv.addEventListener('dragenter',(e)=>{
+      // dataTransfer的dropEffect与effectAllowed同时设置,有none,move,copy,link表示对拖拽元素和放置目标的操作
+      // 这两个属性只是视觉上的表示!
+      // dropEffect只能在dragenter中设置
+      e.dataTransfer.dropEffect='move'
+      console.log('secdiv - dragenter',);
+      e.preventDefault()
+    })
+
+    addUtil(secdiv,'dragleave','dragleave');
+    
+    secdiv.addEventListener('drop',(e)=>{
+      // 在火狐浏览器中,drop事件如果不防止默认行为,则会打开新窗口!
+      e.preventDefault()
+      secdiv.appendChild(firdiv)
+      console.log('secdiv - drop',e.dataTransfer.getData('a'));//drop事件中获取到了数据
+    })
+
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Notification类似alert对话框,不过更灵活,且有必须得到用户允许的限制和运行在部分浏览器或https中!!
+    // firefox中得用户生成的代码来发起通知
+    Notification.requestPermission().then((msg)=>{//使用前先取得允许
+      console.log(msg);//granted允许或未点击 denied拒绝
+    })
+    let notify=new Notification('我是标题!!',{//一旦创建就立马显示!
+      body:'我是消息主体',
+      image:'./cos.jpg',
+      // 是否震动
+      vibrate:true
+    })
+    setTimeout(() => {
+      notify.close()//通过close可以关闭
+    }, 10000);
+    // notification对象还有onshow,onclick,onclose,onerror等回调
+    notify.onclose=()=>{
+      console.log('我被关闭了!');
+    }
+  </script>
+</body>
+</html>

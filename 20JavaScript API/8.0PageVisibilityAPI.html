@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    document.addEventListener('visibilitychange',(e)=>{//在页面被最小化,切换标签页时触发
+      console.log(document.visibilityState);//表示当前显示状态
+      console.log(document.hidden);//表示是否被隐藏
+    })
+  </script>
+</body>
+</html>
