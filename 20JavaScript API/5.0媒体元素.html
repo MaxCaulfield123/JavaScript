@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- <video src="" controls poster="" autoplay>媒体元素有一堆属性628页
+    <source src="" type="">这个是浏览器不支持某些格式时的替代格式,用它代替video的src
+    <source>
+    <source>
+  </video> -->
+  <audio  src="./V.A. - 黑暗悬廊boss.mp3"></audio>
+  <!-- 媒体元素的play()与pause()等方法和currentTime等属性能够让我们自建元素自定义样式控制媒体元素 -->
+  <button onclick="audio.play()">播放</button>
+  <button onclick="audio.pause()">暂停</button>
+  <script>
+    // dropenter,dropover,drap事件的e.dataTransfer对象表示拖拽到事件元素上的文件信息
+    let audio=document.getElementsByTagName('audio')[0];
+    audio.addEventListener('pause',(e)=>{//媒体元素还有一堆事件628页
+      console.log('我被暂停啦!');
+    })
+    // audio.canPlayType('MIME类型')能检测是否能播放这个格式的视频,返回probaly,maybe或空字符串
+    console.log(audio.canPlayType('audio/mpeg'));
+    // audio还有相应的构造函数
+    let audio1=new Audio('./V.A. - 黑暗悬廊boss.mp3');
+    audio1.play();
+    setTimeout(() => {
+      audio1.pause()
+    }, 10000);
+  </script>
+</body>
+</html>

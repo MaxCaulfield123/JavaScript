@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file">
+  <img>
+  <script>
+    // 对象URl也被称为BlobURL,有了它就不用把文件读取进js,而直接用URL指向内存中的文件就行了
+    // window.URL.createObjectURl(file/blob)传入文件或blob对象,返回一个指向内存中文件的地址字符串;
+    let ipt=document.getElementsByTagName('input')[0];
+    let img=document.getElementsByTagName('img')[0];
+    ipt.addEventListener('change',(e)=>{
+      let url=URL.createObjectURL(e.target.files[0]);
+      img.src=url;
+    })
+  </script>
+</body>
+</html>

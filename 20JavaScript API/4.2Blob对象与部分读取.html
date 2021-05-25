@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file" name="" id="ipt">
+  <div></div>
+  <script>
+    // Blob表示二进制大对象,是js对不可修改的二进制数据的封装,包含字符串数组,ArrayBuffers,ArrayBufferViews
+    // new Blob(数据对象,{type:MIME类型字符串})返回Blob对象
+    console.log(new Blob(['{"a":"b"}'],{type:'application/json'}));//Blob {size: 9, type: "application/json"}
+    let ipt=document.getElementById('ipt'),
+        div=document.getElementsByTagName('div')[0]
+    
+    ipt.addEventListener('change',(e)=>{
+      let file=e.target.files;
+          //blob.Slice(起始下标,截取字节长度,此blob的类型)返回一个类似文件的被截取的数据对象 
+      let blob=new Blob(file,{type:'text'}).slice(3,32);//新建blob对象读取文件,然后截取部分数据
+      let reader=new FileReader();//新建FileReader对象
+      reader.readAsText(blob);//读取blob数据,作为文字放入reader.result属性中
+      reader.onload=function(){
+        div.innerHTML=reader.result;
+      }
+
+    })
+  </script>
+</body>
+</html>

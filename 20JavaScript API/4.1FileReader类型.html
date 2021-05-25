@@ -7,38 +7,40 @@
   <title>Document</title>
 </head>
 <body>
+  <!-- type=file上传 -->
   <input type="file" multiple>;
   <div></div>
   <script>
     // new FileReader()类型可以从文件系统中读取文件并保存进自身的result属性中!
     // 此类型有readAsText(file,[encoding码])/DataURL(file)/BinaryString/ArrayBuffer来读取文件并保存!
+    // 读取并保存的操作是异步的
     // 这个类型有三个事件 new FileReader().onprogress=fun(50ms触发一次) .onerror=fun .onload=fun
     // 分别代表读取中,错误,和读取完成
     let ipt=document.getElementsByTagName('input')[0];
     let div=document.getElementsByTagName('div')[0]
 
-    ipt.addEventListener('change',(e)=>{
+    ipt.addEventListener('change',(e)=>{//上传文件后触发change事件
       let files=e.target.files,
-          fileReader=new FileReader(),
+          fileReader=new FileReader(),//新建FileReader对象
           type;
-      if(/image/.test(files[0].type)){
+      if(/image/.test(files[0].type)){//image类型的文件,读取并保存为URL到result中
         type='img'
         fileReader.readAsDataURL(files[0])
-      }else{
+      }else{//其他类型读取并保存为文字
         type='text'
         fileReader.readAsText(files[0])
       }
 
-      fileReader.onerror=function(){
-        div.innerHTML='出错!文件上传不成功'
+      fileReader.onerror=function(e){//出错时的处理,包含错误码
+        div.innerHTML='出错!文件上传不成功,原因:'+e.code
       }
       // onprogress事件中的参数对象event 包含total loaded lengthComputable 和即使未完成的result属性
-      fileReader.onprogress=function(e){
+      fileReader.onprogress=function(e){//50ms触发一次的,读取时的处理
         if(e.lengthComputable){//如果可以测量进度
           console.log(`已下载:${e.loaded}总数${e.total}`);
         }
       }
-      fileReader.onload=function(){
+      fileReader.onload=function(){//完成后的处理
         if(type=='img'){
           div.innerHTML=`<img src='${fileReader.result}' />`
         }else if(type=='text'){
@@ -47,6 +49,8 @@
       }
 
     })
+    // 还有一个FileReaderSync类型,与FileReader的区别在于它是同步的,且只能在工作者线程中运行,直到把文件都放入内存中才继续执行代码
+    // 用它可以另一个线程读取文件
   </script>
 </body>
 </html>
