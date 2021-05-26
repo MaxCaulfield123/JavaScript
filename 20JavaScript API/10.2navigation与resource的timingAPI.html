@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <img src="./cos.jpg" alt="">
+  <script>
+    // performance.getEntriesByType('navigation') 记录了一堆时间戳,可以用它知道页面一系列事件的用事
+    let [a]=performance.getEntriesByType('navigation');
+    console.log(a);
+    // resource类型记录了页面下载资源时的时间戳,每次加载资源'完成后!'都会自动记录;
+    window.onload=function(){
+      let [b]=performance.getEntriesByType('resource');
+      console.log(b);
+    }
+  </script>
+</body>
+</html>

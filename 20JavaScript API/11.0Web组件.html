@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width='device-width', initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- template标签让浏览器自动将其解析为DOM子树,但不渲染 ie不支持这个标签-->
+  <template>
+    <p>我在模板标签template里!</p>
+  </template>
+  <template id="saber">
+    <script>
+      console.log('我是模板中的script');
+    </script>
+  </template>
+  <script>
+    //这里的web组件其实就是一系列增强dom的工具;例如影子DOm,自定义元素和HTML模板;
+    // 这些东西各个浏览器实现的情况非常不一致!
+
+    let a=document.getElementsByTagName('p')[0]
+    console.log(a);//undefined
+    // 通过普通方法查询不到template标签中的元素,它们在DocumentFragment节点内,f12可以看到template内有引用
+    // 对template元素的content属性可以取得内部的fragment引用;
+    let fragment=document.getElementsByTagName('template')[0].content;
+    console.log(fragment);
+    
+    // 此时的fragment就像一个最小化的独立的document对象,可以使用document的一系列查询方法;
+    console.log(fragment.querySelector('p'));//查到p标签了!;
+    // 也可以直接把template中的content属性获得的frag节点直接放入其他地方
+    document.body.appendChild(fragment)
+
+    // 还可以新建fragment对象,通过向这个类似document的对象插入标签再一次性插入文档中,来防止过多的使页面重写渲染(d.append会使);
+    let frag=new DocumentFragment();
+    frag.appendChild(document.createElement('p'))
+    frag.appendChild(document.createElement('p'))
+    frag.appendChild(document.createElement('p'));
+    document.body.appendChild(frag);//一次插入后,fragment节点本身消失
+
+    // 可以用importNode(节点,是否子树)来复制克隆的frag;
+    console.log(fragment);
+    let b=document.importNode(fragment,true);
+    b.appendChild(document.createElement('p'))
+    document.body.appendChild(b);//多出第四个p标签!
+
+    // template标签中的script标签中的代码会在其插入实际文档时运行;
+    let temspt=document.getElementById('saber').content;
+    document.body.appendChild(temspt);//插入时运行了!
+  </script>
+</body>
+</html>

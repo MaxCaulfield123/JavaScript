@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // performanceTimeline记录了度量客户端延迟的api;
+    // 性能对象被浏览器自动记录的,用performance.getEntries()获取
+    let a=performance.getEntries();
+    console.log(a);//这个集合中的对象就是性能对象performanceEntry;
+    // 对象有name,entryType,startTime,duration属性
+    console.log(a[0].name,a[0].entryType,a[0].startTime,a[0].duration);
+    // 其实性能对象还继承了一堆属性
+
+    // 使用performance.mark()可以记录自定义的性能对象,用performance.getEntriesByType('mark')获取
+    performance.mark('foo');
+    let [b]=performance.getEntriesByType('mark');
+    console.log(b);
+    // 在运算开始的前后各创建一个自定义性能对象能计算持续时间
+    performance.mark('max');
+    for(let i=0;i<1E6;i++){}
+    performance.mark('chloe');
+    let [max,chloe]=performance.getEntriesByType('mark').splice(1,2)
+    console.log(chloe.startTime-max.startTime);
+    // 还可以生成性能比较对象,由performance.measure(不同的性能对象)生成;
+    performance.measure('max','chloe');
+    let [difference]=performance.getEntriesByType('measure');
+    console.log(difference);
+    
+  </script>
+</body>
+</html>

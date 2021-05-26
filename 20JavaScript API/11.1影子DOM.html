@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="max"></div>
+  <div id="chloe"></div>
+  <script>
+    // 影子dom类似template(但是能渲染到页面上),它能使css能够被限制在dom子树;
+    //只有部分html元素能够成为影子dom,例如div,body,h1-h6,span等:
+    // 影子dom通过attachShadow()方法创建并添加给html元素的,容纳影子dom的元素被称为影子宿主;
+    let max=document.getElementById('max');
+    let chloe=document.getElementById('chloe');
+
+    // attachShadow({mode:'open/close'}) mode为open的影子宿主通过shadowRoot能够访问到影子dom,closed的则不能
+    let openShadow=max.attachShadow({mode:'open'});
+    let closedShadow=chloe.attachShadow({mode:'closed'});
+    console.log(openShadow,closedShadow);
+    console.log(max.shadowRoot,chloe.shadowRoot);
+    // 不能为了安全而创建closed影子dom
+  </script>
+</body>
+</html>

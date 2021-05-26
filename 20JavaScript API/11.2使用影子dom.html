@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在影子dom中的style标签内的样式,会只应用于其所属的影子dom上:
+    for(let i of ['red','green','lightblue']){
+      let div=document.createElement('div');
+      let shadow=div.attachShadow({mode:'open'});
+      shadow.innerHTML=`
+        <p>让我变成${i}色</p>
+        <style>
+          p{
+            color:${i}
+          }
+        </style>
+      `
+      document.body.appendChild(div)
+    }
+    // f12中看得更清晰
+    // html元素也可以插入到影子dom中但不会受影子dom自身的样式影响!;
+    let a=document.createElement('span');
+    a.innerHTML='外币外币';
+    let shadow=document.body.children[1].shadowRoot;
+    shadow.appendChild(a)
+  </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="d1">
+    <p>我是p标签</p>
+  </div>
+  <script>
+    // 使用影子dom使元素成为宿主后,会隐藏原有子元素;
+    document.getElementById('d1')
+      .attachShadow({mode:'open'})//返回shadow元素
+      .innerHTML=``
+  </script>
+</body>
+</html>
