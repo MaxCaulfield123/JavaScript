@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    console.log(performance.timeOrigin);
+
+    // perfomance对象记载了一堆浏览器内部的度量指标api
+    // 1high resolution time API
+    function max(){
+      let i=0;
+      while(true){
+        i++;
+        if(i==1000){
+          console.log(i);
+          break;
+        }
+      }
+    }
+    let a=Date.now();
+    max();
+    let b=Date.now();
+    console.log(b-a);//出现0是大多数,因为date.now是毫秒级精度,函数运行几十毫秒时可能就是0;当系统时钟被调整时还可能出现负值或极大值
+
+    //performance.now()返回一个微妙精度的浮点值,表示从执行上下文到.now()调用经过的时长
+    let t1=performance.now();
+    max();
+    let t2=performance.now();
+    console.log(t2-t1,t1);
+    // performance.timeOrigin返回performance对象初始化时全局系统时钟的值
+    console.log(performance.timeOrigin);
+
+    // 为了防止幽灵漏洞spectre执行缓存推断攻击,主流浏览器会降低performance.now()的精度
+  </script>
+</body>
+</html>
