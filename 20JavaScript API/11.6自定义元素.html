@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    class max extends HTMLElement {
+      constructor() {
+        super();
+        // this.bar = true;//如果使用createElement创建则不能附带初始属性!
+      }
+      static get observedAttributes() {
+        // 返回应该触发attributeChangedCallback执行的属性
+        return ['bar']
+      }
+      attributeChangedCallback(name, oval, nval) {
+        if (oval !== nval) {
+          console.log(`${oval}->${nval}`);
+          this[name] = nval;
+        }
+      }
+      get bar() {
+        return this.bar
+      }
+      set bar(val) {//每次js代码改变Bar属性,都会修改实际元素属性
+        this.setAttribute('bar', val)
+      }
+    }
+    // customElements.whenDefined(自定义元素)返回一个在自定义元素被定义之后解决的期约
+    customElements.whenDefined('x-max').then(() => console.log('defined'))
+    // customElements.get(自定义元素)方法返回自定义元素的类
+    console.log(customElements.get('x-max'));
+    customElements.define('x-max', max);
+    let xmax = document.createElement('x-max');
+    console.log(xmax instanceof max);//false
+    // 使用customelements.upgrade升级自定义元素
+    customElements.upgrade(xmax);
+
+    document.body.appendChild(xmax)
+      document.querySelector('x-max').setAttribute('bar', false)
+  </script>
+</body>
+
+</html>

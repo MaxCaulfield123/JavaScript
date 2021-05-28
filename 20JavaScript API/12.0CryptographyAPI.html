@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 我们使用的Math.random()是伪随机生成器实现的!对一个内部状态应用了固定算法;
+    // 由于是内部静态状态,所以每次带入到算法后的产出值都是一定的,这容易被攻击;
+    // cryptographyAPI引入了密码学随机生成器,加入了例如测试硬件时间的难易预计行为的系统特性;
+
+    // crypto.getRandomValues(定型数组)会把随机值写入到参数定型数组;最多生成2**16位数据
+    let arr=new Int16Array(1);
+    for(let i=0;i<5;i++){
+      console.log(crypto.getRandomValues(arr));
+    }
+    let arr1=new Int8Array((2**16)+1);
+    let a=crypto.getRandomValues(arr1);//+1后报错
+  </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 浏览器会尝试将不认识的元素变为通用元素;
+    // 自定义元素必须必须有-,且不在开头和结尾,且不能是单闭合标签
+   
+    // 可以使用customElements.define(自定义元素名,继承类)来使自定义元素属于一个类(但未加入dom前未升级,不能用instanceof 检测)
+    class chloe extends HTMLElement{//自定义元素好处在于可以自定义类行为
+      constructor(){//创造自定义元素实例时调用
+        super()//必须用super,因为这是在自定义元素加入dom时要调用的
+        console.log('x-max');
+        this.appendChild(document.createElement('p'))
+        this.attachShadow({mode:'open'});
+        this.shadowRoot.innerHTML='<p>1111</p>'
+      }
+      // 自定义元素还有一堆生命周期
+      connectedCallback(){
+        console.log('connectedCallback在将自定义元素添加到dom时调用');
+      }
+      disconnectedCallback(){
+        console.log('移除');
+      }
+    }
+    // 如果上述的chloe继承元素类例如HTMLDivElement,则可以在define中加{extends:'div'}
+    // 用如下的is来将div元素变为自定义元素的实例
+    customElements.define('x-max',chloe);
+
+    document.body.innerHTML=`
+    <x-max></x-max>
+    <x-max></x-max>
+    <x-max></x-max>
+    <div is="x-max"></div>
+    `
+    console.log(document.getElementsByTagName('x-max')[0]);//x-max;
+  </script>
+</body>
+</html>
