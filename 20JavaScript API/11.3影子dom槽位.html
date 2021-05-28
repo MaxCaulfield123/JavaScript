@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
+
 <body>
-  <div id="d1">
-    <p>我是p标签</p>
-  </div>
+  
   <script>
-    // 使用影子dom使元素成为宿主后,会隐藏原有子元素;
-    document.getElementById('d1')
-      .attachShadow({mode:'open'})//返回shadow元素
-      .innerHTML=``
+    document.body.innerHTML=`
+    <div id="d1">
+    <p slot='f1'>我是p1标签</p>
+    <p slot='f2'>我是p2标签</p>
+  </div>
+    `
+    let a = document.getElementById('d1');
+    // 使用影子dom使元素成为宿主后,可以使用原有子元素的映射slot;
+    let shadow = a.attachShadow({ mode: 'open' })//返回shadow元素
+    shadow.innerHTML = `
+        <div id='max'>
+          <slot name='f2' style="color:'blue'" ></slot>
+          <slot name='f1' style="color:'blue'" ></slot>
+        </div>
+      `//这里的slot指向p标签,这种命名槽位可以改变影子宿主元素的渲染顺序
+    let b = shadow.getElementById('max');
+    console.log(b.children[0].children);
+    console.log(document.querySelector('p').parentElement);
+    // 注意这个例子中原本的p元素还在divd1里没有被隐藏,且parentElment也还是divd1
   </script>
 </body>
+
 </html>
