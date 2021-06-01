@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // subtle的所有方法都要用到ArrayBuffer上,常与TextEncoder/Decoder实现字符串到二进制的相互转换
+    (async function(){
+      let text=new TextEncoder().encode('foo');
+      // crypto.subtle用于生成信息摘要 传入SHA-1 -256 -384 -512指定算法,后三者用于TLS,PGP比特币,算法安全
+      let msgDigest=await crypto.subtle.digest('SHA-256',text);
+      let arr=Array.from(new Uint8Array(msgDigest)).map((x)=>x.toString(16)
+                                                              .padStart(2,'0'))
+              .join('');
+      console.log(arr);
+    })()
+  </script>
+</body>
+</html>
