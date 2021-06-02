@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // js中的非重大错误(不会导致进程无法继续执行,影响用户主要目标)可以用一小块错误文字来代替页面中的部分区域
+    // for(let mod of mods){
+    //   mod.init()
+    // }这样是绝对错误的,因为当一个mod.init出错时代码停止运行,后面的所有模块都不能加载!
+
+    // for(let mod of mods){
+    //   try{
+    //     mod.init()
+    //   }catch(e){
+    //     //处理错误
+    //   }
+    // }在循环中加入trycatch块,能够使前面的出错不影响后面的运行!
+  </script>
+</body>
+</html>

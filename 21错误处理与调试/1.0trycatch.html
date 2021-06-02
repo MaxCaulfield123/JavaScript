@@ -12,17 +12,35 @@
     // 它非常适合用于我们处理不了的错误,比如框架或大型js库中的函数出错,我们无法修改源代码,所以用trycatch来处理可能的出错
     try{
       // 可能出错的代码
+      // 可以用throw关键字来抛出任何数据类型的错误
+      // throw {a:1}
+      // throw new SyntaxError('i don not like your syntax')
     }catch(err){//err参数必须声明
       // 不同浏览器对err对象提供不同的属性,但都有message
       // 可以检测err是哪种错误的实例,进而分别处理
       if(err instanceof ReferenceError){
-
+        // axios.get()//此时可以将错误信息推送给服务器!
       }else if(err instanceof SyntaxError){
 
       }
     }finally{//结束后必定运行,通常它和catch选一个
       // 这里如果有return,则忽视trycatch的return
     }
+    // 我们可以用类的继承来创建自定义错误
+    class wrongMax extends Error{
+      constructor(msg){
+        super(msg);
+        this.name='自定义的错误';
+        this.msg=msg
+      }
+    }
+    try{
+      throw new wrongMax('这是我自定义的!')
+    }catch(e){
+      console.log(e.name,e.msg);
+    }
+    // 捕获错误trycatch是为了阻止浏览器用默认方式响应,而抛出错误是为错误提供有关其发生原因的说明
+    // 所以我们在编写自己的js库或通用的函数的时候,应该认真考虑抛出带有详细信息的错误
   </script>
 </body>
 </html>

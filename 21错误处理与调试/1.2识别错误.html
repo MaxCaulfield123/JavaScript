@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 错误一般有类型转换错误,数据类型错误,通信错误
+    // 通讯错误第一种是在将数据发送到服务器之前没有用encodeURIComponent()编码
+    // 这是一个传入地址,自动将查询字符串编码的函数
+    function addQueryStringArg(url,name,value){
+      if(url.indexOf("?")==-1){
+        url+="?"
+      }else{
+        url+="&"
+      }
+      url+=`${encodeURIComponent(name)}=${encodeURIComponent(value)}`;
+      return url;
+    }
+  </script>
+</body>
+</html>

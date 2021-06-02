@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 任何没有被捕获的错误都会触发error事件
+    // error事件可以通过window.onerror=fun或addevent来添加
+    window.onerror=(e,url,line)=>{
+      console.log(e,url,line);
+    }
+    throw '肌肉金轮';
+    // img也能添加error事件,如果Img的src没有返回可读取的图片,则会报错
+    let img =new Image();
+    img.addEventListener('error',(e)=>{
+      
+    })
+  </script>
+</body>
+</html>
