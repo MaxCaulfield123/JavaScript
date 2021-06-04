@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 请求网络数据有fetch()和使用xhr对象两种方法,前者不被ie支持,后者用的较多但比较落伍;
+    // 创建XHR对象
+    let xhr = new XMLHttpRequest();
+    // 注意先声明事件函数再open
+    // xhr有readystate属性表示此次请求的阶段,它每次改变都会触发xhr的onreadystatechange事件
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {//4代表已接收所有响应
+        // 服务器响应后,xhr对象的responseText,responseXML(服务器传输非XML数据时为Null),status,statusText会被填充数据;
+        //此时根据状态码进行判断请求结果
+        if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
+          console.log(xhr.responseText);
+        }
+        // 如果响应之前要取消异步请求,可用xhr.abort()
+      }
+    }
+    
+    // 使用xhr对象前需要先调用open()方法,为发送链接做准备,xhr.open(请求类型,请求域名,是否异步)
+    // get请求中,参数被放在域名后的问号后的查询字符串内,不同的键值对用&隔开,且传输的键值对最好用encodeURIcomponent()编码
+    xhr.open('get', '1.0.html', false);
+
+    // xhr可以设置请求头,请求头被服务器用于解析数据等,必须在open后,send前设置!
+    // post请求发送的数据需要服务器解析后才能使用,而表单提供的数据不同,可以将content-type设置为application/x-www.formurlencoded
+    // 并且请求主体设置为相应格式的字符串,例如查询字符串
+    xhr.setRequestHeader('myheader','value','Content-Type','application/x-www-formurlencoded')
+
+    // xhr.send(数据主体)发送数据到服务器,如果没有数据主体就填null(某些浏览器要求)
+    xhr.send(null);
+
+  </script>
+</body>
+
+</html>

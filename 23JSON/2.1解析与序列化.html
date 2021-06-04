@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let obj={
+      name:'dingding',
+      age:23,
+      id:3000
+    }
+    // json第二个参数传入数组
+    let json1=JSON.stringify(obj,['name','age']);
+    console.log(json1);//只有name和age,没有id
+    // stringify第二个参数函数
+    function filter(keys,val){
+      switch (keys) {
+        case 'name':
+          return val+'过滤啦';
+        case 'id':
+          return undefined;//利用json特性忽略这个值
+        default:
+          return val;
+      }
+    }
+    // 第三个参数控制缩进空格数量,可以用任意字符替代
+    let json2=JSON.stringify(obj,filter,'--');
+    console.log(json2);
+  </script>
+</body>
+</html>

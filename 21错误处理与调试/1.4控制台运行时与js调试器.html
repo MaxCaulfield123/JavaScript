@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 300px;height: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div class="abc">123</div>
+  <script>
+    // 在控制台element中,单机一个元素节点,然后用$0来引用它
+    (function(){
+      console.log('before');
+      debugger;
+      window.a=1;
+      window.a++;
+      console.log('after',window.a);
+    })()
+    // 旧版ie的一堆调试错误的问题在691页
+  </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // JSON的方便之处在于js数据和json间的快速转换
+    // JSON.parse(json数据,过滤数组或函数,缩进),JSON.stringify(js数据);
+    let a={
+      name:'dingding',
+      id:undefined,
+      introSelf(){
+        console.log('fuck');
+      }
+    }
+    // 在序列化js数据为json数据时,所有函数与原型成员与值为null的属性都会被忽略
+    let json=JSON.stringify(a);
+    console.log(json);
+    let b=`{"name":"dingding"}`;
+    console.log(JSON.parse(b));
+  </script>
+</body>
+</html>
