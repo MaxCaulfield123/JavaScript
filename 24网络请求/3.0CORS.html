@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //CORS定义了浏览器与服务器如何实践跨域通信;基本思路就是使用Http头使浏览器与服务器相互了解,来决定是否要响应
+    // get/post请求没有自定义头部且请求体是text/plain时,会有一个额外的头部叫origin表明本页面的源
+    // 服务器响应请求会发送Access-Control-Allow-Origin头,表示允许通信的网页,公开则为*
+    // 跨域xhr对象在open时传入绝对URL,他有一些限制
+    /**
+     * 不能使用setRequestHeader()自定义头部
+     * 不能发送和接受cookie
+     * getALlResponseHeaders()返回空字符串
+     * **/
+  </script>
+</body>
+</html>

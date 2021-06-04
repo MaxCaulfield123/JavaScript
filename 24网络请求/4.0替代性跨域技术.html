@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 可以用图片的src特性向服务器传输数据,优点是跨域且单向(无需修改服务器),缺点是没有数据返回;
+    let img=new Image();
+    img.onload=img.onerror=function(){
+      alert('done')
+    }//通过这个知道什么时候收到响应
+    //通过查询字符串的方式传输数据
+    img.src='https://www.baidu.com?name=dingding'
+
+    // jsonp也可以无视同源策略,直接发送get请求,缺点是需要后端把查询的数据放入回调函数中返回;
+    // jsonp利用的是script标签的src属性
+    let script=document.createElement('script');
+    // 使用查询字符串传数据,注意传入的函数会在后端赋予参数后返回到前端
+    script.src='www.max.com/jsonp/api?a=1&callback=cbFun';
+    // callback=cbFun后端会把参数放入传输的cbFun数据中,一旦返回完成script标签立马执行有参数的cbfun
+    function cbFun(a){
+      console.log(a);
+    }
+    // document.body.appendChild(script)
+  </script>
+</body>
+</html>

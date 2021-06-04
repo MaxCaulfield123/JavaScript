@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="">
+    <input type="text" value="123">
+  </form>
+  <script>
+    // 可以使用formData来模拟form表单类型,这样能被xhr自动添加头部信息,不用手动添加;
+    // 新建时可以传入form元素,自动将form元素中的数据填入js对象中
+    let form=new FormData(document.getElementsByTagName('form')[0]);
+    form.append('name','dingding')//form这样添加键值对的数据类型
+    console.log(form);
+    
+    // xhr还有timeout指定超时属性 和超时时触发的ontimeout事件
+    let xhr=new XMLHttpRequest();
+    xhr.timeout=1000;
+    xhr.ontimeout=()=>{
+      console.log('超时未收到响应,readyState仍变为4,超时后访问xhr.status会报错');
+    }//xhr.status如果与超时连用可以放在trycatch块中
+
+    // xhr.overrideMimeType()可以重写从服务器传来的数据MIME类型
+    xhr.overrideMimeType('text/plain')
+  </script>
+</body>
+</html>

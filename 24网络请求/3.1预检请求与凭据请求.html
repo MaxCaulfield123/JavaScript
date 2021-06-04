@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1使用自定义头部2除get/post之外的方法,3不同请求体内容类型 
+    // 上述情况下cors会应用通过预检请求的服务器验证机制
+    // 使用OPTIONS方法发送预检请求并包含以下头部
+    // Origin,Access-Control-Request-Method,acrHeaders
+    // 服务器响应时也会返回这些,且额外返回ac-Max-Age
+
+    // 默认情况跨域请求不提供凭据(cookie,HTTP认证,客户端SSL证书)
+    // 将withCredentials设置为true来携带凭证
+    // 之后服务器会返回ac-Allow-Credentials:true头部,如果没有则不返回数据
+  </script>
+</body>
+</html>

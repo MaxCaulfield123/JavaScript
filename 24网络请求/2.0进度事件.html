@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 发送请求还有六个如下进度按顺序执行
+    // loadstart接收到响应时触发->progress反复触发->error abort load触发其一->loadend
+    // load事件接受响应全部完成后触发,有event对象的浏览器target被设置为xhr
+
+    // progress事件的event有lengthComputable进度是否可用,position已下载字节,totalSize
+    // 且必须在open之前使用
+    let xhr=new XMLHttpRequest();
+    xhr.onprogress=function(e){
+      if(e.lengthComputable){
+        console.log(position/totalSize);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -34,6 +34,7 @@
     xhr.setRequestHeader('myheader','value','Content-Type','application/x-www-formurlencoded')
 
     // xhr.send(数据主体)发送数据到服务器,如果没有数据主体就填null(某些浏览器要求)
+    // 可以使用serialize(表单元素)获取表单数据发送
     xhr.send(null);
 
   </script>
