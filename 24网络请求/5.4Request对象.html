@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // request对象就相当于把fetch中的参数提取出来放入一个对象容器;
+    let req=new Request('/api',{//new Request创建传入两个参数,url与init对象(与fetch相同)
+      method:'POST'
+    })
+    // 可以在新建request对象时传入已有对象来复制所有init与url信息,但两者的bodyUsed属性不同
+    let req2=new Request(req,{method:'GET'})//复制时传入的init对象会覆盖原有对象的同名属性
+    // 也可以使用clone()方法完全复制;
+    let req3=req.clone();
+    // 当req对象的text()方法被调用后(读取数据后),bodyUsed被设置为true
+
+    //使用request对象,fetch中新传入的init对象也会覆盖req对象的同名属性
+    fetch(req,{method:'GET'});//如果req已经读取过数据(text())则无法发送,fetch后的req对象也无法使用
+    // 所以clonereq对象必须在fetch使用前clone
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // fetch的第二个参数init对象有很多可选值
+    let item={
+      body:'123',//请求体的内容,有内容限制
+      cache:'reload',//控制浏览器与下载的缓存的交互
+      credentials:'omit',//如何包含cookie
+      headers:{},//请求头
+      integrity:'aaaasd2342',
+      keepalive:true,//请求响应的事件是否可以超出页面生命周期
+      method:'POST',//请求方法
+      mode:'cors',//指定跨域请求的响应是否有效
+      redirect:'follow',//重定向时的行为
+      referrer:'no-referrer',//指定http的referer头的内容
+      referrerPolicy:'no-referrer',//指定http的referer头
+      signal:abortController.signal
+    }
+    fetch('/api',item).then((res)=>{})
+  </script>
+</body>
+</html>

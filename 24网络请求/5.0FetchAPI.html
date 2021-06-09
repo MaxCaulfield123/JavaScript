@@ -14,6 +14,21 @@
       somorphic-fetch是建在Github的whatwg fetch polyfill基础之上的一个库，
       建议添加es6 promise兼容的polyfill。 
      **/
+    //  使用fetch(url)发送数据,返回一个期约对象
+    fetch('/bar').then((response)=>{
+
+      // res还有如下属性,fetch默认遇到重定向时会跟随到重定向的url返回200而不是300,redirected变为true
+      console.log(response.status,response.statusText,response.redirected,response.ok);//ok表示请求吗在200-299
+
+      // 期约的成功执行器含有响应参数
+      response.text().then((data)=>{//res.text()返回含有响应数据的期约
+        console.log(data);
+      })
+
+      // 可以通过res.url检查请求的url
+      console.log(response.url);
+    },(err)=>{console.log(err);})//通常是打平的.then((res)=>{res.text()}).then((data)=>{clgdata})  
+    // 只要服务器响应期约就立马解决,即使数据未下载完时
   </script>
 </body>
 </html>

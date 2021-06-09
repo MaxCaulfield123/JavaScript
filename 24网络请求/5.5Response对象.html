@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // new response(消息主体,init对象)创建response对象;
+    let a=new Response('bar');
+    console.log(a);
+    // fetch中的response对象与上面相同,都包含一系列属性
+    fetch('/api').then((response)=>{
+      console.log(response);
+    })
+    // response对象有redirect(网址,status码)与error()方法,前者用来将res重定向,后者用来表示产生网络错误;
+    a.redirected('/api2',301)//注意第二个必须是30x;
+    a.error()
+    // 用clone()方法复制response对象,与resquest对象相同,都会在text()读取数据后无法使用;
+    let b=a.clone();
+    a.text();
+    // a.clone()//报错!
+    let c=new Response(a.body)//如果新req对象引用旧req对象,则一个对象text后另一个对象无法读取;
+    // c.text()//报错!
+  </script>
+</body>
+</html>

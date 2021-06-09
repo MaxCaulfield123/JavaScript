@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // headers对象是外发请求和响应的头部的容器;通过请求实例.headers访问,响应实例.headers访问;
+    // Headers对象和map对象极为相似
+    let head=new Headers();
+    head.set('foo','bar');
+    console.log(head.has('foo'));
+    console.log(head.get('foo'));
+    head.set('foo','newbar');
+    console.log(head.get('foo'));;
+    head.delete('foo');
+    console.log(head);
+
+    // head和map都能用一个可迭代对象作为初始化数据,区别在于head能用键值对的不可迭代对象来初始化
+    let head1=new Headers([['foo','bar']]);
+    let head2=new Headers({foo:'bar'});
+    // 可以通过append添加数据,键名相同时类似set;
+    head2.append('max','chloe');
+    head2.append('max','js');
+
+    // Headers可以通过 '头部护卫'来防止部分头部数据被set append delete修改,具体在732页
+
+  </script>
+</body>
+</html>
