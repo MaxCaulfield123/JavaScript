@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 为了记录更多浏览器期间的信息,有些请求适合在页面声明周期最晚时发送
+    // 但所有xhr,fetch的请求在unload事件中发送都会被取消;
+    // 所以出现了navigator.sendBeacon(url,数据) 来发送一个post请求;状态码超时失败等都不透明;
+    navigator.sendBeacon('www.baidu.com','{foo:"bar"}');
+    // 它任何时间都能异步发送请求,且页面关闭后也会发送;
+    //beacon 灯塔n.
+  </script>
+</body>
+</html>
