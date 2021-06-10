@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //https://www.ruanyifeng.com/blog/2018/07/indexeddb.html
+    // indexDB用于存储大规模数据,5-10mb根据浏览器不同而不同,超出则会询问用户
+    // 它的大多数操作是异步的,且大多数操作要添加onerror 和 onsuccess事件;
+    //indexDB采用公共命名空间下的一组对象存储,而不是用表格存储
+
+    // indexedDB.open('数据库名称',版本号)发送一个请求到相应的数据库,没有则发送创建请求,返回IDBrequest实例
+    // 版本号要使用整数,转换为unsigned long long数值(8个字节，64位的无符号长整形 2^64)
+    let request=indexedDB.open('max',1);
+    // IDBrequest实例上可以添加事件;
+    let db;
+    request.onerror=function(e){
+      console.log(e.target.errorCode);
+    }
+    request.onsuccess=function(e){
+      db=e.target.result;//成功后的这个属性保存数据库实例
+      console.log(db);
+    }
+    console.log(db);//undefined是因为,e只在事件期间存在,事件结束后被释放了
+    // 数据库的创建与升级会触发request请求的ungradeneeded事件,可以在这里面创建一个存储对象;
+    request.onupgradeneeded=function(e){
+      let db=e.target.result;
+      // 如果数据库中名称数组含有max,删除max数据库
+      console.log(db.objectStoreNames,db);
+      if(db.objectStoreNames.contains('max')){
+        db.deleteObjectStore('max')
+      }
+      db.createObjectStore('max',{keyPath:'name'})//keyPath表示max区域中每个对象用作键的属性名
+    }
+    
+  </script>
+</body>
+</html>

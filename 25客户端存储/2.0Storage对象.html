@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <a href="./2.1.html" target="_blank">111</a>
+  <script>
+    // 每次Storage对象被其他页面修改时时都会触发原页面的storage事件(必须由其他页面修改!)
+    window.addEventListener("storage",(e)=>{
+      //domain存储变化对应的域
+      console.log(e.domain,e.key,e.newValue,e.oldValue);
+      console.log(1);
+    })
+
+    // sessionStorage与localStorage都有getItem(键名),setItem(键,值),removeItem(),key(索引)返回键名,clear()
+    // storage对象只存储字符串,非字符串会调用toString转换为字符串
+    // sessionStorage临时存储数据(关闭消失),localStorage关闭浏览器后也不消失
+    sessionStorage.setItem('max',{a:1});
+    console.log(sessionStorage.getItem('max'));//[Object,Object]
+    sessionStorage.max='asd';//storage对象也可以用属性赋值来设置属性
+    console.log(sessionStorage.getItem('max'));//asd
+    // delete sessionStorage.max;//或者sessionStorage.removeItem(键名)
+
+    localStorage.setItem('max','123')
+    
+    //不同浏览器对storage对象的限制不同
+  </script>
+</body>
+</html>
