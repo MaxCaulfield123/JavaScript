@@ -10,6 +10,9 @@
 
 <body>
   <script>
+    // 1为什么transaction在open数据库success事件中整个事务被取消? 
+    //2为什么同上条件chrome浏览器报specified object not found错误?firefox不报?
+
     //https://www.ruanyifeng.com/blog/2018/07/indexeddb.html
     // indexDB用于存储大规模数据,5-10mb根据浏览器不同而不同,超出则会询问用户
     // 它的大多数操作是异步的,且大多数操作要添加onerror 和 onsuccess事件;
@@ -19,7 +22,7 @@
     // 版本号要使用整数,转换为unsigned long long数值(8个字节，64位的无符号长整形 2^64)
     var db;
     var request = window.indexedDB.open('max', 1);
-    
+
     // IDBrequest实例上可以添加事件;
     request.onerror = function (e) {
       console.log(e.target.errorCode);
@@ -28,54 +31,55 @@
       db = e.target.result;//成功后的这个属性保存数据库实例
       console.log(db);
 
-      // 创建user的事务,事务用于操作区域中的具体数据,可以以数组来传入多个区域对象
-      // let transaction=db.transaction(['user','max'])
-      // 每个事物默认只读,第二个参数控制访问模式,'readonly','readwrite','versionchange'
-      let transaction=db.transaction('user','readwrite');
-      // 一个事物可以完成多个请求,transaction也有succcess,error事件
-      transaction.onerror=function(e){
-        console.log('整个事务被取消',e);
-      }
-      transaction.onsuccess=function(e){
-        console.log('整个事务成功完成');
-      }
-
-      // 用objectStore(区域对象名)方法访问存储
-      let store=transaction.objectStore('user');
-      // 可以用store.add() put() get(键名) delete(键名)
-      // add()与put()区别在于当键名对应的值相同时,add报错,put()更新该对象
-      let users=[{name:'dingding'},{name:'chloe'},{name:'dio'}];
-      for(let user of users){
-        let request=store.add(user);
-        request.onerror=()=>{
-          console.log('出错啦');
-        };
-        request.onsuccess=()=>{
-          console.log('成功啦');
-        };
-      }
-      console.log(store);
     }
 
     // 数据库的创建与升级会触发request请求的ungradeneeded事件,可以在这里面创建一个存储对象;
     // 注意,第一次创建数据库后它一直存在于浏览器中,随后我们页面刷新都是连接所以不触发这个事件,得清除浏览器数据第一次时才能看到
     request.onupgradeneeded = function (e) {
-      db=request.result
+      db = request.result
       // 如果max数据库中区域的名称数组含有user,删除user区域
       console.log(db.objectStoreNames);
       if (db.objectStoreNames.contains('user')) {
         db.deleteObjectStore('user')
       }
       // 在max数据库中创建user数据表
-      var objectStore=db.createObjectStore('user', { keyPath: 'name' })//keyPath表示max区域中每个对象用作键的属性名
-
-
-      
+      var objectStore = db.createObjectStore('user', { keyPath: 'name' })//keyPath表示max区域中每个对象用作键的属性名
     }
 
     setTimeout(() => {
       console.log(db)
     }, 1000);//undefined是因为open是异步的,计时器后就好了
+
+    // 目前我不知道事务相关操作应该在什么地方何时运行
+    function addData() {
+        // 创建user的事务,事务用于操作区域中的具体数据,可以以数组来传入多个区域对象
+        // let transaction=db.transaction(['user','max'])
+        // 每个事物默认只读,第二个参数控制访问模式,'readonly','readwrite','versionchange'
+        let transaction = db.transaction(['user'], 'readwrite');
+        // 一个事物可以完成多个请求,transaction也有succcess,error事件
+        transaction.onerror = function (e) {
+          console.log('整个事务被取消', e);
+        }
+        transaction.onsuccess = function (e) {
+          console.log('整个事务成功完成');
+        }
+
+        // 用objectStore(区域对象名)方法访问存储
+        let store = transaction.objectStore('user');
+        // 可以用store.add() put() get(键名) delete(键名)
+        // add()与put()区别在于当键名对应的值相同时,add报错,put()更新该对象
+        let users = [{ name: 'dingding' }, { name: 'chloe' }, { name: 'dio' }];
+        for (let user of users) {
+          let request = store.add(user);
+          request.onerror = () => {//每个add或put都是一个请求,可以在这个请求上添加事件
+            console.log('出错啦');
+          };
+          request.onsuccess = () => {
+            console.log('成功啦');
+          };
+        }
+        console.log(store);
+    }
   </script>
 </body>
 

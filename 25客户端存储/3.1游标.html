@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var db;
+    var request=indexedDB.open('max',1);
+    request.onsuccess=function(e){
+      db=e.target.result;
+    }
+    request.onupgradeneeded = function (e) {
+      db = request.result
+      // 如果max数据库中区域的名称数组含有user,删除user区域
+      console.log(db.objectStoreNames);
+      if (db.objectStoreNames.contains('user')) {
+        db.deleteObjectStore('user')
+      }
+      // 在max数据库中创建user数据表
+      var objectStore = db.createObjectStore('user', { keyPath: 'name' })//keyPath表示max区域中每个对象用作键的属性名
+    }
+
+    // 游标提供了在集合中单次跨一行或多行或向后浏览数据的能力
+    function youbiao(){
+      let transaction=db.transaction('user');//创建事务;
+      let store=transaction.objectStore('user')//访问数据区域;
+      yb=store.openCursor()//创建游标请求;
+      // 重点是success事件中,e.target.result指向游标实例,当没有记录时为null
+      yb.onsuccess=(e)=>{
+        let cursor=e.target.result;
+        if(cursor){
+          // 如果有记录 cursor.direction游标前进方向及是否遍历重复值 cursor.key对象的键 
+          //cursor.value实际对象 cursor.primaryKey游标使用的键,对象键或创建的索引键
+          if(cursor.key=='chloe'){//游标指向键名是chloe时
+            let obj=cursor.value;
+            obj.age='23';//修改当前对象数据
+            let update=cursor.update(obj);//调用yb.update(更新对象)来更新数据库中的值,返回对象可用成功失败事件;
+
+            // 也可以直接用cursor.delete()删除当前记录
+            //contain(key)没key移动到下一条记录,有则移动到键名为Key的记录;
+            // advance(count) 移动指定count条记录
+            cursor.continue()
+          }
+        }
+      };
+      yb.onerror=()=>{};
+
+    }
+  </script>
+</body>
+</html>
