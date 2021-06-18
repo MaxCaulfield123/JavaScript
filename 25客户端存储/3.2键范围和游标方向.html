@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    var db,
+    request=window.indexedDB.open('max',1);
+    request.onsuccess=function(e){
+      db=e.target.result;
+    };
+    request.onupgradeneeded=function(e){
+      db=request.result;
+      if(db.objectStoreNames.contains('user')){
+        db.deleteObjectStore('user')
+      }
+      // 在max数据库中创建user数据表
+      var objectStore = db.createObjectStore('user', { keyPath: 'name' })//keyPath表示max区域中每个对象用作键的属性名
+    };
+    function yb(){
+      const transaction=db.transaction("users");
+      store=transaction.objectStore('users');
+      // 在创建游标时,第一个参数可以传入范围对象
+      //这个范围对象由IDBKeyRange.lowerBound(开始键,不包含键对象bool)/upperBound(结束键,bool)/bound来创建;
+      // bound(开始键,结束键,不包含开始键bool,结束键bool)
+      let lowerBound=IDBKeyRange.lowerBound('chloe',true)
+
+      // openCursor()第二个参数为字符串表示的方向next nextunique prev prevunique
+      // 加了unique则表示不遍历相同对象,prev表示从后到前
+      ybreq=store.openCursor(lowerBound,'prevunique');
+
+    }
+
+  </script>
+</body>
+</html>

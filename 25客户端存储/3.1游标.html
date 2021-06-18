@@ -32,19 +32,21 @@
       // 重点是success事件中,e.target.result指向游标实例,当没有记录时为null
       yb.onsuccess=(e)=>{
         let cursor=e.target.result;
-        if(cursor){
+        if(cursor){//永远要检查,没有下一条记录时为Null
           // 如果有记录 cursor.direction游标前进方向及是否遍历重复值 cursor.key对象的键 
           //cursor.value实际对象 cursor.primaryKey游标使用的键,对象键或创建的索引键
           if(cursor.key=='chloe'){//游标指向键名是chloe时
             let obj=cursor.value;
             obj.age='23';//修改当前对象数据
             let update=cursor.update(obj);//调用yb.update(更新对象)来更新数据库中的值,返回对象可用成功失败事件;
-
             // 也可以直接用cursor.delete()删除当前记录
+            let deleteRequest=cursor.delete();
+            deleteRequest.onsuccess=()=>{};
+            deleteRequest.onerror=()=>{};
+          }
             //contain(key)没key移动到下一条记录,有则移动到键名为Key的记录;
             // advance(count) 移动指定count条记录
             cursor.continue()
-          }
         }
       };
       yb.onerror=()=>{};

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    let db,
+          request=window.indexedDB.open('max',1);
+    request.onsuccess=function(e){
+      db=e.target.result;
+    }
+    request.onupgradeneeded=function(e){
+      db=request.result;
+      if (db.objectStoreNames.contains('user')) {
+        db.deleteObjectStore('user')
+      }
+      // 在max数据库中创建user数据表
+      var objectStore = db.createObjectStore('user', { keyPath: 'name' })//keyPath表示max区域中每个对象用作键的属性名
+    }
+    function creatIndex(){
+      // 数据库中的数据对象除了主键之外,其他的属性可以创建为索引;
+      let transaction=db.transaction('user');
+      let store=transaction.objectStore('user');
+      // 对象区域.createIndex('索引名称','索引对应属性',包含键是否唯一的option对象{uniuqe:true})
+      let index=store.createIndex('username','username',{unique:true})
+      // 也可以用store.index('索引名')来获取索引实例
+      // 索引也可以创建游标
+      let request=index.openCursor();
+      request.onsuccess=function(e){
+        //e.result.key为索引
+      }
+      let specialRequest=index.openKeyCursor();//索引.openKeyCursor创建特殊游标,e.result.value为主键
+      specialRequest.onsuccess=function(e){
+        // e.result.value为主键,.key为索引
+      }
+
+      // index.getKey(索引键)返回一个请求,可以获得主键;
+      let mainkeyr=index.getKey('username');
+      mainkeyr.onsuccess=function(e){
+        // e.target.result.key 是索引键;
+        // e.target.result.value是主键;
+
+      }
+
+      // index这个对象有name,keyPath->createIndex时传入的属性路径,objectStore索引对应的对象,unique
+      // 还有一个store.indexNames表示对象中索引名称的集合;
+      for(let indexName in store.indexNames){
+        let index=store.indexName(indexName);
+        console.log(index.name,index.keyPath,index.unique);
+      }
+
+      // 也可以用store.deleteIndex('索引名')删除索引,注意删除索引不会删除实际的数据结构
+      
+    }
+  </script>
+</body>
+</html>

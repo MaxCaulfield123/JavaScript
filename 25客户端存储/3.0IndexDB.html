@@ -30,6 +30,7 @@
     request.onsuccess = function (e) {
       db = e.target.result;//成功后的这个属性保存数据库实例
       console.log(db);
+      addData();
 
     }
 
@@ -52,6 +53,7 @@
 
     // 目前我不知道事务相关操作应该在什么地方何时运行
     function addData() {
+        debugger
         // 创建user的事务,事务用于操作区域中的具体数据,可以以数组来传入多个区域对象
         // let transaction=db.transaction(['user','max'])
         // 每个事物默认只读,第二个参数控制访问模式,'readonly','readwrite','versionchange'

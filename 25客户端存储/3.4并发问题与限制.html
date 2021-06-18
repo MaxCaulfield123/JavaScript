@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // indexDB在两个标签页同时打开一个源的网页时,有可能一个标签页触发升级,与另一个冲突
+    let db,request=indexedDB.open('max',1);
+    request.onsuccess=function(e){
+      db=e.target.result;
+      // 可以使用db.onversionchange事件,在数据库升级时把数据库关闭来防止这种冲突;
+      db.onversionchange=function(){
+        db.close()
+      }//应该始终指定这个事件
+    }
+    // indexDB是与源地址绑定的,信息不能跨域共享
+  </script>
+</body>
+</html>
