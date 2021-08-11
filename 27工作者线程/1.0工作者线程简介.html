@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // js运行环境就是运行在托管操作系统中的虚拟环境
+    // 工作者环境就是原始页面环境外的一个完全独立的二级子环境
+    // 工作者线程与执行线程有一些相同点与不同点在791页,创建工作者线程开销大;
+    //有专用/共享/服务三种工作者线程
+
+    // 工作者线程中不再有window而是WorkerGlobalScope实例,通过self关键字暴露,他继承window对象,是其严格子集
+    // self.console,self.location
+    // self.importScripts引入其他模块
+    // 专用/共享/服务工作者线程都有不同的类继承WorkerGlobalScope
+  </script>
+</body>
+</html>

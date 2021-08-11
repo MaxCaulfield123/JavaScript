@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script type="module">
+    //模块代码
+  </script>
+  <script src="" type="module"></script>
+  <!-- module按照顺序执行,与加了defer的script标签一样 -->
+  <!-- 所有的模块标签都会在加载后,等到文档解析完成后执行,
+    所以放在head还是body尾只影响加载顺序,不影响执行顺序 -->
+  <!-- 同一个模块只会加载一次,module也会受到async的影响 -->
+  <script type="module" async>
+    import './3.js' //type为module的script 与import的文件会被认为模块
+  </script>
+</body>
+</html>

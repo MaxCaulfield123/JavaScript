@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 另一种方式是使用messageChannel,它最大的用处是实现工作者进程间通信
+    const channel=new MessageChannel()
+    const workerA=new Worker('./worker.js')
+    const workerB=new Worker('./worker.js')
+
+    workerA.postMessage('workerA',[channel.post1])
+    workerB.postMessage('workerB',[channel.post2])
+
+    workerA.onmessage=({data})=>console.log(data);
+    workerB.onmessage=({data})=>console.log(data);
+
+    workerA.postMessage(['page'])
+    workerB.postMessage(['page'])
+
+    // worker.js中
+    let messagePort=null;
+    let contextIdentifier=null;
+
+    function addContenxtAndSend(data,destination){
+      data.push(contextIdentifier);
+      destination.postMessage(data)
+    }
+
+    self.onmessage=({data,ports})=>{
+      if(ports.length){
+        contextIdentifier=data;
+        messagePort=ports[0];
+        messagePort.onmessage=({data})=>{
+          addContenxtAndSend(data,self)
+        }
+      }else{
+        addContenxtAndSend(data,messagePort)
+      }
+    }
+
+    // 另外还可以使用更简单的BroadcastChannel对象来在脚本间传递消息
+
+  </script>
+</body>
+</html>[]

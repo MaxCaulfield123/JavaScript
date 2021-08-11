@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 工作者与主进程之间通信的第一种方式就是postMessage方法与onmessage事件的结合
+    // worker.js
+    function count(a){
+      return a++
+    };
+    self.onmessage=({data})=>{
+      self.postMessage(count(data))
+    };
+    // 主页面
+    const worker=new Worker('./worker.js')
+    worker.onmessage=({data})=>console.log(data);
+    worker.postMessage(3)//4
+    worker.postMessage(4)//5
+  </script>
+</body>
+</html>

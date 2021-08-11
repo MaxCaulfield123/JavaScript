@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 再将数据postMessage给其他工作者进程时,有三种转移数据的方式,这三种方式其他api也会用到:
+    // 结构化克隆算法,可转移对象,共享数组缓冲区
+    // 结构化克隆算法用于在两个独立上下文间共享数据,就是把数据复制出一个副本,具体在805页
+
+    // 可转移对象
+    // postMessage(1,2)第二个参数表示要转移的数据对象 ,可转移对象就是利用它将数据完全转移给另一个上下文
+    const worker=new worker('./worker.js');
+    const arrayBuffer=new ArrayBuffer(32);
+    console.log(arrayBuffer.byteLength);//32
+    worker.postMessage({foo:{bar:arrayBuffer}},[arrayBuffer])
+    console.log(arrayBuffer.byteLength);//0 对缓冲区内存的引用已从父上下文抹去,转移到工作者线程中
+    // worker.js
+    self.onmessage=({data})=>{
+      console.log(data.foo.bar.byteLength);//32
+    }
+
+    // 共享数组缓冲区其实就是sharedArrayBuffer在不同的线程间传递,经典的会引起资源争用问题,利用Atomics.add解决
+  </script>
+</body>
+</html>

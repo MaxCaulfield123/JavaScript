@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 在工作者线程中可以使用importScripts(参数1,参数2)来引入其他脚本,其他脚本与引入文件共享作用域
+    importScripts('./a.js','./b.js')
+    let a=1;
+    // a.js中
+    console.log(a);//在引入后会打印出1
+    // 在主页面引入工作者线程时受到同源策略限制,但工作者线程中引入其他脚本则不受此限制
+
+    // 工作者线程中可以再 new worker()一个子工作者线程
+    let worker=new Worker('./a.js')
+    // a.js中
+    let worker1=new Worker('./b.js')
+    // 顶级工作者线程与子工作者线程都必须与主页相同的源加载
+
+    // 如果工作者线程中会报错或抛出错误,则应该把new Worker放入try/catch块中
+  </script>
+</body>
+</html>

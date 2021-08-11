@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // worker代表的进程有initializing初始化 active terminated终止三个周期,创建时为初始化
+    // 我们无法通过worker对象得知周期进程
+    // worker.js 
+    self.addEventListener('message', ({ data }) => console.log(data))
+
+    // 而关闭的close与terminate是关闭并锁住事件循环队列!它不关闭同步的代码执行
+    self.postMessage('foo')
+    self.close()
+    self.postMessage('bar')
+    setTimeout(() => {
+      self.postMessage('baz')
+    }, 1000);
+    // for (let i = 0; i < 3; i++) {
+        // setTimeout(() => {
+        //   worker.postMessage('foo')
+        //   worker.terminate()
+        //   worker.postMessage('baz')
+        // }, 100)在异步中只执行foo,之后baz不会推入执行队列(因为terminate锁住了事件队列)
+    // }外部的terminate也是如此
+    // 虽然在中间close了,但同步的bar还是会发送,异步的队列中的baz被停止 
+
+    // 主页面
+    const worker = new Worker('./worker.js');
+    worker.postMessage('abc')//此时worker可能在初始化状态,不过还是可以postMessage
+    // 创建工作者进程后除非主动关闭worker.terminate(),self.close()或关闭页面,否则工作者进程一直存在
+
+  </script>
+</body>
+
+</html>

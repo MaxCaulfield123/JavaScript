@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 工作者线程不必引入一个外部文件,也可以自己通过blob将字符串变为二进制对象作为工作者文件
+    const workStr=`self.onmessage=({data})=>console.log(data)`
+    const workBlobUrl=URL.createObjectURL(new Blob([workStr]));
+    const worker=new Worker(workBlobUrl);
+    worker.postMessage('waibiwaibi')//打印出waibiwaibi
+
+    // 也可以将函数toString()变为字符串传入新建的工作者文件中
+    function fibonacci(n){
+      return n<1? 0
+      :n<=2?1
+      :fibonacci(n-1)+fibonacci(n-2)
+    }
+    const workStr1=`
+      self.postMessage(${fibonacci.toString()}(9))//加不加toString都行,这里本来就自动执行toString
+    `
+    const worker1=new Worker(URL.createObjectURL(new Blob([workStr1])));
+    worker1.onmessage=({data})=>console.log(data)//打印出34
+  </script>
+</body>
+</html>

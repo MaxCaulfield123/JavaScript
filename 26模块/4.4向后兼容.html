@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 我们在不知道浏览器是否支持es6的模块语法时,可以让服务器检查判断 -->
+  <!-- 也可以用type与nomodule属性 -->
+
+  <!-- 不支持es6之后的浏览器不执行type=module的代码 -->
+  <script type="module" src=""></script>
+
+  
+  <!-- 支持es6模块的浏览器不执行nomodule属性的代码 -->
+  <script nomodule></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // Es6模块支持浏览器和第三方加载,都是异步加载执行
+    // moduleA依赖moduleB,moduleB依赖moduleC,es6规范会先下载mcoduleB并解析完成后才知道依赖moduleC
+    // 然后才会请求moduleC,逐级递归.这种方式效率高但不适合大型应用的深度依赖图
+
+    // es6有很多行为例如默认在严格模式下执行,顶级模块的this是undefined,模块中的var不会添加到window对象
+  </script>
+  <script type="module">
+    console.log(this);//undefined
+    var a='wa'
+  </script>
+  <script>
+    console.log(a);//a is not defined 
+  </script>
+</body>
+</html>

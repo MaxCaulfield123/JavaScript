@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // es6之前有时会将模块放在匿名函数自调用的闭包和作用域中
+    var foo=(function(){
+      return{
+        bar:'baz',
+        baz:function(){
+          console.log(this.bar);
+        }
+      }//一个模块
+    })();
+    // 泄露模块模式,就是闭包
+    var max=(function(){
+      var bar='abc';
+      var baz=function(){console.log(this.bar);}
+      return {bar,baz}
+    })()
+    max.baz();
+    // 也可以这样嵌套对象
+    // 还可以使用外部的值
+    var sth=function(){
+      console.log('say  sth');
+    }
+    max.say=(function(func){
+      return{
+        something:func
+      }
+    })(sth)//外部的值在这里传入
+    max.say.something();
+
+    // 可以传入模块自己来拓展模块本身
+    var max=(function(maxmodule){
+      maxmodule.age=16;
+      return maxmodule;
+    })(max||{})//这样写参数,无论模块是否存在,都可以配置模块拓展
+    console.log(max);
+  </script>
+</body>
+</html>
