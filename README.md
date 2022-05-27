@@ -6,7 +6,7 @@
 
 阅读书籍时可以搭配这个笔记食用,从而专注于编程;
 
-里面更有作者对各个知识点自己的理解的注释,注释只有中文 QAQ
+里面更有我对各个知识点自己的理解的注释,注释只有中文 QAQ
 
 This is my note about Professional JavaScript for Web Developers (4th Edition),Almost every chapter has  record,and every knowledge point has my annotation;You can use this as a template which help  you focus on coding rather than recording when you reading the JSbook;
 
